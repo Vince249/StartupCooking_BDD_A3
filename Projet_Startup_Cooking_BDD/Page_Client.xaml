@@ -10,17 +10,71 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="AUTO"/>
+            <RowDefinition Height="AUTO"/>
+            <RowDefinition />
+            <RowDefinition Height="AUTO"/>
+            <RowDefinition Height="AUTO"/>
+            <RowDefinition Height="AUTO"/>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="AUTO"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-               FontSize="24">Connection réussie</Label>
-        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-               FontSize="24" Name="welcome_message"></Label>
+        <!--Label-->
+        <Label Name="welcome_message" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
+               FontSize="24"></Label>
+        <Label Name="Credit" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+               FontSize="24"></Label>
+        <Label  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+               FontSize="24">Liste des Recettes</Label>
+        <Label  Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center"
+               FontSize="24">Votre commande</Label>
+        <Label  Grid.Row="2" Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Bottom"
+               FontSize="24">Quantité</Label>
+        <Label  Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+               FontSize="24">Total</Label>
+        <Label Name="Total" Grid.Row="7" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+               FontSize="24"></Label>
+        
+        <!--TextBox-->
+        <TextBox Name="Quantité" Grid.Row="3" Grid.Column="2" MinHeight="25" Margin="15"></TextBox>
+        <!--Bouton-->
+        <Button Name="CdR" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                FontSize="18" Click="CdR_Click"></Button>
+        <Button Name="Ajouter" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center"
+                FontSize="18" Margin="10" Click="Ajouter_Click">Ajouter</Button>
+        <Button Name="Retirer" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center"
+                FontSize="18" Margin="10" Click="Retirer_Click">Retirer</Button>
+        <Button Name="Deco" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                FontSize="18">Déconnexion</Button>
+        <Button Name="Valider" Grid.Column="3" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center"
+                FontSize="18">Valider</Button>
+        <!--Liste-->
+        <ListView Name="Liste_Recette" Grid.Row="2" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,0,0,0" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nom_Recette" Width="AUTO"  DisplayMemberBinding="{Binding Nom_Recette}" />
+                    <GridViewColumn Header="Type" Width="AUTO" DisplayMemberBinding="{Binding Type}"/>
+                    <GridViewColumn Header="Prix" Width="AUTO" DisplayMemberBinding="{Binding Prix}"/>
+                    <GridViewColumn Header="Descriptif" Width="AUTO" DisplayMemberBinding="{Binding Descriptif}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView Name="Panier" Grid.Row="2" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="2" Margin="0,0,10,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nom_Recette" Width="AUTO"  DisplayMemberBinding="{Binding Nom_Recette}"/>
+                    <GridViewColumn Header="Quantité" Width="AUTO" DisplayMemberBinding="{Binding Quantite_Recette}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+
     </Grid>
 </Page>
