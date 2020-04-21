@@ -60,7 +60,7 @@ namespace Projet_Startup_Cooking_BDD
         }
 
 
-        public static void Insert_Requete(string requete)
+        public static string Insert_Requete(string requete)
         {
             string connectionString = "SERVER=localhost;PORT=3306;DATABASE=cooking;UID=root;PASSWORD=root;";
             MySqlConnection connection = new MySqlConnection(connectionString);
@@ -70,13 +70,16 @@ namespace Projet_Startup_Cooking_BDD
 
                 MySqlCommand cmd = new MySqlCommand(requete, connection);
                 cmd.ExecuteNonQuery();
+                connection.Close();
+                return "";
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                connection.Close();
+                return ex.Message;
             }
 
-            connection.Close();
+            
         }
 
 

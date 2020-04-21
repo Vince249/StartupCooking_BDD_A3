@@ -33,9 +33,17 @@ namespace Projet_Startup_Cooking_BDD
             string nom = nomTextBox.Text;
             string tel = telTextBox.Text;
             string requete = $"INSERT INTO cooking.client VALUES (\"{id}\",\"{mdp}\",\"{nom}\",\"{tel}\",0,False);";
-            Commandes_SQL.Insert_Requete(requete);
-            Interface_Home homepage = new Interface_Home();
-            this.NavigationService.Navigate(homepage);
+            string message = Commandes_SQL.Insert_Requete(requete);
+            if(message.Length ==0)
+            {
+                Interface_Home homepage = new Interface_Home();
+                this.NavigationService.Navigate(homepage);
+            }
+            else
+            {
+                error.Content = message;
+            }
+            
 
 
         }
