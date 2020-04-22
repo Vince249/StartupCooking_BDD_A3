@@ -39,8 +39,10 @@
                FontSize="24">Quantité</Label>
         <Label  Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
                FontSize="24">Total</Label>
-        <Label Name="Total" Grid.Row="7" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-               FontSize="24"></Label>
+        <Label Name="Total" Grid.Row="7" Grid.Column="2" Margin="20,0,0,0" VerticalAlignment="Center"
+               FontSize="24">0</Label>
+        <Label  Grid.Row="7" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"
+               FontSize="24">cook(s)</Label>
         
         <!--TextBox-->
         <TextBox Name="Quantité" Grid.Row="3" Grid.Column="2" MinHeight="25" Margin="15"></TextBox>
@@ -52,16 +54,16 @@
         <Button Name="Retirer" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center"
                 FontSize="18" Margin="10" Click="Retirer_Click">Retirer</Button>
         <Button Name="Deco" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
-                FontSize="18">Déconnexion</Button>
+                FontSize="18" Click="Deco_Click">Déconnexion</Button>
         <Button Name="Valider" Grid.Column="3" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center"
-                FontSize="18">Valider</Button>
+                FontSize="18" Click="Valider_Click">Valider</Button>
         <!--Liste-->
         <ListView Name="Liste_Recette" Grid.Row="2" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,0,0,0" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nom_Recette" Width="AUTO"  DisplayMemberBinding="{Binding Nom_Recette}" />
                     <GridViewColumn Header="Type" Width="AUTO" DisplayMemberBinding="{Binding Type}"/>
-                    <GridViewColumn Header="Prix" Width="AUTO" DisplayMemberBinding="{Binding Prix}"/>
+                    <GridViewColumn Header="Prix (cook)" Width="AUTO" DisplayMemberBinding="{Binding Prix}"/>
                     <GridViewColumn Header="Descriptif" Width="AUTO" DisplayMemberBinding="{Binding Descriptif}"/>
                 </GridView>
             </ListView.View>

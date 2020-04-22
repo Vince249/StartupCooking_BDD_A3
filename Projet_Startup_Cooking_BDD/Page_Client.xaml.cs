@@ -39,7 +39,7 @@ namespace Projet_Startup_Cooking_BDD
                 Liste_Recette.Items.Add(new Recette_complete { Nom_Recette = recette[i][0], Type = recette[i][1], Descriptif= recette[i][3], Prix = recette[i][2] });
             }
 
-            string query2 = $"select CdR from client where Identifiant = \"{this.id_client}\" ;";
+            string query2 = $"select CdR,Credit_Cook from client where Identifiant = \"{this.id_client}\" ;";
             liste = Commandes_SQL.Select_Requete(query2);
             if (liste[0][0] == "False")
             {
@@ -50,6 +50,8 @@ namespace Projet_Startup_Cooking_BDD
                 CdR.Content = "Page CdR";
             }
 
+            Credit.Content = "Crédit : " + liste[0][1] + " cook(s)";
+
         }
 
 
@@ -57,10 +59,16 @@ namespace Projet_Startup_Cooking_BDD
         {
             Recette_complete selection = Liste_Recette.SelectedItem as Recette_complete;
 
-            Panier.Items.Add(new Recette_Panier { Nom_Recette = selection.Nom_Recette, Quantite_Recette = Quantité.Text });
+            int ajout = Convert.ToInt32(selection.Prix) * Convert.ToInt32(Quantité.Text);
+            Total.Content = Convert.ToString(Convert.ToInt32(Total.Content) + ajout);
+
+            Panier.Items.Add(new Recette_Panier { Nom_Recette = selection.Nom_Recette, Quantite_Recette = Quantité.Text , Prix=selection.Prix});
         }
         private void Retirer_Click(object sender, RoutedEventArgs e)
         {
+            Recette_Panier selection = Panier.SelectedItem as Recette_Panier;
+            int retrait = Convert.ToInt32(selection.Prix) * Convert.ToInt32(selection.Quantite_Recette);
+            Total.Content = Convert.ToString(Convert.ToInt32(Total.Content) - retrait);
             Panier.Items.Remove(Panier.SelectedItem);
         }
         private void CdR_Click(object sender, RoutedEventArgs e)
@@ -77,6 +85,24 @@ namespace Projet_Startup_Cooking_BDD
             {
                 //this.NavigationService.Navigate(Page_CdR(this.id_client));
             }
+        }
+
+        private void Deco_Click(object sender, RoutedEventArgs e)
+        {
+            Interface_Home interhome = new Interface_Home();
+            this.NavigationService.Navigate(interhome);
+        }
+
+        private void Valider_Click(object sender, RoutedEventArgs e)
+        {
+            // Décrémenter le nb de crédit du client
+            // Augmenter le compteur des recettes utilisées de la quantité prise
+            // Augmenter le prix de vente
+            // Augmenter la rémunération de la recette
+            // Créer une instance de Commande
+            // Créer ses instances de Recette_Commande
+            Validation_Paiement page_validation = new Validation_Paiement(Total.Content.ToString(),Credit.Content.ToString(),this.id_client);
+            this.NavigationService.Navigate(page_validation);
         }
         public class Recette_complete
         {
@@ -99,6 +125,8 @@ namespace Projet_Startup_Cooking_BDD
             public string Nom_Recette { get; set; }
 
             public string Quantite_Recette { get; set; }
+
+            public string Prix { get; set; }
         }
 
         
