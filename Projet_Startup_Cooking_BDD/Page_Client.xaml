@@ -29,23 +29,27 @@
         <!--Label-->
         <Label Name="welcome_message" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
                FontSize="24"></Label>
-        <Label Name="Credit" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-               FontSize="24"></Label>
+        <!-- Création Stackpanel pour pouvoir récupérer la valeur d'une case directment sans avoir de string-->
+        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label FontSize="24">Solde : </Label>
+            <Label Name="Solde" FontSize="24"></Label>
+            <Label FontSize="24"> cook(s)</Label>
+        </StackPanel>
         <Label  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
                FontSize="24">Liste des Recettes</Label>
         <Label  Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Center" VerticalAlignment="Center"
                FontSize="24">Votre commande</Label>
         <Label  Grid.Row="2" Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Bottom"
                FontSize="24">Quantité</Label>
-        <Label  Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
-               FontSize="24">Total</Label>
-        <Label Name="Total" Grid.Row="7" Grid.Column="2" Margin="20,0,0,0" VerticalAlignment="Center"
-               FontSize="24">0</Label>
-        <Label  Grid.Row="7" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center"
-               FontSize="24">cook(s)</Label>
-        
+        <StackPanel Grid.Row="7" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Label FontSize="24">Total : </Label>
+            <Label Name="Total" FontSize="24">0</Label>
+            <Label FontSize="24">cook(s)</Label>
+        </StackPanel>
+
         <!--TextBox-->
         <TextBox Name="Quantité" Grid.Row="3" Grid.Column="2" MinHeight="25" Margin="15"></TextBox>
+        
         <!--Bouton-->
         <Button Name="CdR" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
                 FontSize="18" Click="CdR_Click"></Button>
@@ -57,6 +61,7 @@
                 FontSize="18" Click="Deco_Click">Déconnexion</Button>
         <Button Name="Valider" Grid.Column="3" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center"
                 FontSize="18" Click="Valider_Click">Valider</Button>
+        
         <!--Liste-->
         <ListView Name="Liste_Recette" Grid.Row="2" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,0,0,0" >
             <ListView.View>

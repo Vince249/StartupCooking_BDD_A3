@@ -50,7 +50,7 @@ namespace Projet_Startup_Cooking_BDD
                 CdR.Content = "Page CdR";
             }
 
-            Credit.Content = "Crédit : " + liste[0][1] + " cook(s)";
+            Solde.Content = liste[0][1];
 
         }
 
@@ -62,7 +62,7 @@ namespace Projet_Startup_Cooking_BDD
             int ajout = Convert.ToInt32(selection.Prix) * Convert.ToInt32(Quantité.Text);
             Total.Content = Convert.ToString(Convert.ToInt32(Total.Content) + ajout);
 
-            Panier.Items.Add(new Recette_Panier { Nom_Recette = selection.Nom_Recette, Quantite_Recette = Quantité.Text , Prix=selection.Prix});
+            Panier.Items.Add(new Recette_Panier { Nom_Recette = selection.Nom_Recette, Quantite_Recette = Quantité.Text , Prix = selection.Prix});
         }
         private void Retirer_Click(object sender, RoutedEventArgs e)
         {
@@ -95,13 +95,13 @@ namespace Projet_Startup_Cooking_BDD
 
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
-            // Décrémenter le nb de crédit du client
-            // Augmenter le compteur des recettes utilisées de la quantité prise
-            // Augmenter le prix de vente
-            // Augmenter la rémunération de la recette
-            // Créer une instance de Commande
-            // Créer ses instances de Recette_Commande
-            Validation_Paiement page_validation = new Validation_Paiement(Total.Content.ToString(),Credit.Content.ToString(),this.id_client);
+            List<string> liste_nom_recette_panier = new List<string>();
+            //je sais on pourrait le mettre en attribut de la classe mais je trouve que ça ferait deg, faut 
+            //trouver un moyen de selectionner les noms des recettes et leur quantité qui sont dans la panier
+            //pour les passer en parametres pour la prochaine page pour pouvoir incrémenter le compteur de chaque recette
+            //après validation du paiement
+
+            Validation_Paiement page_validation = new Validation_Paiement(Total.Content.ToString(),Solde.Content.ToString(),this.id_client);
             this.NavigationService.Navigate(page_validation);
         }
         public class Recette_complete
@@ -113,11 +113,6 @@ namespace Projet_Startup_Cooking_BDD
             public string Descriptif { get; set; }
 
             public string Prix { get; set; }
-
-            public string test ()
-            {
-                return this.Nom_Recette;
-            }
         }
 
         public class Recette_Panier
