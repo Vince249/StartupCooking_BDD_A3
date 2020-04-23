@@ -95,13 +95,18 @@ namespace Projet_Startup_Cooking_BDD
 
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
-            List<string> liste_nom_recette_panier = new List<string>();
-            //je sais on pourrait le mettre en attribut de la classe mais je trouve que ça ferait deg, faut 
-            //trouver un moyen de selectionner les noms des recettes et leur quantité qui sont dans la panier
-            //pour les passer en parametres pour la prochaine page pour pouvoir incrémenter le compteur de chaque recette
-            //après validation du paiement
+            List<List<string>> liste_panier = new List<List<string>>();
+            for (int index_panier = 0;  index_panier < Panier.Items.Count;  index_panier++)
+            {
+                Recette_Panier recette = Panier.Items[index_panier] as Recette_Panier;
+                List<string> liste_recette_quantite = new List<string>();
+                liste_recette_quantite.Add(recette.Nom_Recette);
+                liste_recette_quantite.Add(recette.Quantite_Recette);
+                liste_panier.Add(liste_recette_quantite);
+            }
 
-            Validation_Paiement page_validation = new Validation_Paiement(Total.Content.ToString(),Solde.Content.ToString(),this.id_client);
+            
+            Validation_Paiement page_validation = new Validation_Paiement(Total.Content.ToString(),Solde.Content.ToString(),this.id_client, liste_panier);
             this.NavigationService.Navigate(page_validation);
         }
         public class Recette_complete
