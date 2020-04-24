@@ -30,14 +30,34 @@ namespace Projet_Startup_Cooking_BDD
             welcome_message.Content = "Bonjour "+ liste[0][0];
 
             // Ajout de toutes les recettes
-            List<List<string>> recette = new List<List<string>>();
+            List<List<string>> list_recette = new List<List<string>>();
             query = "Select Nom_Recette, Type, Prix_Vente, Descriptif from cooking.recette;";
-            recette = Commandes_SQL.Select_Requete(query);
+            list_recette = Commandes_SQL.Select_Requete(query);
 
-            for (int i = 0; i < recette.Count(); i++)
+            for (int i = 0; i < list_recette.Count(); i++)
             {
-                Liste_Recette.Items.Add(new Recette_complete { Nom_Recette = recette[i][0], Type = recette[i][1], Descriptif= recette[i][3], Prix = recette[i][2] });
+
+                //déterminer nb de produit dans la recette
+                query = $"select Nom_Produit, Quantite_Produit from cooking.composition_recette where Nom_Recette = \"{list_recette[i][0]}\";";
+                List<List<string>> List_Produit_QT_dans_recette = Commandes_SQL.Select_Requete(query);
+
+                int min_qt_faisable = int.MaxValue;
+                for (int j = 0; j < List_Produit_QT_dans_recette.Count; j++) //pour chaque produit
+                {
+                    query = $"Select Stock from cooking.produit where Nom_Produit = \"{List_Produit_QT_dans_recette[j][0]}\";";
+                    List<List<string>> List_Stock = Commandes_SQL.Select_Requete(query);
+                    int stock_produit = Convert.ToInt32(List_Stock[0][0]);
+                    int quantite_pour_recette = Convert.ToInt32(List_Produit_QT_dans_recette[j][1]);
+                    int qt_faisable = stock_produit / quantite_pour_recette;
+                    if (qt_faisable < min_qt_faisable) min_qt_faisable = qt_faisable;
+                }
+
+                Liste_Recette.Items.Add(new Recette_complete { Nom_Recette = list_recette[i][0], Type = list_recette[i][1], Descriptif= list_recette[i][3], Prix = list_recette[i][2], Qt_Faisable = min_qt_faisable });
             }
+
+            
+
+           
 
             string query2 = $"select CdR,Credit_Cook from client where Identifiant = \"{this.id_client}\" ;";
             liste = Commandes_SQL.Select_Requete(query2);
@@ -58,18 +78,137 @@ namespace Projet_Startup_Cooking_BDD
         private void Ajouter_Click(object sender, RoutedEventArgs e)
         {
             Recette_complete selection = Liste_Recette.SelectedItem as Recette_complete;
+            if (selection != null)
+            {
+                Recette_Panier recette_selectionnee = new Recette_Panier { Nom_Recette = selection.Nom_Recette, Quantite_Recette = Quantité.Text, Prix = selection.Prix };
 
-            int ajout = Convert.ToInt32(selection.Prix) * Convert.ToInt32(Quantité.Text);
-            Total.Content = Convert.ToString(Convert.ToInt32(Total.Content) + ajout);
+                List<Recette_Panier> Liste_Recette_Panier = new List<Recette_Panier>();
+                Liste_Recette_Panier.Add(recette_selectionnee);
+                for (int i = 0; i < Panier.Items.Count; i++)
+                {
+                    Liste_Recette_Panier.Add(Panier.Items[i] as Recette_Panier);
+                }
 
-            Panier.Items.Add(new Recette_Panier { Nom_Recette = selection.Nom_Recette, Quantite_Recette = Quantité.Text , Prix = selection.Prix});
+                //Liste_Recette_Panier contient toutes les recettes qu'on veut évaluer
+                List<List<string>> Nom_Conso = new List<List<string>>();
+                for (int i = 0; i < Liste_Recette_Panier.Count; i++)
+                {
+                    string query = $"select Nom_Produit, Quantite_Produit from cooking.composition_recette where Nom_Recette = \"{Liste_Recette_Panier[i].Nom_Recette}\";";
+                    List<List<string>> List_Produit_QT_dans_recette = Commandes_SQL.Select_Requete(query);
+
+                    for (int j = 0; j < List_Produit_QT_dans_recette.Count; j++) // pour chaque produit de cette recette
+                    {
+                        if (Nom_Conso.Count == 0)//premier item
+                        {
+                            List<string> premieritem = new List<string>();
+                            premieritem.Add(List_Produit_QT_dans_recette[j][0]);
+                            premieritem.Add(Convert.ToString(Convert.ToInt32(List_Produit_QT_dans_recette[j][1]) * Convert.ToInt32(Liste_Recette_Panier[i].Quantite_Recette)));
+                            Nom_Conso.Add(premieritem);
+                        }
+                        else
+                        {
+                            bool copie = false;
+                            for (int k = 0; k < Nom_Conso.Count; k++) //pour chaque produit déjà enregistré
+                            {
+                                if (Nom_Conso[k][0] == List_Produit_QT_dans_recette[j][0])
+                                {
+                                    copie = true;
+                                    Nom_Conso[k][1] = Convert.ToString(Convert.ToInt32(Nom_Conso[k][1]) + (Convert.ToInt32(List_Produit_QT_dans_recette[j][1]) * Convert.ToInt32(Liste_Recette_Panier[i].Quantite_Recette)));
+                                }
+                            }
+
+                            if (!copie)
+                            {
+                                List<string> nv_item = new List<string>();
+                                nv_item.Add(List_Produit_QT_dans_recette[j][0]);
+                                nv_item.Add(Convert.ToString(Convert.ToInt32(List_Produit_QT_dans_recette[j][1]) * Convert.ToInt32(Liste_Recette_Panier[i].Quantite_Recette)));
+                                Nom_Conso.Add(nv_item);
+                            }
+                        }
+
+                    }
+
+
+                }
+
+                //on récupère le vrai stock
+
+                string query2 = "Select Nom_Produit, Stock from cooking.produit";
+                List<List<string>> Nom_Stock = Commandes_SQL.Select_Requete(query2);
+                bool check = true;
+                for (int i = 0; i < Nom_Stock.Count; i++)
+                {
+                    for (int j = 0; j < Nom_Conso.Count; j++)
+                    {
+                        if (Nom_Stock[i][0] == Nom_Conso[j][0])
+                        {
+                            Nom_Stock[i][1] = Convert.ToString(Convert.ToInt32(Nom_Stock[i][1]) - Convert.ToInt32(Nom_Conso[j][1]));
+                            if (Convert.ToInt32(Nom_Stock[i][1]) < 0) check = false; //pas assez de stock
+                        }
+                    }
+                }
+
+                if (!check)
+                {
+                    erreur.Content = "ERREUR pas assez de stock";
+                }
+                else
+                {
+
+                    erreur.Content = "";
+                    List<Recette_complete> nouvelle_table = new List<Recette_complete>();
+                    for (int i = 0; i < Liste_Recette.Items.Count; i++)
+                    {
+                        Recette_complete recette_observee = Liste_Recette.Items[i] as Recette_complete;
+                        string nom_recette = recette_observee.Nom_Recette;
+                        string query = $"select Nom_Produit, Quantite_Produit from cooking.composition_recette where Nom_Recette = \"{nom_recette}\";";
+                        List<List<string>> List_Produit_QT_dans_recette = Commandes_SQL.Select_Requete(query);
+
+                        int min_qt_faisable = int.MaxValue;
+                        for (int j = 0; j < List_Produit_QT_dans_recette.Count; j++) //pour chaque produit
+                        {
+                            int stock_produit = 0;
+                            for (int k = 0; k < Nom_Stock.Count; k++)
+                            {
+                                if (Nom_Stock[k][0] == List_Produit_QT_dans_recette[j][0]) stock_produit = Convert.ToInt32(Nom_Stock[k][1]);
+                            }
+
+                            int quantite_pour_recette = Convert.ToInt32(List_Produit_QT_dans_recette[j][1]);
+                            int qt_faisable = stock_produit / quantite_pour_recette;
+                            if (qt_faisable < min_qt_faisable) min_qt_faisable = qt_faisable;
+                        }
+
+                        recette_observee.Qt_Faisable = min_qt_faisable; // NE MARCHE PAS
+                        Recette_complete copie_recette = new Recette_complete { Nom_Recette = recette_observee.Nom_Recette, Type = recette_observee.Type, Descriptif = recette_observee.Descriptif, Prix = recette_observee.Prix, Qt_Faisable = min_qt_faisable };
+                        nouvelle_table.Add(copie_recette);
+    
+                    }
+                    
+                    Liste_Recette.Items.Clear();
+                    for (int i = 0; i < nouvelle_table.Count; i++)
+                    {
+                        Liste_Recette.Items.Add(nouvelle_table[i]);
+                    }
+                    int ajout = Convert.ToInt32(selection.Prix) * Convert.ToInt32(Quantité.Text);
+                    Total.Content = Convert.ToString(Convert.ToInt32(Total.Content) + ajout);
+                    Panier.Items.Add(new Recette_Panier { Nom_Recette = selection.Nom_Recette, Quantite_Recette = Quantité.Text, Prix = selection.Prix });
+                }
+
+            }
+
+
         }
         private void Retirer_Click(object sender, RoutedEventArgs e)
         {
+            
             Recette_Panier selection = Panier.SelectedItem as Recette_Panier;
-            int retrait = Convert.ToInt32(selection.Prix) * Convert.ToInt32(selection.Quantite_Recette);
-            Total.Content = Convert.ToString(Convert.ToInt32(Total.Content) - retrait);
-            Panier.Items.Remove(Panier.SelectedItem);
+            if(selection!= null)
+            {
+                int retrait = Convert.ToInt32(selection.Prix) * Convert.ToInt32(selection.Quantite_Recette);
+                Total.Content = Convert.ToString(Convert.ToInt32(Total.Content) - retrait);
+                Panier.Items.Remove(Panier.SelectedItem);
+            }
+
         }
         private void CdR_Click(object sender, RoutedEventArgs e)
         {
@@ -118,6 +257,8 @@ namespace Projet_Startup_Cooking_BDD
             public string Descriptif { get; set; }
 
             public string Prix { get; set; }
+
+            public int Qt_Faisable { get; set; }
         }
 
         public class Recette_Panier

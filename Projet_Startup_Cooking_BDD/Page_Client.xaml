@@ -41,6 +41,8 @@
                FontSize="24">Votre commande</Label>
         <Label  Grid.Row="2" Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Bottom"
                FontSize="24">Quantité</Label>
+        <Label Name="erreur" Grid.Row="6" Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Center"
+               FontSize="14" Foreground="red"></Label>
         <StackPanel Grid.Row="7" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Label FontSize="24">Total : </Label>
             <Label Name="Total" FontSize="24">0</Label>
@@ -70,6 +72,7 @@
                     <GridViewColumn Header="Type" Width="AUTO" DisplayMemberBinding="{Binding Type}"/>
                     <GridViewColumn Header="Prix (cook)" Width="AUTO" DisplayMemberBinding="{Binding Prix}"/>
                     <GridViewColumn Header="Descriptif" Width="AUTO" DisplayMemberBinding="{Binding Descriptif}"/>
+                    <GridViewColumn Header="Quantité faisable" Width="AUTO" DisplayMemberBinding="{Binding Qt_Faisable}"/>
                 </GridView>
             </ListView.View>
         </ListView>
