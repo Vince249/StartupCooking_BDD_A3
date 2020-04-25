@@ -1,3 +1,5 @@
+DROP database cooking;
+CREATE database cooking;
 
 CREATE TABLE IF NOT EXISTS `cooking`.`Client` (
   `Identifiant` VARCHAR(20) NOT NULL,

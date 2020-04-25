@@ -54,13 +54,13 @@
         
         <!--Bouton-->
         <Button Name="CdR" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
-                FontSize="18" Click="CdR_Click"></Button>
+                FontSize="18" Padding="5" Click="CdR_Click"></Button>
         <Button Name="Ajouter" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center"
                 FontSize="18" Margin="10" Click="Ajouter_Click">Ajouter</Button>
         <Button Name="Retirer" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center"
                 FontSize="18" Margin="10" Click="Retirer_Click">Retirer une recette</Button>
         <Button Name="Deco" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
-                FontSize="18" Click="Deco_Click">Déconnexion</Button>
+                FontSize="18" Padding ="5" Click="Deco_Click">Déconnexion</Button>
         <Button Name="Valider" Grid.Column="3" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center"
                 FontSize="18" Click="Valider_Click">Valider</Button>
         

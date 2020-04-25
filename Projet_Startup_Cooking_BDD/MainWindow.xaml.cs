@@ -23,8 +23,6 @@ namespace Projet_Startup_Cooking_BDD
         public MainWindow()
         {
             InitializeComponent();
-            Commandes_SQL.Execution_Script_TXT("Initialisation_DB.txt");
-            Commandes_SQL.Execution_Script_TXT("Dummy_Data.txt");
         }
     }
 }

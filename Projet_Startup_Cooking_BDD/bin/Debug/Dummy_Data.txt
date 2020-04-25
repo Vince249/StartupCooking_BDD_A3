@@ -1,12 +1,13 @@
 INSERT INTO cooking.client VALUES ("remiid","remimdp","GUILLON","0000000000",100,False);
 INSERT INTO cooking.client VALUES ("vincentid","vincentmdp","POUPET","0000000000",99,True);
+INSERT INTO cooking.client VALUES ("a","a","azerty","0000000000",0,True);
 
 INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("14/04/2020",8,"remiid");
 INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("15/04/2020",15,"vincentid");
 
 INSERT INTO cooking.recette VALUES ("riz-steak","etudiant","bon",6,2,0,"vincentid");
-INSERT INTO cooking.recette VALUES ("frites","etudiant","meh",1,1,0,"vincentid");
-INSERT INTO cooking.recette VALUES ("boulgour","bobo","arnaque",8,1,0,"vincentid");
+INSERT INTO cooking.recette VALUES ("frites","etudiant","meh",1,1,0,"a");
+INSERT INTO cooking.recette VALUES ("boulgour","bobo","arnaque",8,1,0,"a");
 INSERT INTO cooking.recette VALUES ("tofu","bobo","bul",7,1,0,"vincentid");
 
 INSERT INTO cooking.fournisseur VALUES ("Pignouf","JCVD","8888888");
@@ -28,6 +29,7 @@ INSERT INTO cooking.composition_commande VALUES ("tofu",2,1);
 INSERT INTO cooking.composition_recette VALUES ("riz-steak","rizviande",1);
 INSERT INTO cooking.composition_recette VALUES ("frites","patate",1);
 INSERT INTO cooking.composition_recette VALUES ("boulgour","graines",1);
+INSERT INTO cooking.composition_recette VALUES ("boulgour","granules",3);
 INSERT INTO cooking.composition_recette VALUES ("tofu","granules",1);
 
 INSERT INTO cooking.top_semaine (CdR_OR,Recette_OR_1,CdR_Semaine,Recette_Semaine_1) VALUES ("vincentid","riz-steak","vincentid","tofu");
