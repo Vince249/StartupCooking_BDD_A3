@@ -20,9 +20,110 @@ namespace Projet_Startup_Cooking_BDD
     /// </summary>
     public partial class Page_Admin : Page
     {
-        public Page_Admin()
+        private string id_admin;
+        public Page_Admin(string id_admin)
         {
             InitializeComponent();
+            this.id_admin = id_admin;
+
+            welcome_message.Content = "Bonjour " + id_admin;
+
+            //Ajout recette CdR et id_CdR dans la listView associé
+            string query = $"select Nom_Recette,Identifiant from cooking.recette;";
+            List<List<string>> liste_recette_nom_compteur = Commandes_SQL.Select_Requete(query);
+            for (int i = 0; i < liste_recette_nom_compteur.Count; i++)
+            {
+                Recettes_id_ListView.Items.Add(new Recette_id_CdR { Nom_Recette = liste_recette_nom_compteur[i][0], Identifiant_CdR = liste_recette_nom_compteur[i][1] });
+            }
+        }
+
+        private void Deco_Click(object sender, RoutedEventArgs e)
+        {
+            Interface_Home interhome = new Interface_Home();
+            this.NavigationService.Navigate(interhome);
+        }
+
+        private void Trier_par_id_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Trier_par_recette_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Supprimer_recette_Click(object sender, RoutedEventArgs e)
+        {
+            Recette_id_CdR selection = Recettes_id_ListView.SelectedItem as Recette_id_CdR;
+            if (selection == null)
+            {
+                Erreur_Message.Content = "Aucune recette sélectionnée";
+            }
+            else
+            {
+                Erreur_Message.Content = "";
+
+                //delete child rows
+                string query1 = $"delete from cooking.composition_recette where Nom_Recette = \"{selection.Nom_Recette}\";";
+                string query2 = $"delete from cooking.composition_commande where Nom_Recette = \"{selection.Nom_Recette}\";";
+
+                //delete parent row
+                string query3 = $"delete from cooking.recette where Nom_Recette = \"{selection.Nom_Recette}\";";
+
+                //final query
+                string query = query1 + query2 + query3;
+                string ex = Commandes_SQL.Insert_Requete(query);
+
+                //update listView
+                List<Recette_id_CdR> liste_nv_Item = new List<Recette_id_CdR>();
+                for (int i = 0; i < Recettes_id_ListView.Items.Count; i++)
+                {
+                    Recette_id_CdR recette_observee = Recettes_id_ListView.Items[i] as Recette_id_CdR;
+                    if (recette_observee.Nom_Recette != selection.Nom_Recette)
+                    {
+                        Recette_id_CdR copie_recette = new Recette_id_CdR { Nom_Recette = recette_observee.Nom_Recette, Identifiant_CdR = recette_observee.Identifiant_CdR };
+                        liste_nv_Item.Add(copie_recette);
+                    }
+                }
+                Recettes_id_ListView.Items.Clear();
+                for (int i = 0; i < liste_nv_Item.Count; i++)
+                {
+                    Recettes_id_ListView.Items.Add(liste_nv_Item[i]);
+                }
+            }
+        }
+
+        private void Ban_CdR_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CdR_To_Client_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Top_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Update_Produit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Editer_liste_commandes_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public class Recette_id_CdR
+        {
+            public string Nom_Recette { get; set; }
+
+            public string Identifiant_CdR { get; set; }
         }
     }
 }

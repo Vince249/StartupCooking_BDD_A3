@@ -81,7 +81,7 @@ namespace Projet_Startup_Cooking_BDD
 
             if (connection_ok)
             {
-                Page_Admin page_admin = new Page_Admin();
+                Page_Admin page_admin = new Page_Admin(id);
                 this.NavigationService.Navigate(page_admin);
             }
             else
