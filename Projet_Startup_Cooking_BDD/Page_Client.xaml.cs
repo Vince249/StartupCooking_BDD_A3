@@ -61,13 +61,18 @@ namespace Projet_Startup_Cooking_BDD
 
             string query2 = $"select CdR,Credit_Cook from client where Identifiant = \"{this.id_client}\" ;";
             liste = Commandes_SQL.Select_Requete(query2);
-            if (liste[0][0] == "False")
+            if (Convert.ToInt32(liste[0][0]) == 0)
             {
                 CdR.Content = "Devenir CdR";
             }
-            else
+            if (Convert.ToInt32(liste[0][0]) == 1)
             {
                 CdR.Content = "Page CdR";
+            }
+            if (Convert.ToInt32(liste[0][0]) == 2)
+            {
+                CdR.Content = "Client";
+                CdR.IsEnabled = false;
             }
 
             Solde.Content = liste[0][1];
@@ -322,9 +327,9 @@ namespace Projet_Startup_Cooking_BDD
         {
             string query = $"select CdR from client where Identifiant = \"{this.id_client}\" ;";
             List<List<string>> liste = Commandes_SQL.Select_Requete(query);
-            if(liste[0][0] == "False")
+            if(Convert.ToInt32(liste[0][0]) == 0)
             {
-                string query2 = $"Update cooking.client set CdR = True where Identifiant = \"{this.id_client}\" ;";
+                string query2 = $"Update cooking.client set CdR = 1 where Identifiant = \"{this.id_client}\" ;";
                 string ex = Commandes_SQL.Insert_Requete(query2);
                 CdR.Content = "Page CdR";
             }

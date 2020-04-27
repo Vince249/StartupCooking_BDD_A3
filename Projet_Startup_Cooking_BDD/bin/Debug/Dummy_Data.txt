@@ -1,6 +1,7 @@
-INSERT INTO cooking.client VALUES ("remiid","remimdp","GUILLON","0000000000",100,False);
-INSERT INTO cooking.client VALUES ("vincentid","vincentmdp","POUPET","0000000000",99,True);
-INSERT INTO cooking.client VALUES ("a","a","azerty","0000000000",0,True);
+INSERT INTO cooking.client VALUES ("remiid","remimdp","GUILLON","0000000000",100,0);
+INSERT INTO cooking.client VALUES ("vincentid","vincentmdp","POUPET","0000000000",99,1);
+INSERT INTO cooking.client VALUES ("a","a","azerty","0000000000",0,1);
+INSERT INTO cooking.client VALUES ("b","b","wxcvbn","0000000000",0,2);
 
 INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("14/04/2020",8,"remiid");
 INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("15/04/2020",15,"vincentid");

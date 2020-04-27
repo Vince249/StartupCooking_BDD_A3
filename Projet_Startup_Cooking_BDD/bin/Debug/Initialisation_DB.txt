@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `cooking`.`Client` (
   `Nom_Client` VARCHAR(20) NULL,
   `Numero_tel_Client` VARCHAR(15) NULL,
   `Credit_Cook` INT NULL,
-  `CdR` BOOLEAN NULL,
+  `CdR` INT NULL, 
   PRIMARY KEY (`Identifiant`) );
  
 CREATE TABLE IF NOT EXISTS `cooking`.`Commande` (
