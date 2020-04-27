@@ -23,6 +23,16 @@ namespace Projet_Startup_Cooking_BDD
         public Page_Top()
         {
             InitializeComponent();
+
+            //On peut déjà mettre les informations du CdR d'Or
+
+            //On recherche déjà son nom
+            //On peut directement chercher dans Composition_Commande vu qu'on va prendre toutes les commandes
+        }
+
+        private void Semaine_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
