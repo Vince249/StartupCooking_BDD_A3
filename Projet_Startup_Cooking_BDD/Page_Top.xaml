@@ -42,8 +42,7 @@
                 <GridView>
                     <GridViewColumn Width="AUTO" Header="Nom" DisplayMemberBinding="{Binding Nom}"/>
                     <GridViewColumn Width="AUTO" Header="Type" DisplayMemberBinding="{Binding Type}"/>
-                    <GridViewColumn Width="AUTO" Header="Compteur" DisplayMemberBinding="{Binding Compteur}"/>
-                    <GridViewColumn Width="100" Header="Quantité vendue" DisplayMemberBinding="{Binding Qt}"/>
+                    <GridViewColumn Width="AUTO" Header="Quantité vendue" DisplayMemberBinding="{Binding Compteur}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -52,8 +51,7 @@
                 <GridView>
                     <GridViewColumn Width="AUTO" Header="Nom" DisplayMemberBinding="{Binding Nom}"/>
                     <GridViewColumn Width="AUTO" Header="Type" DisplayMemberBinding="{Binding Type}"/>
-                    <GridViewColumn Width="AUTO" Header="Compteur" DisplayMemberBinding="{Binding Compteur}"/>
-                    <GridViewColumn Width="100" Header="Quantité vendue" DisplayMemberBinding="{Binding Qt}"/>
+                    <GridViewColumn Width="AUTO" Header="Quantité vendue" DisplayMemberBinding="{Binding Compteur}"/>
                     <GridViewColumn Width="AUTO" Header="Créateur" DisplayMemberBinding="{Binding Createur}"/>
 
                 </GridView>
