@@ -34,7 +34,7 @@
             <Label FontSize="20">CdR de la Semaine</Label>
             <Label Name="CdR_Semaine" FontSize="20" Margin="30,0,0,0">dsds</Label>
         </StackPanel>
-        <Label Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"> Recettes du CdR d'Or</Label>
+        <Label Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20">Recettes du CdR d'Or</Label>
         <Label Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20">Recettes de la Semaine</Label>
 
         <ListView Name="Liste_Recette_Or" Grid.Row="4"  Margin="10,0,10,10">
