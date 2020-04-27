@@ -106,7 +106,8 @@ namespace Projet_Startup_Cooking_BDD
 
         private void Top_Click(object sender, RoutedEventArgs e)
         {
-
+            Page_Top pageTop = new Page_Top();
+            this.NavigationService.Navigate(pageTop);
         }
 
         private void Update_Produit_Click(object sender, RoutedEventArgs e)
