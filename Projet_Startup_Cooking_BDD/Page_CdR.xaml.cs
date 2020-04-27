@@ -139,12 +139,13 @@ namespace Projet_Startup_Cooking_BDD
                 //delete child rows
                 string query1 = $"delete from cooking.composition_recette where Nom_Recette = \"{selection.Nom_Recette}\";";
                 string query2 = $"delete from cooking.composition_commande where Nom_Recette = \"{selection.Nom_Recette}\";";
-                
+                string query3 = $"delete from cooking.palmares_recette where Nom_Recette = \"{selection.Nom_Recette}\";";
+
                 //delete parent row
-                string query3 = $"delete from cooking.recette where Nom_Recette = \"{selection.Nom_Recette}\";";
+                string query4 = $"delete from cooking.recette where Nom_Recette = \"{selection.Nom_Recette}\";";
 
                 //final query
-                string query = query1 + query2 + query3;
+                string query = query1 + query2 + query3 + query4;
                 string ex = Commandes_SQL.Insert_Requete(query);
 
                 //update listView
