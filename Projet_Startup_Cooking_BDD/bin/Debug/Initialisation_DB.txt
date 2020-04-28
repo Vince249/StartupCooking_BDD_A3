@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `cooking`.`Client` (
  
 CREATE TABLE IF NOT EXISTS `cooking`.`Commande` (
   `Ref_Commande` INT NOT NULL AUTO_INCREMENT,
-  `Date` VARCHAR(20) NOT NULL,
+  `Date` DATE NOT NULL,
   `prix` INT NULL,
   `Identifiant` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`Ref_Commande`),
