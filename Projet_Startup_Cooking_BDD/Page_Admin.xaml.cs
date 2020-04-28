@@ -206,25 +206,65 @@ namespace Projet_Startup_Cooking_BDD
 
         private void Carnet_commandes_produit_XML_Click(object sender, RoutedEventArgs e)
         {
-            List<List<string>> liste_produit_a_commander = new List<List<string>>();
-            string query = "select Nom_Produit,Categorie,Unite,Stock,Stock_min,Stock_max,Ref_Fournisseur from cooking.produit" +
-                           "where Stock < Stock_min order by Ref_Fournisseur,Nom_Produit;";
-            liste_produit_a_commander = Commandes_SQL.Select_Requete(query);
+            //récupération des produits triés par fournisseur et nom des produits
+            string query = "select Nom_Produit,Categorie,Unite,Stock,Stock_min,Stock_max,Ref_Fournisseur from cooking.produit where Stock < Stock_min order by Ref_Fournisseur,Nom_Produit;";
+            List<List<string>> liste_produit_a_commander = Commandes_SQL.Select_Requete(query);
 
-
-
-
-
-
-            Address adresse = new Address { Street = "1, rue du petit pont", ZipCode = "75005", City = "Paris", Country = "France" };
-            Address adresse2 = new Address { Street = "345 allé zmfoj", ZipCode = "79221", City = "trouduc", Country = "France" };
-            List<Address> liste = new List<Address> { adresse2, adresse };
-            Person p = new Person {Id = 123,LastName = "albert",FirstName = "françois",liste_adresse = liste};
-
-            XmlSerializer xs = new XmlSerializer(typeof(Person));
-            using (StreamWriter wr = new StreamWriter("person.xml"))
+            List<Fournisseur> liste_Fournisser_XML = new List<Fournisseur>(); //liste finale qu'on va rentrer dans XML
+            List<Produit> liste_produits_pour_un_fournisseur = new List<Produit>();
+            int a = 0; //compteur utilisé pour rassembler les produits d'un même fournisseur dans une liste
+            bool changement_fournisseur_iteration_precedente = true;
+            for (int i = 0; i < liste_produit_a_commander.Count; i=i+a)
             {
-                xs.Serialize(wr, p);
+                a = 0;
+                //si on a changé de fournisseur à l'itération précédente, on doit rentrer dans la boucle
+                //de même, si le fournisseur du produit regardé est le même que celui du produit de l'itération précédente, on doit rentrer dans la boucle
+                //la condition du dessus est valable car les produits sont triés par fournisseur dans la liste des produits commandés
+                while (changement_fournisseur_iteration_precedente || liste_produit_a_commander[i+a][6] == liste_produit_a_commander[i+a - 1][6])
+                {
+                    //info du produit qu'on regarde
+                    Produit produit_concerne = new Produit
+                    {
+                        Nom_Produit = liste_produit_a_commander[i+a][0],
+                        Categorie = liste_produit_a_commander[i+a][1],
+                        Unite = liste_produit_a_commander[i+a][2],
+                        Stock = liste_produit_a_commander[i+a][3],
+                        Stock_min = liste_produit_a_commander[i+a][4],
+                        Stock_max = liste_produit_a_commander[i+a][5],
+                        Ref_Fournisseur = liste_produit_a_commander[i+a][6],
+                        Quantite_a_commander = Convert.ToString(Convert.ToInt32(liste_produit_a_commander[i+a][5]) - Convert.ToInt32(liste_produit_a_commander[i+a][3]))
+                    };
+
+                    liste_produits_pour_un_fournisseur.Add(produit_concerne); //tous les produits à commander pour un fournisseur
+                    a++;
+                    if (i + a == liste_produit_a_commander.Count) break; //si on atteint la taille de la liste des produits à commander on sort du while
+                    changement_fournisseur_iteration_precedente = false;
+                }
+
+                //récupération des infos du fournisseur concerné
+                query = $"select Ref_Fournisseur,Nom_Fournisseur,Numero_tel_Fournisseur from cooking.fournisseur where Ref_Fournisseur = \"{liste_produit_a_commander[i+a - 1][6]}\";";
+                List<List<string>> liste_info_fournisseur = Commandes_SQL.Select_Requete(query);
+
+                Fournisseur nouveau_fournisseur = new Fournisseur
+                {
+                    Ref_Fournisseur = liste_info_fournisseur[0][0],
+                    Nom_Fournisseur = liste_info_fournisseur[0][1],
+                    Numero_tel_Fournisseur = liste_info_fournisseur[0][2],
+                    liste_produit_a_commander = liste_produits_pour_un_fournisseur
+                };
+
+                liste_Fournisser_XML.Add(nouveau_fournisseur);
+
+                liste_produits_pour_un_fournisseur = new List<Produit>(); //reset la liste des produits pour un fournisseur
+
+                changement_fournisseur_iteration_precedente = true;
+            }
+
+            //Création du fichier XML (site pour aide : https://tlevesque.developpez.com/dotnet/xml-serialization/#LI-A-1)
+            XmlSerializer xs = new XmlSerializer(typeof(List<Fournisseur>));
+            using (StreamWriter wr = new StreamWriter("Liste_des_produits_à_commander.xml"))
+            {
+                xs.Serialize(wr, liste_Fournisser_XML);
             }
         }
 
@@ -270,24 +310,5 @@ namespace Projet_Startup_Cooking_BDD
             public List<Produit> liste_produit_a_commander { get; set; }
         }
 
-
-
-        public class Person
-        {
-            public int Id { get; set; }
-            public string LastName { get; set; }
-            public string FirstName { get; set; }
-
-            public List<Address> liste_adresse { get; set; } 
-        }
-
-
-        public class Address
-        {
-            public string Street { get; set; }
-            public string ZipCode { get; set; }
-            public string City { get; set; }
-            public string Country { get; set; }
-        }
     }
 }
