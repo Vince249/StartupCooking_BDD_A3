@@ -51,8 +51,8 @@ namespace Projet_Startup_Cooking_BDD
             int jour = (int)DateTime.Today.DayOfWeek; //jour de la semaine
             double decalage = 1 - jour; //on veut le decalage à lundi
             System.DateTime datelimite_system = DateTime.Today.AddDays(decalage);
-            string datelimite = $"{datelimite_system.Day}/{datelimite_system.Month}/{datelimite_system.Year}"; // on a notre date limite
-            string date = $"{DateTime.Now.Day}/{DateTime.Now.Month}/{DateTime.Now.Year}";
+            string datelimite = $"{datelimite_system.Year}/{datelimite_system.Month}/{datelimite_system.Day}"; // on a notre date limite
+            string date = $"{DateTime.Now.Year}/{DateTime.Now.Month}/{DateTime.Now.Day}";
             // on veut sélectionner toutes les commandes faites sur cette période
             query = $"select  recette.Identifiant " +
                 $"from (commande natural join composition_commande as T)  join recette " +
@@ -85,11 +85,6 @@ namespace Projet_Startup_Cooking_BDD
                     Compteur = Liste_Recette_Semaine[i][4]
                 });
             }
-        }
-
-        private void Semaine_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
 
         public class Recette_Or

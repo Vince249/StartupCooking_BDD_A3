@@ -3,13 +3,13 @@ INSERT INTO cooking.client VALUES ("vincentid","vincentmdp","POUPET","0000000000
 INSERT INTO cooking.client VALUES ("a","a","azerty","0000000000",0,1);
 INSERT INTO cooking.client VALUES ("b","b","wxcvbn","0000000000",0,2);
 
-INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("2020/4/14",8,"remiid");
-INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("2020/4/15",15,"vincentid");
+INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("2020/04/28",8,"remiid");
+INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("2020/04/28",15,"vincentid");
 
-INSERT INTO cooking.recette VALUES ("riz-steak","etudiant","bon",6,2,0,"vincentid");
-INSERT INTO cooking.recette VALUES ("frites","etudiant","meh",1,1,2,"a");
-INSERT INTO cooking.recette VALUES ("boulgour","bobo","arnaque",8,1,1,"a");
-INSERT INTO cooking.recette VALUES ("tofu","bobo","bul",7,1,0,"vincentid");
+INSERT INTO cooking.recette VALUES ("riz-steak","etudiant","bon",6,2,1,"vincentid");
+INSERT INTO cooking.recette VALUES ("frites","etudiant","meh",1,2,2,"a");
+INSERT INTO cooking.recette VALUES ("boulgour","bobo","arnaque",8,2,1,"a");
+INSERT INTO cooking.recette VALUES ("tofu","bobo","bul",7,2,1,"vincentid");
 
 INSERT INTO cooking.fournisseur VALUES ("Pignouf","JCVD","8888888");
 INSERT INTO cooking.fournisseur VALUES ("Boboland","Big Steve","999999");
