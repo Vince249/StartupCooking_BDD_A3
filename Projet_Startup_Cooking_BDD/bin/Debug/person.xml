@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Person xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>123</Id>
+  <LastName>albert</LastName>
+  <FirstName>françois</FirstName>
+  <liste_adresse>
+    <Address>
+      <Street>1, rue du petit pont</Street>
+      <ZipCode>75005</ZipCode>
+      <City>Paris</City>
+      <Country>France</Country>
+    </Address>
+    <Address>
+      <Street>345 allé zmfoj</Street>
+      <ZipCode>79221</ZipCode>
+      <City>trouduc</City>
+      <Country>France</Country>
+    </Address>
+  </liste_adresse>
+</Person>

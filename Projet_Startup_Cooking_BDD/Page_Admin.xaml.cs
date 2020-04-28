@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization; //pour (Dé)Sérialisation en XML
+using System.IO; //lecture et écriture de fichiers
 
 namespace Projet_Startup_Cooking_BDD
 {
@@ -202,12 +204,31 @@ namespace Projet_Startup_Cooking_BDD
             this.NavigationService.Navigate(pageTop);
         }
 
-        private void Update_Produit_Click(object sender, RoutedEventArgs e)
+        private void Carnet_commandes_produit_XML_Click(object sender, RoutedEventArgs e)
         {
+            List<List<string>> liste_produit_a_commander = new List<List<string>>();
+            string query = "select Nom_Produit,Categorie,Unite,Stock,Stock_min,Stock_max,Ref_Fournisseur from cooking.produit" +
+                           "where Stock < Stock_min order by Ref_Fournisseur,Nom_Produit;";
+            liste_produit_a_commander = Commandes_SQL.Select_Requete(query);
 
+
+
+
+
+
+            Address adresse = new Address { Street = "1, rue du petit pont", ZipCode = "75005", City = "Paris", Country = "France" };
+            Address adresse2 = new Address { Street = "345 allé zmfoj", ZipCode = "79221", City = "trouduc", Country = "France" };
+            List<Address> liste = new List<Address> { adresse2, adresse };
+            Person p = new Person {Id = 123,LastName = "albert",FirstName = "françois",liste_adresse = liste};
+
+            XmlSerializer xs = new XmlSerializer(typeof(Person));
+            using (StreamWriter wr = new StreamWriter("person.xml"))
+            {
+                xs.Serialize(wr, p);
+            }
         }
 
-        private void Editer_liste_commandes_Click(object sender, RoutedEventArgs e)
+        private void Creation_Produit_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -217,6 +238,56 @@ namespace Projet_Startup_Cooking_BDD
             public string Nom_Recette { get; set; }
 
             public string Identifiant_CdR { get; set; }
+        }
+
+        public class Produit
+        {
+            public string Nom_Produit { get; set; }
+
+            public string Categorie { get; set; }
+
+            public string Unite { get; set; }
+
+            public string Stock { get; set; }
+
+            public string Stock_min { get; set; }
+
+            public string Stock_max { get; set; }
+
+            public string Ref_Fournisseur { get; set; }
+
+            public string Quantite_a_commander { get; set; } 
+        }
+
+        public class Fournisseur
+        {
+            public string Ref_Fournisseur { get; set; }
+
+            public string Nom_Fournisseur { get; set; }
+
+            public string Numero_tel_Fournisseur { get; set; }
+
+            public List<Produit> liste_produit_a_commander { get; set; }
+        }
+
+
+
+        public class Person
+        {
+            public int Id { get; set; }
+            public string LastName { get; set; }
+            public string FirstName { get; set; }
+
+            public List<Address> liste_adresse { get; set; } 
+        }
+
+
+        public class Address
+        {
+            public string Street { get; set; }
+            public string ZipCode { get; set; }
+            public string City { get; set; }
+            public string Country { get; set; }
         }
     }
 }

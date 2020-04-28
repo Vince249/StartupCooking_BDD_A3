@@ -3,22 +3,21 @@ INSERT INTO cooking.client VALUES ("vincentid","vincentmdp","POUPET","0000000000
 INSERT INTO cooking.client VALUES ("a","a","azerty","0000000000",0,1);
 INSERT INTO cooking.client VALUES ("b","b","wxcvbn","0000000000",0,2);
 
-INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("14/04/2020",8,"remiid");
-INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("15/04/2020",15,"vincentid");
+INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("2020/4/14",8,"remiid");
+INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("2020/4/15",15,"vincentid");
 
 INSERT INTO cooking.recette VALUES ("riz-steak","etudiant","bon",6,2,0,"vincentid");
-INSERT INTO cooking.recette VALUES ("frites","etudiant","meh",1,1,0,"a");
-INSERT INTO cooking.recette VALUES ("boulgour","bobo","arnaque",8,1,0,"a");
+INSERT INTO cooking.recette VALUES ("frites","etudiant","meh",1,1,2,"a");
+INSERT INTO cooking.recette VALUES ("boulgour","bobo","arnaque",8,1,1,"a");
 INSERT INTO cooking.recette VALUES ("tofu","bobo","bul",7,1,0,"vincentid");
 
 INSERT INTO cooking.fournisseur VALUES ("Pignouf","JCVD","8888888");
 INSERT INTO cooking.fournisseur VALUES ("Boboland","Big Steve","999999");
 
-INSERT INTO cooking.produit VALUES ("rizviande","pauvre","kg",2,0,10,"Pignouf");
-INSERT INTO cooking.produit VALUES ("patate","irlandais","g",4,1,8,"Pignouf");
-INSERT INTO cooking.produit VALUES ("graines","parigot","g",15,1,16,"Boboland");
-INSERT INTO cooking.produit VALUES ("granules","parigot","g",7,1,15,"Boboland");
-
+INSERT INTO cooking.produit VALUES ("rizviande","pauvre","kg",2,10,100,"Pignouf");
+INSERT INTO cooking.produit VALUES ("patate","irlandais","g",4,10,80,"Pignouf");
+INSERT INTO cooking.produit VALUES ("graines","parigot","g",15,10,300,"Boboland");
+INSERT INTO cooking.produit VALUES ("granules","parigot","g",7,10,150,"Boboland");
 
 
 INSERT INTO cooking.composition_commande VALUES ("riz-steak",1,1);

@@ -53,10 +53,10 @@
                 FontSize="18" Click="CdR_To_Client_Click" Padding="5" Margin="0,0,0,10">Passer le CdR en client</Button>
         <Button Name="Top" Grid.Column="4" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center"
                 FontSize="18" Click="Top_Click" Padding="5">TOP</Button>
-        <Button Name="Update_Produit" Grid.Column="4" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"
-                FontSize="18" Click="Update_Produit_Click" Padding="5">Update produit</Button>
-        <Button Name="Editer_liste_commandes" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Right"
-                FontSize="18" Click="Editer_liste_commandes_Click" Padding="5">Editer liste des commandes au format XML</Button>
+        <Button Name="Creation_Produit" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.ColumnSpan="2"
+                FontSize="18" Click="Creation_Produit_Click" Padding="5">Créer nouveau produit</Button>
+        <Button Name="Carnet_commandes_produit_XML" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Right"
+                FontSize="18" Click="Carnet_commandes_produit_XML_Click" Padding="5">Carnet de commandes des produits XML</Button>
 
         <!--ListView-->
         <ListView Name="Recettes_id_ListView" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="0" Margin="0,0,0,0">
