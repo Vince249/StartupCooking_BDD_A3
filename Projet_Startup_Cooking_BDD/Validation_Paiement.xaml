@@ -35,7 +35,7 @@
                FontSize="18">Nouveau solde</Label>
         <Label Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
                FontSize="18">Reste à payer</Label>
-        
+
         <!-- Création Stackpanel pour pouvoir récupérer la valeur d'une case directment sans avoir de string-->
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
             <Label Name="Total" FontSize="18"></Label>
@@ -52,6 +52,13 @@
         <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
             <Label Name="Reste_a_payer" FontSize="18"></Label>
             <Label FontSize="18">cook(s)</Label>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="150,0,0,0">
+            <Label Name="label_Remuneration" FontSize="14" Foreground="Red">Rémunération sur commande :</Label>
+            <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Name="Remuneration_cooks" FontSize="14" Foreground="Red"></Label>
+                <Label Name="label_cook_remuneration" FontSize="14" Foreground="Red">cook(s)</Label>
+            </StackPanel>
         </StackPanel>
 
         <!--Buttons-->

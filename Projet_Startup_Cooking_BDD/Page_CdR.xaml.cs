@@ -116,6 +116,10 @@ namespace Projet_Startup_Cooking_BDD
                 string query = query1 + query2;
                 string ex = Commandes_SQL.Insert_Requete(query);
 
+
+                //mise à jour des sotck min et max des produits
+
+
                 Page_CdR page_CdR = new Page_CdR(this.id_client);
                 this.NavigationService.Navigate(page_CdR);
             }

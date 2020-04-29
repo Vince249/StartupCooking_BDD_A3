@@ -214,7 +214,7 @@ namespace Projet_Startup_Cooking_BDD
             List<Produit> liste_produits_pour_un_fournisseur = new List<Produit>();
             int a = 0; //compteur utilisé pour rassembler les produits d'un même fournisseur dans une liste
             bool changement_fournisseur_iteration_precedente = true;
-            for (int i = 0; i < liste_produit_a_commander.Count; i=i+a)
+            for (int i = 0; i < liste_produit_a_commander.Count; i+=a)
             {
                 a = 0;
                 //si on a changé de fournisseur à l'itération précédente, on doit rentrer dans la boucle

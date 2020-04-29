@@ -29,6 +29,33 @@ namespace Projet_Startup_Cooking_BDD
             this.id_client = id_client;
             Total.Content = total;
             Solde.Content = solde;
+
+            Remuneration_cooks.Visibility = Visibility.Hidden; //par défaut on cache ce label
+            label_Remuneration.Visibility = Visibility.Hidden; //par défaut on cache ce label
+            label_cook_remuneration.Visibility = Visibility.Hidden; //par défaut on cache ce label
+
+            //Si le client qui commande est le CdR d'une des recette du panier, on affiche la rémunération qu'il va percevoir de cette commande
+            int ajout_credit = 0;
+            List<string> liste_CdR = new List<string>();
+            for (int i = 0; i < liste_panier.Count; i++)
+            {
+                string nom_recette = this.liste_panier[i][0];
+                string query = $"select Identifiant,Remuneration from cooking.recette where Nom_Recette = \"{nom_recette}\";";
+                List<List<string>> Id_CdR_et_remuneration = Commandes_SQL.Select_Requete(query);
+
+                if (this.id_client == Id_CdR_et_remuneration[i][0])
+                {
+                    int qt = Convert.ToInt32(this.liste_panier[i][1]);
+                    int remuneration = Convert.ToInt32(Id_CdR_et_remuneration[i][1]);
+                    ajout_credit+=remuneration * qt;
+                    Remuneration_cooks.Visibility = Visibility.Visible;
+                    label_Remuneration.Visibility = Visibility.Visible;
+                    label_cook_remuneration.Visibility = Visibility.Visible;
+                }
+            }
+
+            Remuneration_cooks.Content = Convert.ToString(ajout_credit);
+
             int difference = Convert.ToInt32(solde) - Convert.ToInt32(total);
             if(difference>=0)
             {
