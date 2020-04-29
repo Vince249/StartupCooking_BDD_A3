@@ -112,12 +112,22 @@ namespace Projet_Startup_Cooking_BDD
                 for (int i = 0; i < liste_produit_nom_quantite.Count; i++)
                 {
                     query2 += $"INSERT INTO cooking.composition_recette VALUES (\"{nom_recette_input}\",\"{liste_produit_nom_quantite[i][0]}\",{liste_produit_nom_quantite[i][1]});";
+                    //mise à jour des sotck min et max des produits
+                    // on a décidé d'augmenter stock min de 1 fois la quantité nécessaire pour cette recette (choix expliqué dans le rapport)
+                    // stock max est augmenté de 2 fois la quantité nécessaire pour cette recette
+
+                    string query3 = $"Select Stock_min, Stock_max from cooking.produit where Nom_Produit = \"{liste_produit_nom_quantite[i][0]}\" ;";
+                    List<List<string>> Liste_stock_min_max = Commandes_SQL.Select_Requete(query3);
+                    int Nv_Stock_min =  Convert.ToInt32(Liste_stock_min_max[0][0]) + Convert.ToInt32(liste_produit_nom_quantite[i][1]);
+                    int Nv_Stock_max = Convert.ToInt32(Liste_stock_min_max[0][1]) + 2* Convert.ToInt32(liste_produit_nom_quantite[i][1]);
+                    query3 = $"Update cooking.produit set Stock_min = {Nv_Stock_min}, Stock_max = {Nv_Stock_max} where Nom_Produit = \"{liste_produit_nom_quantite[i][0]}\" ;";
+                    Commandes_SQL.Insert_Requete(query3);
                 }
                 string query = query1 + query2;
                 string ex = Commandes_SQL.Insert_Requete(query);
 
 
-                //mise à jour des sotck min et max des produits
+                
 
 
                 Page_CdR page_CdR = new Page_CdR(this.id_client);

@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `cooking`.`Commande` (
 
 CREATE TABLE IF NOT EXISTS `cooking`.`Recette` (
   `Nom_Recette` VARCHAR(30) NOT NULL,
-  `Type` VARCHAR(20) NULL,
+  `Type` VARCHAR(30) NULL,
   `Descriptif` VARCHAR(256) NULL,
   `Prix_Vente` INT NULL,
   `Remuneration` INT NULL,

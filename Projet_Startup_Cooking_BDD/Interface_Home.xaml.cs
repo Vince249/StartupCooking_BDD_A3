@@ -56,38 +56,38 @@ namespace Projet_Startup_Cooking_BDD
         {
             string id = ID_admin.Text;
             string mdp = MDP_admin.Password;
-            
-            //Récupération infos dans fichier txt --> chaque index de la liste de liste finale contient un id et son mdp associé
-            string line;
-            string infos_in_file = "";
-            System.IO.StreamReader file = new System.IO.StreamReader("Acces_admin.txt");
-            while ((line = file.ReadLine()) != null)
+            if (id.Length > 0 && mdp.Length > 0) // rien de rentré
             {
-                infos_in_file += line + '\n';
-            }
-            file.Close();
-
-            string[] temp = infos_in_file.Split('\n');
-            List <List<string>> liste_infos_in_file = new List<List<string>>();
-            bool connection_ok = false;
-            for (int i = 0; i < temp.Length; i++)
-            {
-                liste_infos_in_file.Add(temp[i].Split(';').ToList());
-                if (liste_infos_in_file[i][0] == id && liste_infos_in_file[i][1] == mdp)
+                //Récupération infos dans fichier txt --> chaque index de la liste de liste finale contient un id et son mdp associé
+                string line;
+                string infos_in_file = "";
+                System.IO.StreamReader file = new System.IO.StreamReader("Acces_admin.txt");
+                while ((line = file.ReadLine()) != null)
                 {
-                    connection_ok = true;
+                    infos_in_file += line + '\n';
                 }
-            }
+                file.Close();
 
-            if (connection_ok)
-            {
-                Page_Admin page_admin = new Page_Admin(id);
-                this.NavigationService.Navigate(page_admin);
+                string[] temp = infos_in_file.Split('\n');
+                List<List<string>> liste_infos_in_file = new List<List<string>>();
+                bool connection_ok = false;
+                for (int i = 0; i < temp.Length; i++)
+                {
+                    liste_infos_in_file.Add(temp[i].Split(';').ToList());
+                    if (liste_infos_in_file[i][0] == id && liste_infos_in_file[i][1] == mdp)
+                    {
+                        connection_ok = true;
+                    }
+                }
+
+                if (connection_ok)
+                {
+                    Page_Admin page_admin = new Page_Admin(id);
+                    this.NavigationService.Navigate(page_admin);
+                }
+               
             }
-            else
-            {
-                error_label.Content = "Erreur administrateur non reconnu";
-            }
+            error_label.Content = "Erreur admin non reconnu";
         }
 
         private void Button_Click_Reset_BDD(object sender, RoutedEventArgs e)

@@ -24,6 +24,7 @@ namespace Projet_Startup_Cooking_BDD
         public Page_Client(string id_client)
         {
             InitializeComponent();
+            Valider.IsEnabled = false;
             this.id_client = id_client;
             string query = $"Select Nom_Client from cooking.client where Identifiant = \"{this.id_client}\" ;";
             List<List<string>> liste = Commandes_SQL.Select_Requete(query);
@@ -86,6 +87,10 @@ namespace Projet_Startup_Cooking_BDD
             if (selection == null)
             {
                 erreur.Content = "Aucune recette sélectionnée";
+            }
+            if(Quantité.Text=="" || !int.TryParse(Quantité.Text,out _) || Convert.ToInt32(Quantité.Text)<=0)
+            {
+                erreur.Content = "Quantité invalide";
             }
             else
             {
@@ -164,6 +169,7 @@ namespace Projet_Startup_Cooking_BDD
                 }
                 else
                 {
+                    Valider.IsEnabled = true; // on réactive le bouton
 
                     erreur.Content = "";
                     List<Recette_complete> nouvelle_table = new List<Recette_complete>();
@@ -204,6 +210,8 @@ namespace Projet_Startup_Cooking_BDD
                     Panier.Items.Add(new Recette_Panier { Nom_Recette = selection.Nom_Recette, Quantite_Recette = Quantité.Text, Prix = selection.Prix });
                     Quantité.Text = "";
                 }
+
+                
 
             }
 
@@ -320,8 +328,10 @@ namespace Projet_Startup_Cooking_BDD
                 {
                     Liste_Recette.Items.Add(nouvelle_table[i]);
                 }
+                if (Panier.Items.Count == 0) Valider.IsEnabled = false; // on désactive le bouton
             }
 
+            
         }
         private void CdR_Click(object sender, RoutedEventArgs e)
         {
@@ -348,19 +358,25 @@ namespace Projet_Startup_Cooking_BDD
 
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
-            List<List<string>> liste_panier = new List<List<string>>();
-            for (int index_panier = 0;  index_panier < Panier.Items.Count;  index_panier++)
+            if (Panier.Items.Count > 0) //s'il y a des choses dans le panier
             {
-                Recette_Panier recette = Panier.Items[index_panier] as Recette_Panier;
-                List<string> liste_recette_quantite = new List<string>();
-                liste_recette_quantite.Add(recette.Nom_Recette);
-                liste_recette_quantite.Add(recette.Quantite_Recette);
-                liste_panier.Add(liste_recette_quantite);
-            }
 
+
+                List<List<string>> liste_panier = new List<List<string>>();
+                for (int index_panier = 0; index_panier < Panier.Items.Count; index_panier++)
+                {
+                    Recette_Panier recette = Panier.Items[index_panier] as Recette_Panier;
+                    List<string> liste_recette_quantite = new List<string>();
+                    liste_recette_quantite.Add(recette.Nom_Recette);
+                    liste_recette_quantite.Add(recette.Quantite_Recette);
+                    liste_panier.Add(liste_recette_quantite);
+                }
+
+
+                Validation_Paiement page_validation = new Validation_Paiement(Total.Content.ToString(), Solde.Content.ToString(), this.id_client, liste_panier);
+                this.NavigationService.Navigate(page_validation);
+            }
             
-            Validation_Paiement page_validation = new Validation_Paiement(Total.Content.ToString(),Solde.Content.ToString(),this.id_client, liste_panier);
-            this.NavigationService.Navigate(page_validation);
         }
         public class Recette_complete
         {

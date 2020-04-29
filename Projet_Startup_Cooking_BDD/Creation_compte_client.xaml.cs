@@ -32,18 +32,24 @@ namespace Projet_Startup_Cooking_BDD
             string mdp = mdpTextBox.Text;
             string nom = nomTextBox.Text;
             string tel = telTextBox.Text;
-            string requete = $"INSERT INTO cooking.client VALUES (\"{id}\",\"{mdp}\",\"{nom}\",\"{tel}\",0,False);";
-            string message = Commandes_SQL.Insert_Requete(requete);
-            if(message.Length ==0)
+            if (int.TryParse(tel, out _))
             {
-                Interface_Home homepage = new Interface_Home();
-                this.NavigationService.Navigate(homepage);
+                string requete = $"INSERT INTO cooking.client VALUES (\"{id}\",\"{mdp}\",\"{nom}\",\"{tel}\",0,False);";
+                string message = Commandes_SQL.Insert_Requete(requete);
+                if (message.Length == 0)
+                {
+                    Interface_Home homepage = new Interface_Home();
+                    this.NavigationService.Navigate(homepage);
+                }
+                else
+                {
+                    error.Content = message;
+                }
             }
             else
             {
-                error.Content = message;
+                error.Content = "Enter a valid number";
             }
-            
 
 
         }

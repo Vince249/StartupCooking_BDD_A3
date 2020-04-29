@@ -42,8 +42,8 @@
                FontWeight="Bold" FontSize="18">Mot de passe</Label>
         <Label Grid.Row="2" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Trebuchet MS"
                FontWeight="Bold" FontSize="18">Mot de passe</Label>
-        <Label Name ="error_label" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="4" VerticalAlignment="Center" 
-               HorizontalAlignment="Center" FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="18" Foreground="Red"></Label>
+        <Label Name ="error_label" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3" VerticalAlignment="Center" 
+               HorizontalAlignment="Center" FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="14" Foreground="Red"></Label>
 
         <!-- TextBox -->
         <TextBox Name="ID_client" Grid.Row="1" Grid.Column="2" MaxHeight="20"></TextBox>

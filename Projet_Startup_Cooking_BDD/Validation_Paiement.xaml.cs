@@ -114,7 +114,7 @@ namespace Projet_Startup_Cooking_BDD
 
                 // Créer une instance de Commande
 
-                string date = $"{DateTime.Now.Day}/{DateTime.Now.Month}/{DateTime.Now.Year}";
+                string date = $"{DateTime.Now.Year}/{DateTime.Now.Month}/{DateTime.Now.Day}";
                 query = $"Insert into cooking.commande (Date, prix, Identifiant) VALUES(\"{date}\",{Total.Content},\"{this.id_client}\");";
                 ex = Commandes_SQL.Insert_Requete(query);
 

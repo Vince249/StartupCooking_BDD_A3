@@ -55,10 +55,10 @@ namespace Projet_Startup_Cooking_BDD
             string date = $"{DateTime.Now.Year}/{DateTime.Now.Month}/{DateTime.Now.Day}";
             // on veut sélectionner toutes les commandes faites sur cette période
             query = $"select  recette.Identifiant " +
-                $"from (commande natural join composition_commande as T)  join recette " +
-                $"on recette.Nom_Recette=T.Nom_Recette " +
+                $"from (cooking.commande natural join cooking.composition_commande as T)  join cooking.recette " +
+                $"on cooking.recette.Nom_Recette=T.Nom_Recette " +
                 $"where Date between \"{datelimite}\" and \"{date}\" " +
-                $"group by recette.Identifiant " +
+                $"group by cooking.recette.Identifiant " +
                 $"order by sum(Quantite_Recette) desc " +
                 $"limit 1;";
             List<List<string>> Liste_CdR_Semaine = Commandes_SQL.Select_Requete(query);
@@ -66,10 +66,10 @@ namespace Projet_Startup_Cooking_BDD
 
             //Top commande Semaine
             query = $"select recette.Nom_Recette, Type, recette.Identifiant, sum(Quantite_Recette), Compteur " +
-                $"from (commande natural join composition_commande as T)  join recette " +
-                $"on recette.Nom_Recette=T.Nom_Recette " +
+                $"from (cooking.commande natural join cooking.composition_commande as T)  join cooking.recette " +
+                $"on cooking.recette.Nom_Recette=T.Nom_Recette " +
                 $"where Date between \"{datelimite}\" and \"{date}\" " +
-                $"group by recette.Nom_Recette " +
+                $"group by cooking.recette.Nom_Recette " +
                 $"order by sum(Quantite_Recette) desc " +
                 $"limit 5;";
             List<List<string>> Liste_Recette_Semaine = Commandes_SQL.Select_Requete(query);

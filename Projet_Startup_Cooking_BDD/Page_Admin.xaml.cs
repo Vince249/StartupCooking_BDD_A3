@@ -206,8 +206,32 @@ namespace Projet_Startup_Cooking_BDD
 
         private void Carnet_commandes_produit_XML_Click(object sender, RoutedEventArgs e)
         {
+            //mise a jour stock min et max produits pas utilisés depuis 30 jours
+            DateTime Trente_jours_avant = DateTime.Now.AddDays(0);
+            string datelimite = $"{Trente_jours_avant.Year}/{Trente_jours_avant.Month}/{Trente_jours_avant.Day}";
+            string auj = $"{DateTime.Now.Year}/{DateTime.Now.Month}/{DateTime.Now.Day}";
+
+            string query = $"select distinct(Nom_Produit), Stock_min, Stock_max " +
+                           $"from cooking.produit " +
+                           $"where Nom_Produit not in " +
+                           $"(select distinct(Nom_Produit) " +
+                           $"from (cooking.commande natural join cooking.composition_commande) natural join cooking.composition_recette " +
+                           $"where Date between \"{auj}\" AND \"{datelimite}\");";
+            List<List<string>> Liste_Produit_a_modifier = Commandes_SQL.Select_Requete(query);
+
+            //pour chaque produit on fait la modif
+
+            for (int i = 0; i < Liste_Produit_a_modifier.Count; i++)
+            {
+                string nom_produit = Liste_Produit_a_modifier[i][0];
+                int Nv_Stock_Min = Convert.ToInt32(Liste_Produit_a_modifier[i][1]) / 2;
+                int Nv_Stock_Max = Convert.ToInt32(Liste_Produit_a_modifier[i][2]) / 2;
+                query = $"Update cooking.produit set Stock_min = {Nv_Stock_Min}, Stock_max = {Nv_Stock_Max} where Nom_Produit = \"{nom_produit}\";";
+                string ex = Commandes_SQL.Insert_Requete(query);
+            }
+
             //récupération des produits triés par fournisseur et nom des produits
-            string query = "select Nom_Produit,Categorie,Unite,Stock,Stock_min,Stock_max,Ref_Fournisseur from cooking.produit where Stock < Stock_min order by Ref_Fournisseur,Nom_Produit;";
+            query = "select Nom_Produit,Categorie,Unite,Stock,Stock_min,Stock_max,Ref_Fournisseur from cooking.produit where Stock < Stock_min order by Ref_Fournisseur,Nom_Produit;";
             List<List<string>> liste_produit_a_commander = Commandes_SQL.Select_Requete(query);
 
             List<Fournisseur> liste_Fournisser_XML = new List<Fournisseur>(); //liste finale qu'on va rentrer dans XML
