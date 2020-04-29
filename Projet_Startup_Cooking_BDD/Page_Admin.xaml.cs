@@ -294,7 +294,8 @@ namespace Projet_Startup_Cooking_BDD
 
         private void Creation_Produit_Click(object sender, RoutedEventArgs e)
         {
-
+            Creation_Produit page_creation_produit = new Creation_Produit();
+            this.NavigationService.Navigate(page_creation_produit);
         }
 
         public class Recette_id_CdR

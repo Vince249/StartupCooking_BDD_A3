@@ -1,0 +1,70 @@
+﻿<Page x:Class="Projet_Startup_Cooking_BDD.Creation_Produit"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Projet_Startup_Cooking_BDD"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Creation_Produit">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!-- Labels -->
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
+               FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="25">Creation de produit</Label>
+        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+               FontSize="16">Nom :</Label>
+        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+               FontSize="16">Categorie:</Label>
+        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+               FontSize="16">Unite :</Label>
+        <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+               FontSize="16">Référence fournisseur :</Label>
+        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" 
+               FontSize="16">Stock :</Label>
+        <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" 
+               FontSize="16">Stock min :</Label>
+        <Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" 
+               FontSize="16">Stock max :</Label>
+        <Label Name="Erreur_message" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
+               FontSize="16" Foreground="Red"></Label>
+
+        <!-- Textbox -->
+        <TextBox Name="textbox_nom" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 FontSize="16" Height="25" Width="100"></TextBox>
+        <TextBox Name="textbox_categorie" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 FontSize="16" Height="25" Width="100"></TextBox>
+        <TextBox Name="textbox_unite" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 FontSize="16" Height="25" Width="100"></TextBox>
+        <TextBox Name="textbox_ref_fournisseur" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 FontSize="16" Height="25" Width="100"></TextBox>
+        <TextBox Name="textbox_stock" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 FontSize="16" Height="25" Width="100"></TextBox>
+        <TextBox Name="textbox_stock_min" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 FontSize="16" Height="25" Width="100"></TextBox>
+        <TextBox Name="textbox_stock_max" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 FontSize="16" Height="25" Width="100"></TextBox>
+
+        <!-- Button -->
+        <Button Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"  FontFamily="Trebuchet MS"
+               FontSize="12" Height="70" Width="200" Click="Creer_Produit_Click">Créer le produit</Button>
+        <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"  FontFamily="Trebuchet MS"
+               FontSize="12" Height="70" Width="200" Click="Creer_Reinitialiser">Réinitialiser</Button>
+
+    </Grid>
+</Page>
