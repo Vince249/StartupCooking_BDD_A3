@@ -32,26 +32,51 @@ namespace Projet_Startup_Cooking_BDD
             string mdp = mdpTextBox.Text;
             string nom = nomTextBox.Text;
             string tel = telTextBox.Text;
-            if (int.TryParse(tel, out _))
+            
+            if (id == "")
+            {
+                error.Content = "Identifiant vide";
+            }
+            else if (mdp == "")
+            {
+                error.Content = "Mot de passe vide";
+            }
+            else if (nom == "")
+            {
+                error.Content = "Nom vide";
+            }
+            else if (tel == "" || !int.TryParse(tel,out _))
+            {
+                error.Content = "Téléphone vide ou invalide";
+            }
+            else
             {
                 string requete = $"INSERT INTO cooking.client VALUES (\"{id}\",\"{mdp}\",\"{nom}\",\"{tel}\",0,False);";
-                string message = Commandes_SQL.Insert_Requete(requete);
-                if (message.Length == 0)
+                string ex = Commandes_SQL.Insert_Requete(requete);
+
+                if (ex == $"Duplicate entry '{id}' for key 'client.PRIMARY'")
+                {
+                    error.Content = "Identifiant déjà utilisé";
+                }
+                else
                 {
                     Interface_Home homepage = new Interface_Home();
                     this.NavigationService.Navigate(homepage);
                 }
-                else
-                {
-                    error.Content = message;
-                }
             }
-            else
+        }
+
+
+        private void Caractere_interdit(object sender, TextChangedEventArgs e)
+        {
+            TextBox id_textbox = sender as TextBox;
+            // \s - Stands for white space. The rest is for alphabets and numbers
+            if (id_textbox.Text.Contains('"'))
             {
-                error.Content = "Enter a valid number";
+                id_textbox.Text = String.Empty;
+                error.Content = "Guillemets (\") interdits";
             }
-
-
+            return;
         }
     }
 }

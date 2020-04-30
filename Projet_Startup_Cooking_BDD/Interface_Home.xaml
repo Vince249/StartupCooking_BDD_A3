@@ -46,9 +46,9 @@
                HorizontalAlignment="Center" FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="14" Foreground="Red"></Label>
 
         <!-- TextBox -->
-        <TextBox Name="ID_client" Grid.Row="1" Grid.Column="2" MaxHeight="20"></TextBox>
+        <TextBox Name="ID_client" Grid.Row="1" Grid.Column="2" MaxHeight="20" TextChanged="Caractere_interdit"></TextBox>
         <PasswordBox Name="MDP_client" Grid.Row="2" Grid.Column="2" MaxHeight="20" PasswordChar="*"></PasswordBox>
-        <TextBox Name="ID_admin" Grid.Row="1" Grid.Column="5" MaxHeight="20"></TextBox>
+        <TextBox Name="ID_admin" Grid.Row="1" Grid.Column="5" MaxHeight="20" TextChanged="Caractere_interdit"></TextBox>
         <PasswordBox Name="MDP_admin" Grid.Row="2" Grid.Column="5" MaxHeight="20" PasswordChar="*"></PasswordBox>
 
         <!-- Button -->

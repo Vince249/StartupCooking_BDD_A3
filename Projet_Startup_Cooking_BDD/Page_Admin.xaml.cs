@@ -145,52 +145,59 @@ namespace Projet_Startup_Cooking_BDD
                 string query = $"select Nom_Recette from cooking.recette where Identifiant = \"{id_CdR_Box.Text}\";";
                 List<List<string>> liste_nom_recette_CdR = Commandes_SQL.Select_Requete(query);
 
-                for (int i = 0; i < liste_nom_recette_CdR.Count; i++)
+                if (liste_nom_recette_CdR.Count == 0)
                 {
-                    //mettre à jour les stock mini et max de produit
-                    //on recupère les infos relatives au produit dont on a besoin
-                    query = $"Select Nom_Produit,Quantite_Produit,Stock_min,Stock_max from cooking.composition_recette natural join cooking.produit where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
-                    List<List<string>> Liste_Nom_Produit_QT_Min_Max = Commandes_SQL.Select_Requete(query);
-
-                    string query5 = "";
-                    for (int j = 0; j < Liste_Nom_Produit_QT_Min_Max.Count; j++)
-                    {
-                        string nom_produit_observe = Liste_Nom_Produit_QT_Min_Max[j][0];
-                        int quantite_necessaire_dans_recette = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][1]);
-                        int stock_min = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][2]);
-                        int stock_max = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][3]);
-
-                        //on adapte les stocks de la même manière que lorsque qu'une recette est créée, sauf qu'ici, le stock est impacté négativement
-                        int nv_stock_min = stock_min - quantite_necessaire_dans_recette;
-                        int nv_stock_max = stock_max - 2 * quantite_necessaire_dans_recette;
-
-                        query5 += $"Update cooking.produit set Stock_min = {nv_stock_min}, Stock_max = {nv_stock_max} where Nom_Produit = \"{nom_produit_observe}\";";
-                    }
-                    string ex = Commandes_SQL.Insert_Requete(query5);
-
-                    //delete child rows
-                    string query1 = $"delete from cooking.composition_recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
-                    string query2 = $"delete from cooking.composition_commande where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
-                    string query3 = $"delete from cooking.palmares_recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
-
-                    //delete parent row
-                    string query4 = $"delete from cooking.recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
-
-                    //final query
-                    string query_final = query1 + query2 + query3 + query4;
-                    ex = Commandes_SQL.Insert_Requete(query_final);
+                    Erreur_Message.Content = "Ce CdR n'existe pas";
                 }
-
-                query = $"delete from cooking.client where Identifiant = \"{id_CdR_Box.Text}\";";
-                string ex2 = Commandes_SQL.Insert_Requete(query);
-
-                //on actualise la listView contenant les recettes
-                Recettes_id_ListView.Items.Clear();
-                query = $"select Nom_Recette,Identifiant from cooking.recette;";
-                List<List<string>> liste_recette_nom_compteur = Commandes_SQL.Select_Requete(query);
-                for (int i = 0; i < liste_recette_nom_compteur.Count; i++)
+                else
                 {
-                    Recettes_id_ListView.Items.Add(new Recette_id_CdR { Nom_Recette = liste_recette_nom_compteur[i][0], Identifiant_CdR = liste_recette_nom_compteur[i][1] });
+                    for (int i = 0; i < liste_nom_recette_CdR.Count; i++)
+                    {
+                        //mettre à jour les stock mini et max de produit
+                        //on recupère les infos relatives au produit dont on a besoin
+                        query = $"Select Nom_Produit,Quantite_Produit,Stock_min,Stock_max from cooking.composition_recette natural join cooking.produit where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
+                        List<List<string>> Liste_Nom_Produit_QT_Min_Max = Commandes_SQL.Select_Requete(query);
+
+                        string query5 = "";
+                        for (int j = 0; j < Liste_Nom_Produit_QT_Min_Max.Count; j++)
+                        {
+                            string nom_produit_observe = Liste_Nom_Produit_QT_Min_Max[j][0];
+                            int quantite_necessaire_dans_recette = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][1]);
+                            int stock_min = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][2]);
+                            int stock_max = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][3]);
+
+                            //on adapte les stocks de la même manière que lorsque qu'une recette est créée, sauf qu'ici, le stock est impacté négativement
+                            int nv_stock_min = stock_min - quantite_necessaire_dans_recette;
+                            int nv_stock_max = stock_max - 2 * quantite_necessaire_dans_recette;
+
+                            query5 += $"Update cooking.produit set Stock_min = {nv_stock_min}, Stock_max = {nv_stock_max} where Nom_Produit = \"{nom_produit_observe}\";";
+                        }
+                        string ex = Commandes_SQL.Insert_Requete(query5);
+
+                        //delete child rows
+                        string query1 = $"delete from cooking.composition_recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
+                        string query2 = $"delete from cooking.composition_commande where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
+                        string query3 = $"delete from cooking.palmares_recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
+
+                        //delete parent row
+                        string query4 = $"delete from cooking.recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
+
+                        //final query
+                        string query_final = query1 + query2 + query3 + query4;
+                        ex = Commandes_SQL.Insert_Requete(query_final);
+                    }
+
+                    query = $"delete from cooking.client where Identifiant = \"{id_CdR_Box.Text}\";";
+                    string ex2 = Commandes_SQL.Insert_Requete(query);
+
+                    //on actualise la listView contenant les recettes
+                    Recettes_id_ListView.Items.Clear();
+                    query = $"select Nom_Recette,Identifiant from cooking.recette;";
+                    List<List<string>> liste_recette_nom_compteur = Commandes_SQL.Select_Requete(query);
+                    for (int i = 0; i < liste_recette_nom_compteur.Count; i++)
+                    {
+                        Recettes_id_ListView.Items.Add(new Recette_id_CdR { Nom_Recette = liste_recette_nom_compteur[i][0], Identifiant_CdR = liste_recette_nom_compteur[i][1] });
+                    }
                 }
             }
         }
@@ -214,49 +221,56 @@ namespace Projet_Startup_Cooking_BDD
                 query = $"select Nom_Recette from cooking.recette where Identifiant = \"{id_CdR_Box.Text}\";";
                 List<List<string>> liste_nom_recette_CdR = Commandes_SQL.Select_Requete(query);
 
-                for (int i = 0; i < liste_nom_recette_CdR.Count; i++)
+                if (liste_nom_recette_CdR.Count == 0)
                 {
-                    //mettre à jour les stock mini et max de produit
-                    //on recupère les infos relatives au produit dont on a besoin
-                    query = $"Select Nom_Produit,Quantite_Produit,Stock_min,Stock_max from cooking.composition_recette natural join cooking.produit where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
-                    List<List<string>> Liste_Nom_Produit_QT_Min_Max = Commandes_SQL.Select_Requete(query);
-
-                    string query5 = "";
-                    for (int j = 0; j < Liste_Nom_Produit_QT_Min_Max.Count; j++)
-                    {
-                        string nom_produit_observe = Liste_Nom_Produit_QT_Min_Max[j][0];
-                        int quantite_necessaire_dans_recette = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][1]);
-                        int stock_min = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][2]);
-                        int stock_max = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][3]);
-
-                        //on adapte les stocks de la même manière que lorsque qu'une recette est créée, sauf qu'ici, le stock est impacté négativement
-                        int nv_stock_min = stock_min - quantite_necessaire_dans_recette;
-                        int nv_stock_max = stock_max - 2 * quantite_necessaire_dans_recette;
-
-                        query5 += $"Update cooking.produit set Stock_min = {nv_stock_min}, Stock_max = {nv_stock_max} where Nom_Produit = \"{nom_produit_observe}\";";
-                    }
-                    ex = Commandes_SQL.Insert_Requete(query5);
-
-                    //delete child rows
-                    string query1 = $"delete from cooking.composition_recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
-                    string query2 = $"delete from cooking.composition_commande where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
-                    string query3 = $"delete from cooking.palmares_recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
-
-                    //delete parent row
-                    string query4 = $"delete from cooking.recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
-
-                    //final query
-                    string query_final = query1 + query2 + query3 + query4;
-                    ex = Commandes_SQL.Insert_Requete(query_final);
+                    Erreur_Message.Content = "Ce CdR n'existe pas";
                 }
-
-                //on actualise la listView contenant les recettes
-                Recettes_id_ListView.Items.Clear();
-                query = $"select Nom_Recette,Identifiant from cooking.recette;";
-                List<List<string>> liste_recette_nom_compteur = Commandes_SQL.Select_Requete(query);
-                for (int i = 0; i < liste_recette_nom_compteur.Count; i++)
+                else
                 {
-                    Recettes_id_ListView.Items.Add(new Recette_id_CdR { Nom_Recette = liste_recette_nom_compteur[i][0], Identifiant_CdR = liste_recette_nom_compteur[i][1] });
+                    for (int i = 0; i < liste_nom_recette_CdR.Count; i++)
+                    {
+                        //mettre à jour les stock mini et max de produit
+                        //on recupère les infos relatives au produit dont on a besoin
+                        query = $"Select Nom_Produit,Quantite_Produit,Stock_min,Stock_max from cooking.composition_recette natural join cooking.produit where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
+                        List<List<string>> Liste_Nom_Produit_QT_Min_Max = Commandes_SQL.Select_Requete(query);
+
+                        string query5 = "";
+                        for (int j = 0; j < Liste_Nom_Produit_QT_Min_Max.Count; j++)
+                        {
+                            string nom_produit_observe = Liste_Nom_Produit_QT_Min_Max[j][0];
+                            int quantite_necessaire_dans_recette = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][1]);
+                            int stock_min = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][2]);
+                            int stock_max = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][3]);
+
+                            //on adapte les stocks de la même manière que lorsque qu'une recette est créée, sauf qu'ici, le stock est impacté négativement
+                            int nv_stock_min = stock_min - quantite_necessaire_dans_recette;
+                            int nv_stock_max = stock_max - 2 * quantite_necessaire_dans_recette;
+
+                            query5 += $"Update cooking.produit set Stock_min = {nv_stock_min}, Stock_max = {nv_stock_max} where Nom_Produit = \"{nom_produit_observe}\";";
+                        }
+                        ex = Commandes_SQL.Insert_Requete(query5);
+
+                        //delete child rows
+                        string query1 = $"delete from cooking.composition_recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
+                        string query2 = $"delete from cooking.composition_commande where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
+                        string query3 = $"delete from cooking.palmares_recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
+
+                        //delete parent row
+                        string query4 = $"delete from cooking.recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
+
+                        //final query
+                        string query_final = query1 + query2 + query3 + query4;
+                        ex = Commandes_SQL.Insert_Requete(query_final);
+                    }
+
+                    //on actualise la listView contenant les recettes
+                    Recettes_id_ListView.Items.Clear();
+                    query = $"select Nom_Recette,Identifiant from cooking.recette;";
+                    List<List<string>> liste_recette_nom_compteur = Commandes_SQL.Select_Requete(query);
+                    for (int i = 0; i < liste_recette_nom_compteur.Count; i++)
+                    {
+                        Recettes_id_ListView.Items.Add(new Recette_id_CdR { Nom_Recette = liste_recette_nom_compteur[i][0], Identifiant_CdR = liste_recette_nom_compteur[i][1] });
+                    }
                 }
             }
         }
@@ -398,5 +412,18 @@ namespace Projet_Startup_Cooking_BDD
             public List<Produit> liste_produit_a_commander { get; set; }
         }
 
+
+
+        private void Caractere_interdit(object sender, TextChangedEventArgs e)
+        {
+            TextBox id_textbox = sender as TextBox;
+            // \s - Stands for white space. The rest is for alphabets and numbers
+            if (id_textbox.Text.Contains('"'))
+            {
+                id_textbox.Text = String.Empty;
+                Erreur_Message.Content = "Guillemets (\") interdits";
+            }
+            return;
+        }
     }
 }

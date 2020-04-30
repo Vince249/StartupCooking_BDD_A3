@@ -46,10 +46,10 @@
                FontWeight="Bold" FontSize="10" Name="error"></Label>
 
         <!-- TextBox -->
-        <TextBox Name ="idTextBox" Grid.Row="1" Grid.Column="2" Height="20" Width="150"></TextBox>
-        <TextBox Name ="mdpTextBox" Grid.Row="2" Grid.Column="2" Height="20" Width="150"></TextBox>
-        <TextBox Name ="nomTextBox" Grid.Row="3" Grid.Column="2" Height="20" Width="150"></TextBox>
-        <TextBox Name ="telTextBox" Grid.Row="4" Grid.Column="2" Height="20" Width="150"></TextBox>
+        <TextBox Name ="idTextBox" Grid.Row="1" Grid.Column="2" Height="20" Width="150" TextChanged="Caractere_interdit"></TextBox>
+        <TextBox Name ="mdpTextBox" Grid.Row="2" Grid.Column="2" Height="20" Width="150" TextChanged="Caractere_interdit"></TextBox>
+        <TextBox Name ="nomTextBox" Grid.Row="3" Grid.Column="2" Height="20" Width="150" TextChanged="Caractere_interdit"></TextBox>
+        <TextBox Name ="telTextBox" Grid.Row="4" Grid.Column="2" Height="20" Width="150" TextChanged="Caractere_interdit"></TextBox>
 
         <!-- Button -->
         <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"  FontFamily="Trebuchet MS"

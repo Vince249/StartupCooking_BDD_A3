@@ -40,13 +40,13 @@
 
         <!-- Textbox -->
         <TextBox Name="textbox_nom" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 FontSize="16" Height="25" Width="100"></TextBox>
+                 FontSize="16" Height="25" Width="100" TextChanged="Caractere_interdit"></TextBox>
         <TextBox Name="textbox_categorie" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 FontSize="16" Height="25" Width="100"></TextBox>
+                 FontSize="16" Height="25" Width="100" TextChanged="Caractere_interdit"></TextBox>
         <TextBox Name="textbox_unite" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 FontSize="16" Height="25" Width="100"></TextBox>
+                 FontSize="16" Height="25" Width="100" TextChanged="Caractere_interdit"></TextBox>
         <TextBox Name="textbox_ref_fournisseur" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 FontSize="16" Height="25" Width="100"></TextBox>
+                 FontSize="16" Height="25" Width="100" TextChanged="Caractere_interdit"></TextBox>
 
         <!-- Button -->
         <Button Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"  FontFamily="Trebuchet MS"

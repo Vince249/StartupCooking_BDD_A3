@@ -95,9 +95,9 @@ namespace Projet_Startup_Cooking_BDD
             {
                 Erreur_Message.Content = "Prix doit être entre 10 et 40";
             }
-            else if (description_recette_input == "")
+            else if (description_recette_input == "" || description_recette_input.Length > 256)
             {
-                Erreur_Message.Content = "Aucune description rentrée";
+                Erreur_Message.Content = "Description est limitée à 256 caractères";
             }
             else if (liste_produit_nom_quantite.Count == 0)
             {
@@ -265,6 +265,19 @@ namespace Projet_Startup_Cooking_BDD
             public string Nom_Recette { get; set; }
 
             public string Compteur { get; set; }
+        }
+
+
+        private void Caractere_interdit(object sender, TextChangedEventArgs e)
+        {
+            TextBox id_textbox = sender as TextBox;
+            // \s - Stands for white space. The rest is for alphabets and numbers
+            if (id_textbox.Text.Contains('"'))
+            {
+                id_textbox.Text = String.Empty;
+                Erreur_Message.Content = "Guillemets (\") interdits";
+            }
+            return;
         }
     }
 }

@@ -35,7 +35,7 @@
 
         <StackPanel Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="18">Identifiant CdR :</Label>
-            <TextBox Name="id_CdR_Box" Height="20" Width="100"></TextBox>
+            <TextBox Name="id_CdR_Box" Height="20" Width="100" TextChanged="Caractere_interdit"></TextBox>
         </StackPanel>
 
         <!--Button-->

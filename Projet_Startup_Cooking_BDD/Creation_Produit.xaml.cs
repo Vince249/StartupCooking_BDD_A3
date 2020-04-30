@@ -89,5 +89,18 @@ namespace Projet_Startup_Cooking_BDD
             Creation_Produit page_creation_produit = new Creation_Produit();
             this.NavigationService.Navigate(page_creation_produit);
         }
+
+
+        private void Caractere_interdit(object sender, TextChangedEventArgs e)
+        {
+            TextBox id_textbox = sender as TextBox;
+            // \s - Stands for white space. The rest is for alphabets and numbers
+            if (id_textbox.Text.Contains('"'))
+            {
+                id_textbox.Text = String.Empty;
+                Erreur_message.Content = "Guillemets (\") interdits";
+            }
+            return;
+        }
     }
 }

@@ -400,6 +400,18 @@ namespace Projet_Startup_Cooking_BDD
             public string Prix { get; set; }
         }
 
-        
+
+
+        private void Caractere_interdit(object sender, TextChangedEventArgs e)
+        {
+            TextBox id_textbox = sender as TextBox;
+            // \s - Stands for white space. The rest is for alphabets and numbers
+            if (id_textbox.Text.Contains('"'))
+            {
+                id_textbox.Text = String.Empty;
+                erreur.Content = "Guillemets (\") interdits";
+            }
+            return;
+        }
     }
 }

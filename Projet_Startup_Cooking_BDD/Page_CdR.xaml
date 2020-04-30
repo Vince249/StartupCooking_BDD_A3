@@ -46,24 +46,24 @@
 
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="20">Nom :</Label>
-            <TextBox Name="Nom_Recette_Box" Height="20" Width="100"></TextBox>
+            <TextBox Name="Nom_Recette_Box" Height="20" Width="100" TextChanged="Caractere_interdit"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="20">Type :</Label>
-            <TextBox Name="Type_Recette_Box" Height="20" Width="100"></TextBox>
+            <TextBox Name="Type_Recette_Box" Height="20" Width="100" TextChanged="Caractere_interdit"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="20">Prix :</Label>
-            <TextBox Name="Prix_Recette_Box" Height="20" Width="100"></TextBox>
+            <TextBox Name="Prix_Recette_Box" Height="20" Width="100" TextChanged="Caractere_interdit"></TextBox>
         </StackPanel>
         <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" 
                    VerticalAlignment="Center" FontSize="20">Description : </Label>
         <TextBox Grid.Row="6" Grid.Column="0"  Width="180" Height="100" HorizontalAlignment="Left" Grid.RowSpan="2" 
-                 Name="Description_Recette_Box" Margin="10,0,0,0" TextWrapping="Wrap"/>
+                 Name="Description_Recette_Box" Margin="10,0,0,0" TextWrapping="Wrap" TextChanged="Caractere_interdit"></TextBox>
 
         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="20">Quantité :</Label>
-            <TextBox Name="Quantite_Produit_Box" Height="20" Width="90"></TextBox>
+            <TextBox Name="Quantite_Produit_Box" Height="20" Width="90" TextChanged="Caractere_interdit"></TextBox>
         </StackPanel>
         
         <!-- Button -->

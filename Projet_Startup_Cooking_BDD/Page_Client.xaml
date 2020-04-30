@@ -50,7 +50,7 @@
         </StackPanel>
 
         <!--TextBox-->
-        <TextBox Name="Quantité" Grid.Row="3" Grid.Column="2" MinHeight="25" Margin="15"></TextBox>
+        <TextBox Name="Quantité" Grid.Row="3" Grid.Column="2" MinHeight="25" Margin="15" TextChanged="Caractere_interdit"></TextBox>
         
         <!--Bouton-->
         <Button Name="CdR" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"

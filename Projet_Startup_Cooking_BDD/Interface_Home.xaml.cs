@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,18 +33,24 @@ namespace Projet_Startup_Cooking_BDD
         {
             string id = ID_client.Text;
             string mdp = MDP_client.Password;
-            string query = $"Select count(*) from cooking.client where Identifiant=\"{id}\" and Mot_de_passe=\"{mdp}\";";
-            List<List<string>> liste = Commandes_SQL.Select_Requete(query);
-            if (liste[0][0] == "1")
+            if (mdp.Contains('"'))
             {
-                Page_Client page_client = new Page_Client(id);
-                this.NavigationService.Navigate(page_client);
+                error_label.Content = "Guillemets (\") interdits";
             }
             else
             {
-                error_label.Content = "Erreur client non reconnu";
+                string query = $"Select count(*) from cooking.client where Identifiant=\"{id}\" and Mot_de_passe=\"{mdp}\";";
+                List<List<string>> liste = Commandes_SQL.Select_Requete(query);
+                if (liste[0][0] == "1")
+                {
+                    Page_Client page_client = new Page_Client(id);
+                    this.NavigationService.Navigate(page_client);
+                }
+                else
+                {
+                    error_label.Content = "Erreur client non reconnu";
+                }
             }
-            
         }
 
         private void Button_Click_create_client(object sender, RoutedEventArgs e)
@@ -56,44 +63,66 @@ namespace Projet_Startup_Cooking_BDD
         {
             string id = ID_admin.Text;
             string mdp = MDP_admin.Password;
-            if (id.Length > 0 && mdp.Length > 0) // rien de rentré
+            if (mdp.Contains('"'))
             {
-                //Récupération infos dans fichier txt --> chaque index de la liste de liste finale contient un id et son mdp associé
-                string line;
-                string infos_in_file = "";
-                System.IO.StreamReader file = new System.IO.StreamReader("Acces_admin.txt");
-                while ((line = file.ReadLine()) != null)
-                {
-                    infos_in_file += line + '\n';
-                }
-                file.Close();
-
-                string[] temp = infos_in_file.Split('\n');
-                List<List<string>> liste_infos_in_file = new List<List<string>>();
-                bool connection_ok = false;
-                for (int i = 0; i < temp.Length; i++)
-                {
-                    liste_infos_in_file.Add(temp[i].Split(';').ToList());
-                    if (liste_infos_in_file[i][0] == id && liste_infos_in_file[i][1] == mdp)
-                    {
-                        connection_ok = true;
-                    }
-                }
-
-                if (connection_ok)
-                {
-                    Page_Admin page_admin = new Page_Admin(id);
-                    this.NavigationService.Navigate(page_admin);
-                }
-               
+                error_label.Content = "Guillemets (\") interdits";
             }
-            error_label.Content = "Erreur admin non reconnu";
+            else
+            {
+                if (id.Length > 0 && mdp.Length > 0) // rien de rentré
+                {
+                    //Récupération infos dans fichier txt --> chaque index de la liste de liste finale contient un id et son mdp associé
+                    string line;
+                    string infos_in_file = "";
+                    System.IO.StreamReader file = new System.IO.StreamReader("Acces_admin.txt");
+                    while ((line = file.ReadLine()) != null)
+                    {
+                        infos_in_file += line + '\n';
+                    }
+                    file.Close();
+
+                    string[] temp = infos_in_file.Split('\n');
+                    List<List<string>> liste_infos_in_file = new List<List<string>>();
+                    bool connection_ok = false;
+                    for (int i = 0; i < temp.Length; i++)
+                    {
+                        liste_infos_in_file.Add(temp[i].Split(';').ToList());
+                        if (liste_infos_in_file[i][0] == id && liste_infos_in_file[i][1] == mdp)
+                        {
+                            connection_ok = true;
+                        }
+                    }
+
+                    if (connection_ok)
+                    {
+                        Page_Admin page_admin = new Page_Admin(id);
+                        this.NavigationService.Navigate(page_admin);
+                    }
+
+                }
+                error_label.Content = "Erreur admin non reconnu";
+            }
         }
 
         private void Button_Click_Reset_BDD(object sender, RoutedEventArgs e)
         {
             Commandes_SQL.Execution_Script_TXT("Initialisation_DB.txt");
             Commandes_SQL.Execution_Script_TXT("Dummy_Data.txt");
+        }
+
+
+
+
+        private void Caractere_interdit(object sender, TextChangedEventArgs e)
+        {
+            TextBox id_textbox = sender as TextBox;
+            // \s - Stands for white space. The rest is for alphabets and numbers
+            if (id_textbox.Text.Contains('"'))
+            {
+                id_textbox.Text = String.Empty;
+                error_label.Content = "Guillemets (\") interdits";
+            }
+            return;
         }
     }
 }
