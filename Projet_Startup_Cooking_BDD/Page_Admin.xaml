@@ -27,7 +27,7 @@
 
         <!--Label, Textbox-->
         <Label Name="welcome_message" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
-               Grid.ColumnSpan="2" FontSize="24"></Label>
+               Grid.ColumnSpan="2" FontSize="15"></Label>
         <Label Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                FontSize="24">Recettes et CdR</Label>
         <Label Name="Erreur_Message" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Center" 

@@ -28,12 +28,12 @@
 
         <!--Label-->
         <Label Name="welcome_message" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
-               FontSize="24"></Label>
+               FontSize="15"></Label>
         <!-- Création Stackpanel pour pouvoir récupérer la valeur d'une case directment sans avoir de string-->
         <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label FontSize="24">Solde : </Label>
-            <Label Name="Solde" FontSize="24"></Label>
-            <Label FontSize="24"> cook(s)</Label>
+            <Label FontSize="15">Solde : </Label>
+            <Label Name="Solde" FontSize="15"></Label>
+            <Label FontSize="15"> cook(s)</Label>
         </StackPanel>
         <Label  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
                FontSize="24">Liste des Recettes</Label>
@@ -43,7 +43,7 @@
                FontSize="24">Quantité</Label>
         <Label Name="erreur" Grid.Row="6" Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Center"
                FontSize="14" Foreground="red"></Label>
-        <StackPanel Grid.Row="7" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+        <StackPanel Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="24">Total : </Label>
             <Label Name="Total" FontSize="24">0</Label>
             <Label FontSize="24">cook(s)</Label>

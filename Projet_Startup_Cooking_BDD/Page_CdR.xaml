@@ -18,21 +18,21 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="AUTO"/>
             <RowDefinition Height="AUTO" MinHeight="70"/>
-            <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="AUTO"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <!--Label, StackPanel-->
         <Label Name="welcome_message" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
-               FontSize="24"></Label>
+               FontSize="15"></Label>
         <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label FontSize="24">Solde :</Label>
-            <Label Name="Solde" FontSize="24"></Label>
-            <Label FontSize="24">cook(s)</Label>
+            <Label FontSize="15">Solde :</Label>
+            <Label Name="Solde" FontSize="15"></Label>
+            <Label FontSize="15">cook(s)</Label>
         </StackPanel>
         
         <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"

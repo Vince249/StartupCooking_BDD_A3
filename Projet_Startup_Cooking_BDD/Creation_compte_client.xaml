@@ -31,16 +31,16 @@
                FontWeight="Bold" FontSize="25">CREATION DU COMPTE</Label>
         <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" 
                VerticalAlignment="Center" FontFamily="Trebuchet MS"
-               FontSize="12" >Identifiant (20 caractères max)</Label>
+               FontSize="12" >Identifiant :</Label>
         <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" 
                VerticalAlignment="Center" FontFamily="Trebuchet MS"
-               FontSize="12" >Mot de passe (20 caractères max)</Label>
+               FontSize="12" >Mot de passe :</Label>
         <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" 
                VerticalAlignment="Center" FontFamily="Trebuchet MS"
-               FontSize="12" >Nom Client (20 caractères max)</Label>
+               FontSize="12" >Nom Client :</Label>
         <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" 
                VerticalAlignment="Center" FontFamily="Trebuchet MS"
-               FontSize="12" >Téléphone (15 caractères max)</Label>
+               FontSize="12" >Téléphone :</Label>
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" 
                VerticalAlignment="Bottom" FontFamily="Trebuchet MS" Margin="10" Foreground="Red"
                FontWeight="Bold" FontSize="10" Name="error"></Label>
