@@ -2,9 +2,9 @@ DROP database cooking;
 CREATE database cooking;
 
 CREATE TABLE IF NOT EXISTS `cooking`.`Client` (
-  `Identifiant` VARCHAR(20) NOT NULL,
-  `Mot_de_passe` VARCHAR(20) NOT NULL,
-  `Nom_Client` VARCHAR(20) NULL,
+  `Identifiant` VARCHAR(50) NOT NULL,
+  `Mot_de_passe` VARCHAR(50) NOT NULL,
+  `Nom_Client` VARCHAR(50) NULL,
   `Numero_tel_Client` VARCHAR(15) NULL,
   `Credit_Cook` INT NULL,
   `CdR` INT NULL, 
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `cooking`.`Commande` (
 		ON UPDATE NO ACTION );
 
 CREATE TABLE IF NOT EXISTS `cooking`.`Recette` (
-  `Nom_Recette` VARCHAR(50) NOT NULL,
+  `Nom_Recette` VARCHAR(100) NOT NULL,
   `Type` VARCHAR(30) NULL,
   `Descriptif` VARCHAR(256) NULL,
   `Prix_Vente` INT NULL,
@@ -50,19 +50,19 @@ CREATE TABLE IF NOT EXISTS `cooking`.`Composition_Commande` (
 		ON UPDATE NO ACTION  );
 
 CREATE TABLE IF NOT EXISTS `cooking`.`Fournisseur` (
-  `Ref_Fournisseur` VARCHAR(10) NOT NULL,
-  `Nom_Fournisseur` VARCHAR(20) NOT NULL,
+  `Ref_Fournisseur` VARCHAR(50) NOT NULL,
+  `Nom_Fournisseur` VARCHAR(50) NOT NULL,
   `Numero_tel_Fournisseur` VARCHAR(15) NULL,
   PRIMARY KEY (`Ref_Fournisseur`) );
 
 CREATE TABLE IF NOT EXISTS `cooking`.`Produit` (
-  `Nom_Produit` VARCHAR(30) NOT NULL,
-  `Categorie` VARCHAR(30) NOT NULL,
+  `Nom_Produit` VARCHAR(50) NOT NULL,
+  `Categorie` VARCHAR(50) NOT NULL,
   `Unite` VARCHAR(10) NOT NULL,
   `Stock` INT NULL,
   `Stock_min` INT NULL,
   `Stock_max` INT NULL,
-  `Ref_Fournisseur` VARCHAR(10) NOT NULL,
+  `Ref_Fournisseur` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`Nom_Produit`),
    CONSTRAINT `Ref_Fournisseur_Produit` FOREIGN KEY (`Ref_Fournisseur`)
 		REFERENCES `cooking`.`Fournisseur` (`Ref_Fournisseur`)
@@ -83,34 +83,3 @@ CREATE TABLE IF NOT EXISTS `cooking`.`Composition_Recette` (
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION  );
 
-CREATE TABLE IF NOT EXISTS `cooking`.`Top_Semaine` (
-  `Semaine` INT NOT NULL AUTO_INCREMENT,
-  `CdR_OR` VARCHAR(20) NOT NULL,
-  `Recette_OR_1` VARCHAR(30) NULL,
-  `Recette_OR_2` VARCHAR(30)  NULL,
-  `Recette_OR_3` VARCHAR(30)  NULL,
-  `Recette_OR_4` VARCHAR(30)  NULL,
-  `Recette_OR_5` VARCHAR(30)  NULL,
-
-  `CdR_Semaine` VARCHAR(20) NOT NULL,
-  `Recette_Semaine_1` VARCHAR(30)  NULL,
-  `Recette_Semaine_2` VARCHAR(30)  NULL,
-  `Recette_Semaine_3` VARCHAR(30)  NULL,
-  `Recette_Semaine_4` VARCHAR(30)  NULL,
-  `Recette_Semaine_5` VARCHAR(30)  NULL,
-  
-  PRIMARY KEY (`Semaine`)
- );
-
-CREATE TABLE IF NOT EXISTS `cooking`.`Palmares_Recette` (
-  `Nom_Recette` VARCHAR(30) NOT NULL,
-  `Semaine` INT NOT NULL,
-  PRIMARY KEY (`Nom_Recette`, `Semaine`),
-   CONSTRAINT `Nom_Recette_Palmares_Recette` FOREIGN KEY (`Nom_Recette`)
-		REFERENCES `cooking`.`Recette` (`Nom_Recette`)
-		ON DELETE NO ACTION
-		ON UPDATE NO ACTION,
-   CONSTRAINT `Semaine_Palmares_Recette` FOREIGN KEY (`Semaine`)
-		REFERENCES `cooking`.`top_semaine` (`Semaine`)
-		ON DELETE NO ACTION
-		ON UPDATE NO ACTION  );

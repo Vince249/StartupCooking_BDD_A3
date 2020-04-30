@@ -56,11 +56,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Creation_Fournisseur.xaml.cs">
+      <DependentUpon>Creation_Fournisseur.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Creation_Produit.xaml.cs">
       <DependentUpon>Creation_Produit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page_CdR.xaml.cs">
       <DependentUpon>Page_CdR.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Demo_1.xaml.cs">
+      <DependentUpon>Page_Demo_1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Demo_2.xaml.cs">
+      <DependentUpon>Page_Demo_2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Demo_3.xaml.cs">
+      <DependentUpon>Page_Demo_3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page_Demo_4.xaml.cs">
+      <DependentUpon>Page_Demo_4.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page_Payer_CB.xaml.cs">
       <DependentUpon>Page_Payer_CB.xaml</DependentUpon>
@@ -72,6 +87,10 @@
       <DependentUpon>Validation_Paiement.xaml</DependentUpon>
     </Compile>
     <Page Include="Creation_compte_client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Creation_Fournisseur.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,6 +130,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Page_Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page_Demo_1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page_Demo_2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page_Demo_3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page_Demo_4.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,54 @@
+﻿<Page x:Class="Projet_Startup_Cooking_BDD.Creation_Fournisseur"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Projet_Startup_Cooking_BDD"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Creation_Fournisseur">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!-- Labels -->
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
+               FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="25">Creation de fournisseur</Label>
+        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
+               FontSize="16">Référence :</Label>
+        <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
+               FontSize="16">Nom :</Label>
+        <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
+               FontSize="16">Téléphone :</Label>
+        <Label Name="Erreur_message" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+               FontSize="12" Foreground="Red" FontFamily="Trebuchet MS" FontWeight="Bold"></Label>
+
+        <!-- Textbox -->
+        <TextBox Name="textbox_ref" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 FontSize="16" Height="25" Width="100" TextChanged="Caractere_interdit"></TextBox>
+        <TextBox Name="textbox_nom" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 FontSize="16" Height="25" Width="100" TextChanged="Caractere_interdit"></TextBox>
+        <TextBox Name="textbox_tel" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 FontSize="16" Height="25" Width="100" TextChanged="Caractere_interdit"></TextBox>
+
+        <!-- Button -->
+        <Button Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"  FontFamily="Trebuchet MS"
+               FontSize="12" Height="70" Width="200" Click="Creer_Fournisseur_Click">Créer le fournisseur</Button>
+        <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"  FontFamily="Trebuchet MS"
+               FontSize="12" Height="70" Width="200" Click="Creer_Reinitialiser">Réinitialiser</Button>
+
+    </Grid>
+</Page>

@@ -57,6 +57,8 @@
                 FontSize="18" Click="Creation_Produit_Click" Padding="5">Créer nouveau produit</Button>
         <Button Name="Carnet_commandes_produit_XML" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Right"
                 FontSize="18" Click="Carnet_commandes_produit_XML_Click" Padding="5">Carnet de commandes des produits XML</Button>
+        <Button Name="Creation_Fournisseur" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Right"
+                FontSize="18" Click="Creation_fournisseur" Padding="5">Création Fournisseur</Button>
 
         <!--ListView-->
         <ListView Name="Recettes_id_ListView" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="0" Margin="0,0,0,0">

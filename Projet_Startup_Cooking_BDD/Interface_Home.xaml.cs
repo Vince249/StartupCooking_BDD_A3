@@ -117,12 +117,23 @@ namespace Projet_Startup_Cooking_BDD
         {
             TextBox id_textbox = sender as TextBox;
             // \s - Stands for white space. The rest is for alphabets and numbers
-            if (id_textbox.Text.Contains('"'))
+            if (id_textbox.Text.Contains('"') || id_textbox.Text.Contains('é') || id_textbox.Text.Contains('è')
+                || id_textbox.Text.Contains('î') || id_textbox.Text.Contains('ê') || id_textbox.Text.Contains('ô')
+                || id_textbox.Text.Contains('ï') || id_textbox.Text.Contains('ë') || id_textbox.Text.Contains('ç')
+                || id_textbox.Text.Contains('à') || id_textbox.Text.Contains('ù'))
             {
-                id_textbox.Text = String.Empty;
-                error_label.Content = "Guillemets (\") interdits";
+                string a = id_textbox.Text.Remove(id_textbox.Text.Length - 1);
+                id_textbox.Text = a;
+                error_label.Content = "Accents/Guillemets interdits";
             }
             return;
+        }
+
+
+        private void Button_Click_mode_demo(object sender, RoutedEventArgs e)
+        {
+            Page_Demo_1 page_demo = new Page_Demo_1();
+            this.NavigationService.Navigate(page_demo);
         }
     }
 }

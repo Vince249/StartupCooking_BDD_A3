@@ -371,8 +371,14 @@ namespace Projet_Startup_Cooking_BDD
 
         private void Creation_Produit_Click(object sender, RoutedEventArgs e)
         {
-            Creation_Produit page_creation_produit = new Creation_Produit();
+            Creation_Produit page_creation_produit = new Creation_Produit(this.id_admin);
             this.NavigationService.Navigate(page_creation_produit);
+        }
+
+        private void Creation_fournisseur(object sender, RoutedEventArgs e)
+        {
+            Creation_Fournisseur page_fournisseur = new Creation_Fournisseur(this.id_admin);
+            this.NavigationService.Navigate(page_fournisseur);
         }
 
         public class Recette_id_CdR
@@ -418,12 +424,18 @@ namespace Projet_Startup_Cooking_BDD
         {
             TextBox id_textbox = sender as TextBox;
             // \s - Stands for white space. The rest is for alphabets and numbers
-            if (id_textbox.Text.Contains('"'))
+            if (id_textbox.Text.Contains('"') || id_textbox.Text.Contains('é') || id_textbox.Text.Contains('è')
+                || id_textbox.Text.Contains('î') || id_textbox.Text.Contains('ê') || id_textbox.Text.Contains('ô')
+                || id_textbox.Text.Contains('ï') || id_textbox.Text.Contains('ë') || id_textbox.Text.Contains('ç')
+                || id_textbox.Text.Contains('à') || id_textbox.Text.Contains('ù'))
             {
-                id_textbox.Text = String.Empty;
-                Erreur_Message.Content = "Guillemets (\") interdits";
+                string a = id_textbox.Text.Remove(id_textbox.Text.Length - 1);
+                id_textbox.Text = a;
+                Erreur_Message.Content = "Accents/Guillemets interdits";
             }
             return;
         }
+
+
     }
 }

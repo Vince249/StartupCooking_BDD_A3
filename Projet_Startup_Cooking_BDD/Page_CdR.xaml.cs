@@ -83,9 +83,9 @@ namespace Projet_Startup_Cooking_BDD
                 }
             }
 
-            if (nom_recette_input == "" || nom_recette_input.Length>50)
+            if (nom_recette_input == "" || nom_recette_input.Length>100)
             {
-                Erreur_Message.Content = "Nom doit contenir 1 à 50 caractères";
+                Erreur_Message.Content = "Nom doit contenir 1 à 100 caractères";
             }
             else if (type_recette_input == "" || !type_recette_input.All(Char.IsLetter))
             {
@@ -272,10 +272,14 @@ namespace Projet_Startup_Cooking_BDD
         {
             TextBox id_textbox = sender as TextBox;
             // \s - Stands for white space. The rest is for alphabets and numbers
-            if (id_textbox.Text.Contains('"'))
+            if (id_textbox.Text.Contains('"') || id_textbox.Text.Contains('é') || id_textbox.Text.Contains('è')
+                || id_textbox.Text.Contains('î') || id_textbox.Text.Contains('ê') || id_textbox.Text.Contains('ô')
+                || id_textbox.Text.Contains('ï') || id_textbox.Text.Contains('ë') || id_textbox.Text.Contains('ç')
+                || id_textbox.Text.Contains('à') || id_textbox.Text.Contains('ù'))
             {
-                id_textbox.Text = String.Empty;
-                Erreur_Message.Content = "Guillemets (\") interdits";
+                string a = id_textbox.Text.Remove(id_textbox.Text.Length - 1);
+                id_textbox.Text = a;
+                Erreur_Message.Content = "Accents/Guillemets interdits";
             }
             return;
         }
