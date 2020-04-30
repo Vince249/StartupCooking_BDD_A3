@@ -113,14 +113,14 @@ namespace Projet_Startup_Cooking_BDD
                 for (int i = 0; i < liste_produit_nom_quantite.Count; i++)
                 {
                     query2 += $"INSERT INTO cooking.composition_recette VALUES (\"{nom_recette_input}\",\"{liste_produit_nom_quantite[i][0]}\",{liste_produit_nom_quantite[i][1]});";
-                    //mise à jour des sotck min et max des produits
+                    
+                    // mise à jour des sotck min et max des produits
                     // on a décidé d'augmenter stock min de 1 fois la quantité nécessaire pour cette recette (choix expliqué dans le rapport)
                     // stock max est augmenté de 2 fois la quantité nécessaire pour cette recette
-
                     string query3 = $"Select Stock_min, Stock_max from cooking.produit where Nom_Produit = \"{liste_produit_nom_quantite[i][0]}\" ;";
                     List<List<string>> Liste_stock_min_max = Commandes_SQL.Select_Requete(query3);
                     int Nv_Stock_min =  Convert.ToInt32(Liste_stock_min_max[0][0]) + Convert.ToInt32(liste_produit_nom_quantite[i][1]);
-                    int Nv_Stock_max = Convert.ToInt32(Liste_stock_min_max[0][1]) + 2* Convert.ToInt32(liste_produit_nom_quantite[i][1]);
+                    int Nv_Stock_max = Convert.ToInt32(Liste_stock_min_max[0][1]) + 2*Convert.ToInt32(liste_produit_nom_quantite[i][1]);
                     query4 += $"Update cooking.produit set Stock_min = {Nv_Stock_min}, Stock_max = {Nv_Stock_max} where Nom_Produit = \"{liste_produit_nom_quantite[i][0]}\" ;";
 
                 }
@@ -152,12 +152,27 @@ namespace Projet_Startup_Cooking_BDD
                 Erreur_Message.Content = "";
 
                 //mettre à jour les stock mini et max de produit
-                string nom_recette = selection.Nom_Recette;
-                //on recupère le nom des produits
-                string query = $"SELECT Nom_Produit,Stock_min,Stock_max, Quantite_Produit " +
-                    $"from cooking.composition_recette " +
-                    $"where Nom_Recette = \"{nom_recette}\";";
-                List<List<string>> Liste_Nom_Produit_Min_Max_QT = Commandes_SQL.Select_Requete(query);
+                //on recupère les infos relatives au produit dont on a besoin
+                string query = $"Select Nom_Produit,Quantite_Produit,Stock_min,Stock_max from cooking.composition_recette natural join cooking.produit where Nom_Recette = \"{selection.Nom_Recette}\";";
+                List<List<string>> Liste_Nom_Produit_QT_Min_Max = Commandes_SQL.Select_Requete(query);
+
+                string query5 = "";
+                for (int i = 0; i < Liste_Nom_Produit_QT_Min_Max.Count; i++)
+                {
+                    string nom_produit_observe = Liste_Nom_Produit_QT_Min_Max[i][0];
+                    int quantite_necessaire_dans_recette = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[i][1]);
+                    int stock_min = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[i][2]);
+                    int stock_max = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[i][3]);
+
+                    //on adapte les stocks de la même manière que lorsque qu'une recette est créée, sauf qu'ici, le stock est impacté négativement
+                    int nv_stock_min = stock_min - quantite_necessaire_dans_recette;
+                    int nv_stock_max = stock_max - 2*quantite_necessaire_dans_recette;
+
+                    query5 += $"Update cooking.produit set Stock_min = {nv_stock_min}, Stock_max = {nv_stock_max} where Nom_Produit = \"{nom_produit_observe}\";";
+                }
+                string ex = Commandes_SQL.Insert_Requete(query5);
+
+
 
                 //delete child rows
                 string query1 = $"delete from cooking.composition_recette where Nom_Recette = \"{selection.Nom_Recette}\";";
@@ -169,7 +184,7 @@ namespace Projet_Startup_Cooking_BDD
 
                 //final query
                 query = query1 + query2 + query3 + query4;
-                string ex = Commandes_SQL.Insert_Requete(query);
+                ex = Commandes_SQL.Insert_Requete(query);
 
                 //update listView
                 List<Recette> liste_nv_Item = new List<Recette>();

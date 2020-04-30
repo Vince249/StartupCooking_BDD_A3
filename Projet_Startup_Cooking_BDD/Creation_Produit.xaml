@@ -27,37 +27,25 @@
         <!-- Labels -->
         <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
                FontFamily="Trebuchet MS" FontWeight="Bold" FontSize="25">Creation de produit</Label>
-        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
                FontSize="16">Nom :</Label>
-        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
                FontSize="16">Categorie:</Label>
-        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
                FontSize="16">Unite :</Label>
-        <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
                FontSize="16">Référence fournisseur :</Label>
-        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" 
-               FontSize="16">Stock :</Label>
-        <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" 
-               FontSize="16">Stock min :</Label>
-        <Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" 
-               FontSize="16">Stock max :</Label>
-        <Label Name="Erreur_message" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
-               FontSize="16" Foreground="Red"></Label>
+        <Label Name="Erreur_message" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+               FontSize="12" Foreground="Red" FontFamily="Trebuchet MS" FontWeight="Bold"></Label>
 
         <!-- Textbox -->
-        <TextBox Name="textbox_nom" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+        <TextBox Name="textbox_nom" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
                  FontSize="16" Height="25" Width="100"></TextBox>
-        <TextBox Name="textbox_categorie" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+        <TextBox Name="textbox_categorie" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
                  FontSize="16" Height="25" Width="100"></TextBox>
-        <TextBox Name="textbox_unite" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+        <TextBox Name="textbox_unite" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
                  FontSize="16" Height="25" Width="100"></TextBox>
-        <TextBox Name="textbox_ref_fournisseur" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 FontSize="16" Height="25" Width="100"></TextBox>
-        <TextBox Name="textbox_stock" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 FontSize="16" Height="25" Width="100"></TextBox>
-        <TextBox Name="textbox_stock_min" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"
-                 FontSize="16" Height="25" Width="100"></TextBox>
-        <TextBox Name="textbox_stock_max" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"
+        <TextBox Name="textbox_ref_fournisseur" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
                  FontSize="16" Height="25" Width="100"></TextBox>
 
         <!-- Button -->

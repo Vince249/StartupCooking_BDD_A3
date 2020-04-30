@@ -80,6 +80,27 @@ namespace Projet_Startup_Cooking_BDD
             {
                 Erreur_Message.Content = "";
 
+                //mettre à jour les stock mini et max de produit
+                //on recupère les infos relatives au produit dont on a besoin
+                string query = $"Select Nom_Produit,Quantite_Produit,Stock_min,Stock_max from cooking.composition_recette natural join cooking.produit where Nom_Recette = \"{selection.Nom_Recette}\";";
+                List<List<string>> Liste_Nom_Produit_QT_Min_Max = Commandes_SQL.Select_Requete(query);
+
+                string query5 = "";
+                for (int i = 0; i < Liste_Nom_Produit_QT_Min_Max.Count; i++)
+                {
+                    string nom_produit_observe = Liste_Nom_Produit_QT_Min_Max[i][0];
+                    int quantite_necessaire_dans_recette = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[i][1]);
+                    int stock_min = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[i][2]);
+                    int stock_max = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[i][3]);
+
+                    //on adapte les stocks de la même manière que lorsque qu'une recette est créée, sauf qu'ici, le stock est impacté négativement
+                    int nv_stock_min = stock_min - quantite_necessaire_dans_recette;
+                    int nv_stock_max = stock_max - 2 * quantite_necessaire_dans_recette;
+
+                    query5 += $"Update cooking.produit set Stock_min = {nv_stock_min}, Stock_max = {nv_stock_max} where Nom_Produit = \"{nom_produit_observe}\";";
+                }
+                string ex = Commandes_SQL.Insert_Requete(query5);
+
                 //delete child rows
                 string query1 = $"delete from cooking.composition_recette where Nom_Recette = \"{selection.Nom_Recette}\";";
                 string query2 = $"delete from cooking.composition_commande where Nom_Recette = \"{selection.Nom_Recette}\";";
@@ -89,8 +110,8 @@ namespace Projet_Startup_Cooking_BDD
                 string query4 = $"delete from cooking.recette where Nom_Recette = \"{selection.Nom_Recette}\";";
 
                 //final query
-                string query = query1 + query2 + query3 + query4;
-                string ex = Commandes_SQL.Insert_Requete(query);
+                query = query1 + query2 + query3 + query4;
+                ex = Commandes_SQL.Insert_Requete(query);
 
                 //update listView
                 List<Recette_id_CdR> liste_nv_Item = new List<Recette_id_CdR>();
@@ -126,6 +147,27 @@ namespace Projet_Startup_Cooking_BDD
 
                 for (int i = 0; i < liste_nom_recette_CdR.Count; i++)
                 {
+                    //mettre à jour les stock mini et max de produit
+                    //on recupère les infos relatives au produit dont on a besoin
+                    query = $"Select Nom_Produit,Quantite_Produit,Stock_min,Stock_max from cooking.composition_recette natural join cooking.produit where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
+                    List<List<string>> Liste_Nom_Produit_QT_Min_Max = Commandes_SQL.Select_Requete(query);
+
+                    string query5 = "";
+                    for (int j = 0; j < Liste_Nom_Produit_QT_Min_Max.Count; j++)
+                    {
+                        string nom_produit_observe = Liste_Nom_Produit_QT_Min_Max[j][0];
+                        int quantite_necessaire_dans_recette = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][1]);
+                        int stock_min = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][2]);
+                        int stock_max = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][3]);
+
+                        //on adapte les stocks de la même manière que lorsque qu'une recette est créée, sauf qu'ici, le stock est impacté négativement
+                        int nv_stock_min = stock_min - quantite_necessaire_dans_recette;
+                        int nv_stock_max = stock_max - 2 * quantite_necessaire_dans_recette;
+
+                        query5 += $"Update cooking.produit set Stock_min = {nv_stock_min}, Stock_max = {nv_stock_max} where Nom_Produit = \"{nom_produit_observe}\";";
+                    }
+                    string ex = Commandes_SQL.Insert_Requete(query5);
+
                     //delete child rows
                     string query1 = $"delete from cooking.composition_recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
                     string query2 = $"delete from cooking.composition_commande where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
@@ -136,7 +178,7 @@ namespace Projet_Startup_Cooking_BDD
 
                     //final query
                     string query_final = query1 + query2 + query3 + query4;
-                    string ex = Commandes_SQL.Insert_Requete(query_final);
+                    ex = Commandes_SQL.Insert_Requete(query_final);
                 }
 
                 query = $"delete from cooking.client where Identifiant = \"{id_CdR_Box.Text}\";";
@@ -174,6 +216,27 @@ namespace Projet_Startup_Cooking_BDD
 
                 for (int i = 0; i < liste_nom_recette_CdR.Count; i++)
                 {
+                    //mettre à jour les stock mini et max de produit
+                    //on recupère les infos relatives au produit dont on a besoin
+                    query = $"Select Nom_Produit,Quantite_Produit,Stock_min,Stock_max from cooking.composition_recette natural join cooking.produit where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
+                    List<List<string>> Liste_Nom_Produit_QT_Min_Max = Commandes_SQL.Select_Requete(query);
+
+                    string query5 = "";
+                    for (int j = 0; j < Liste_Nom_Produit_QT_Min_Max.Count; j++)
+                    {
+                        string nom_produit_observe = Liste_Nom_Produit_QT_Min_Max[j][0];
+                        int quantite_necessaire_dans_recette = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][1]);
+                        int stock_min = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][2]);
+                        int stock_max = Convert.ToInt32(Liste_Nom_Produit_QT_Min_Max[j][3]);
+
+                        //on adapte les stocks de la même manière que lorsque qu'une recette est créée, sauf qu'ici, le stock est impacté négativement
+                        int nv_stock_min = stock_min - quantite_necessaire_dans_recette;
+                        int nv_stock_max = stock_max - 2 * quantite_necessaire_dans_recette;
+
+                        query5 += $"Update cooking.produit set Stock_min = {nv_stock_min}, Stock_max = {nv_stock_max} where Nom_Produit = \"{nom_produit_observe}\";";
+                    }
+                    ex = Commandes_SQL.Insert_Requete(query5);
+
                     //delete child rows
                     string query1 = $"delete from cooking.composition_recette where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";
                     string query2 = $"delete from cooking.composition_commande where Nom_Recette = \"{liste_nom_recette_CdR[i][0]}\";";

@@ -31,39 +31,24 @@ namespace Projet_Startup_Cooking_BDD
             string categorie = textbox_categorie.Text;
             string unite = textbox_unite.Text;
             string ref_fournisseur = textbox_ref_fournisseur.Text;
-            string stock = textbox_stock.Text;
-            string stock_min = textbox_stock_min.Text;
-            string stock_max = textbox_stock_max.Text;
             
-            if (nom_produit == "" && categorie != "" && unite != "" && ref_fournisseur != "" && stock != "" && stock_min != "" && stock_max != "")
+            if (nom_produit == "")
             {
-                Erreur_message.Content = "Erreur nom";
+                Erreur_message.Content = "Nom invalide";
             }
-            else if (nom_produit != "" && categorie == "" && unite != "" && ref_fournisseur != "" && stock != "" && stock_min != "" && stock_max != "")
+            else if (categorie == "")
             {
-                Erreur_message.Content = "Erreur categorie";
+                Erreur_message.Content = "Categorie invalide";
             }
-            else if (nom_produit != "" && categorie != "" && unite == "" && ref_fournisseur != "" && stock != "" && stock_min != "" && stock_max != "")
+            else if (unite == "")
             {
-                Erreur_message.Content = "Erreur unite";
+                Erreur_message.Content = "Unite invalide";
             }
-            else if (nom_produit != "" && categorie != "" && unite != "" && ref_fournisseur == "" && stock != "" && stock_min != "" && stock_max != "")
+            else if (ref_fournisseur == "")
             {
-                Erreur_message.Content = "Erreur fournisseur";
+                Erreur_message.Content = "Fournisseur invalide";
             }
-            else if (nom_produit != "" && categorie != "" && unite != "" && ref_fournisseur != "" && stock == "" && stock_min != "" && stock_max != "")
-            {
-                Erreur_message.Content = "Erreur stock";
-            }
-            else if (nom_produit != "" && categorie != "" && unite != "" && ref_fournisseur != "" && stock != "" && stock_min == "" && stock_max != "")
-            {
-                Erreur_message.Content = "Erreur stock min";
-            }
-            else if (nom_produit != "" && categorie != "" && unite != "" && ref_fournisseur != "" && stock != "" && stock_min != "" && stock_max == "")
-            {
-                Erreur_message.Content = "Erreur stock max";
-            }
-            else if (nom_produit != "" && categorie != "" && unite != "" && ref_fournisseur != "" && stock != "" && stock_min != "" && stock_max != "")
+            else
             {
                 Erreur_message.Content = "";
 
@@ -79,26 +64,24 @@ namespace Projet_Startup_Cooking_BDD
 
                 if (!ref_fournisseur_dans_BDD)
                 {
-                    Erreur_message.Content = "Erreur fournisseur inconnu";
-                }
-                else if (Convert.ToInt32(stock_min) > Convert.ToInt32(stock_max))
-                {
-                    Erreur_message.Content = "Combinaison impossible de stock min et max";
+                    Erreur_message.Content = "Fournisseur inconnu";
                 }
                 else
                 {
-                    query = $"insert into cooking.produit values (\"{nom_produit}\",\"{categorie}\",\"{unite}\",{stock},{stock_min},{stock_max},\"{ref_fournisseur}\")";
+                    query = $"insert into cooking.produit values (\"{nom_produit}\",\"{categorie}\",\"{unite}\",0,0,0,\"{ref_fournisseur}\")";
                     string ex = Commandes_SQL.Insert_Requete(query);
 
-                    Creation_Produit page_creation_produit = new Creation_Produit();
-                    this.NavigationService.Navigate(page_creation_produit);
+                    if (ex == $"Duplicate entry '{nom_produit}' for key 'produit.PRIMARY'")
+                    {
+                        Erreur_message.Content = "Nom déjà utilisé";
+                    }
+                    else
+                    {
+                        Creation_Produit page_creation_produit = new Creation_Produit();
+                        this.NavigationService.Navigate(page_creation_produit);
+                    }
                 }
             }
-            else
-            {
-                Erreur_message.Content = "Plusieurs champs sont incomplets";
-            }
-
         }
 
         private void Creer_Reinitialiser(object sender, RoutedEventArgs e)
