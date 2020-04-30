@@ -83,32 +83,33 @@ namespace Projet_Startup_Cooking_BDD
                 }
             }
 
-            if (nom_recette_input == "" && type_recette_input != "" && prix_recette_input != "" && description_recette_input != "" && liste_produit_nom_quantite.Count != 0)
+            if (nom_recette_input == "" || nom_recette_input.Length>50)
             {
-                Erreur_Message.Content = "Aucun nom rentré";
+                Erreur_Message.Content = "Nom doit contenir 1 à 50 caractères";
             }
-            else if (nom_recette_input != "" && type_recette_input == "" && prix_recette_input != "" && description_recette_input != "" && liste_produit_nom_quantite.Count != 0)
+            else if (type_recette_input == "" || !type_recette_input.All(Char.IsLetter))
             {
-                Erreur_Message.Content = "Aucun type rentré";
+                Erreur_Message.Content = "Type invalide";
             }
-            else if (nom_recette_input != "" && type_recette_input != "" && prix_recette_input == "" && description_recette_input != "" && liste_produit_nom_quantite.Count != 0)
+            else if (prix_recette_input == ""|| !int.TryParse(prix_recette_input,out _) || Convert.ToInt32(prix_recette_input)>40|| Convert.ToInt32(prix_recette_input) <10)
             {
-                Erreur_Message.Content = "Aucun prix rentré";
+                Erreur_Message.Content = "Prix doit être entre 10 et 40";
             }
-            else if (nom_recette_input != "" && type_recette_input != "" && prix_recette_input != "" && description_recette_input == "" && liste_produit_nom_quantite.Count != 0)
+            else if (description_recette_input == "")
             {
                 Erreur_Message.Content = "Aucune description rentrée";
             }
-            else if (nom_recette_input != "" && type_recette_input != "" && prix_recette_input != "" && description_recette_input != "" && liste_produit_nom_quantite.Count == 0)
+            else if (liste_produit_nom_quantite.Count == 0)
             {
                 Erreur_Message.Content = "Aucun produit ajouté";
             }
-            else if (nom_recette_input != "" && type_recette_input != "" && prix_recette_input != "" && description_recette_input != "" && liste_produit_nom_quantite.Count != 0)
+            else
             {
                 Erreur_Message.Content = "";
 
                 string query1 = $"INSERT INTO cooking.recette VALUES (\"{nom_recette_input}\",\"{type_recette_input}\",\"{description_recette_input}\",\"{prix_recette_input}\",2,0,\"{this.id_client}\");";
                 string query2 = "";
+                string query4 = "";
                 for (int i = 0; i < liste_produit_nom_quantite.Count; i++)
                 {
                     query2 += $"INSERT INTO cooking.composition_recette VALUES (\"{nom_recette_input}\",\"{liste_produit_nom_quantite[i][0]}\",{liste_produit_nom_quantite[i][1]});";
@@ -120,23 +121,23 @@ namespace Projet_Startup_Cooking_BDD
                     List<List<string>> Liste_stock_min_max = Commandes_SQL.Select_Requete(query3);
                     int Nv_Stock_min =  Convert.ToInt32(Liste_stock_min_max[0][0]) + Convert.ToInt32(liste_produit_nom_quantite[i][1]);
                     int Nv_Stock_max = Convert.ToInt32(Liste_stock_min_max[0][1]) + 2* Convert.ToInt32(liste_produit_nom_quantite[i][1]);
-                    query3 = $"Update cooking.produit set Stock_min = {Nv_Stock_min}, Stock_max = {Nv_Stock_max} where Nom_Produit = \"{liste_produit_nom_quantite[i][0]}\" ;";
-                    Commandes_SQL.Insert_Requete(query3);
+                    query4 += $"Update cooking.produit set Stock_min = {Nv_Stock_min}, Stock_max = {Nv_Stock_max} where Nom_Produit = \"{liste_produit_nom_quantite[i][0]}\" ;";
+
                 }
-                string query = query1 + query2;
+                string query = query1 + query2 + query4; //Si la recette porte le même nom qu'une recette existante, l'exécution plante à la query1. Cela empêche l'exécution des query 2 et 4
                 string ex = Commandes_SQL.Insert_Requete(query);
-
-
-                
-
-
-                Page_CdR page_CdR = new Page_CdR(this.id_client);
-                this.NavigationService.Navigate(page_CdR);
+                if(ex== $"Duplicate entry '{nom_recette_input}' for key 'recette.PRIMARY'")
+                {
+                    Erreur_Message.Content = "Nom déjà utilisé";
+                }
+                else
+                {
+                    Page_CdR page_CdR = new Page_CdR(this.id_client);
+                    this.NavigationService.Navigate(page_CdR);
+                }
+               
             }
-            else
-            {
-                Erreur_Message.Content = "Plusieurs champs sont incomplets";
-            }
+
         }
 
         private void Supprimer_Recette_Click(object sender, RoutedEventArgs e)
@@ -150,6 +151,14 @@ namespace Projet_Startup_Cooking_BDD
             {
                 Erreur_Message.Content = "";
 
+                //mettre à jour les stock mini et max de produit
+                string nom_recette = selection.Nom_Recette;
+                //on recupère le nom des produits
+                string query = $"SELECT Nom_Produit,Stock_min,Stock_max, Quantite_Produit " +
+                    $"from cooking.composition_recette " +
+                    $"where Nom_Recette = \"{nom_recette}\";";
+                List<List<string>> Liste_Nom_Produit_Min_Max_QT = Commandes_SQL.Select_Requete(query);
+
                 //delete child rows
                 string query1 = $"delete from cooking.composition_recette where Nom_Recette = \"{selection.Nom_Recette}\";";
                 string query2 = $"delete from cooking.composition_commande where Nom_Recette = \"{selection.Nom_Recette}\";";
@@ -159,7 +168,7 @@ namespace Projet_Startup_Cooking_BDD
                 string query4 = $"delete from cooking.recette where Nom_Recette = \"{selection.Nom_Recette}\";";
 
                 //final query
-                string query = query1 + query2 + query3 + query4;
+                query = query1 + query2 + query3 + query4;
                 string ex = Commandes_SQL.Insert_Requete(query);
 
                 //update listView
@@ -190,11 +199,11 @@ namespace Projet_Startup_Cooking_BDD
             {
                 Erreur_Message.Content = "Aucun produit selectionné";
             }
-            if (selection != null && quantite_input == "")
+            else if(quantite_input == "" || !int.TryParse(quantite_input,out _)|| Convert.ToInt32(quantite_input)<=0)
             {
-                Erreur_Message.Content = "Aucune quantité indiquée";
+                Erreur_Message.Content = "Quantité invalide";
             }
-            if (selection != null && quantite_input != "")
+            else
             {
                 Erreur_Message.Content = "";
 
