@@ -18,17 +18,16 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
                FontSize="24">Nombre de CdR</Label>
         <Label Name="Nb_CdR"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-               FontSize="24"></Label>
+               FontSize="24" Margin="0,0,0,90"></Label>
         <Button Grid.Column="2" Grid.Row="3" HorizontalAlignment="Right" Height="50" Padding="4" 
                 Margin="0,0,20,0" Click="Button_Click">Suivant</Button>
 
-        <ListView Name="Liste_CdR" Grid.Row="2" Grid.Column="1">
+        <ListView Name="Liste_CdR" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" Height="150" Width="370" Margin="0,35,0,0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Identifiant CdR" DisplayMemberBinding="{Binding Identifiant}"/>
