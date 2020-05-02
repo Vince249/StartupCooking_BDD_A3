@@ -36,8 +36,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Créer le produit" qui crée un nouveau produit dans la database
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Créer le produit"</param>
+        /// <param name="e">Evenement Click</param>
         private void Creer_Produit_Click(object sender, RoutedEventArgs e)
         {
             // récupération des input
@@ -120,8 +120,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Reinitialiser" servant à clear toutes les textbox
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Reinitialiser"</param>
+        /// <param name="e">Evenement Click</param>
         private void Creer_Reinitialiser(object sender, RoutedEventArgs e)
         {
             // on navigue vers une nouvelle page Création_Produit pour réinitialiser les input
@@ -133,8 +133,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Textbox</param>
+        /// <param name="e">Evenement texte modifié</param>
         private void Caractere_interdit(object sender, TextChangedEventArgs e)
         {
             TextBox id_textbox = sender as TextBox;

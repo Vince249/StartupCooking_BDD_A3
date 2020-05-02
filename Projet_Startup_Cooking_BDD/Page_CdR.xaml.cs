@@ -60,8 +60,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Client" ramenant sur la page_Client
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Client"</param>
+        /// <param name="e">Evenement Click</param>
         private void Client_Click(object sender, RoutedEventArgs e)
         {
             Page_Client page_client = new Page_Client(this.id_client);
@@ -72,8 +72,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Déconnexion" ramenant sur la page Interface_Home
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Déconnexion"</param>
+        /// <param name="e">Evenement Click</param>
         private void Deco_Click(object sender, RoutedEventArgs e)
         {
             Interface_Home interhome = new Interface_Home();
@@ -84,8 +84,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Créer la recette" permettant d'ajouter une nouvelle recette dans la database
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Créer la recette"</param>
+        /// <param name="e">Evenement Click</param>
         private void Creer_Recette_Click(object sender, RoutedEventArgs e)
         {
             //récupération infos rentrées par l'utilisateur
@@ -174,8 +174,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Supprimer recette" permettant de supprimer une recette, et tout ce qui est associé à celle-ci, de la database
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Supprimer recette"</param>
+        /// <param name="e">Evenement Click</param>
         private void Supprimer_Recette_Click(object sender, RoutedEventArgs e)
         {
             // selection est un objet que l'on re-définit en tant classe Recette pour pouvoir accéder à ce qu'elle contient
@@ -250,8 +250,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Ajouter le produit" permettant d'affecter une quantité (input) au produit selectionné dans la listView produit
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Ajouter le produit"</param>
+        /// <param name="e">Evenement Click</param>
         private void Ajout_Produit_Click(object sender, RoutedEventArgs e)
         {
             // récupération de l'input 
@@ -304,8 +304,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Reinitialiser" servant à clear toutes les textbox
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Reinitialiser"</param>
+        /// <param name="e">Evenement Click</param>
         private void Reset_Click(object sender, RoutedEventArgs e)
         {
             Page_CdR page_CdR = new Page_CdR(this.id_client);
@@ -318,10 +318,17 @@ namespace Projet_Startup_Cooking_BDD
         /// </summary>
         public class Produit
         {
+            /// <summary>
+            /// Nom du Produit
+            /// </summary>
             public string Nom_Produit { get; set; }
-
+            /// <summary>
+            /// Unité du Produit
+            /// </summary>
             public string Unite { get; set; }
-
+            /// <summary>
+            /// Quantité du Produit
+            /// </summary>
             public string Quantite { get; set; }
         }
 
@@ -331,8 +338,13 @@ namespace Projet_Startup_Cooking_BDD
         /// </summary>
         public class Recette
         {
+            /// <summary>
+            /// Nom de la Recette
+            /// </summary>
             public string Nom_Recette { get; set; }
-
+            /// <summary>
+            /// Compteur de la Recette
+            /// </summary>
             public string Compteur { get; set; }
         }
 
@@ -340,8 +352,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Textbox</param>
+        /// <param name="e">Evenement texte modifié</param>
         private void Caractere_interdit(object sender, TextChangedEventArgs e)
         {
             TextBox id_textbox = sender as TextBox;

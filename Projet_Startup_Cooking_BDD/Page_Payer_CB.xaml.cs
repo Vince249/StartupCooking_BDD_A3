@@ -20,6 +20,9 @@ namespace Projet_Startup_Cooking_BDD
     /// </summary>
     public partial class Page_Payer_CB : Page
     {
+        /// <summary>
+        /// Initialisation de la Page_Payer_CB, vide car il n'était pas demandé de permettre aux clients de réellement donner leurs infos de CB
+        /// </summary>
         public Page_Payer_CB()
         {
             InitializeComponent();

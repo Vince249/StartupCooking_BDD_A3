@@ -21,6 +21,10 @@ namespace Projet_Startup_Cooking_BDD
     public partial class Page_Client : Page
     {
         private string id_client;
+        /// <summary>
+        /// Initialisation de la page permettant l'écriture du welcome message, solde en cook, de la listview des recettes dispos ainsi que des différents bouton, textbox, ...
+        /// </summary>
+        /// <param name="id_client">Identifiant du client actuel</param>
         public Page_Client(string id_client)
         {
             InitializeComponent();
@@ -80,7 +84,12 @@ namespace Projet_Startup_Cooking_BDD
 
         }
 
-
+        /// <summary>
+        /// Méthode reliée au bouton "Ajouter" permettant de passer le montant choisi de la recette sélectionnée dans le panier. La quantité faisable pour chaque recette se met à jour après l'ajout dans le panier
+        /// Le montant total de la commande se met à jour après chaque ajout
+        /// </summary>
+        /// <param name="sender">Bouton "Ajouter"</param>
+        /// <param name="e">Evenement Click</param>
         private void Ajouter_Click(object sender, RoutedEventArgs e)
         {
             Recette_complete selection = Liste_Recette.SelectedItem as Recette_complete;
@@ -217,6 +226,13 @@ namespace Projet_Startup_Cooking_BDD
 
 
         }
+
+        /// <summary>
+        /// Méthode reliée au bouton "Retirer" permettant de retirer une recette choisie du panier (on retire l'intégralité de la recette). La quantité faisable pour toutes les recettes se remet à jour après le retrait d'une recette du panier
+        /// Le montant total se met à jour après chaque retrait
+        /// </summary>
+        /// <param name="sender">Bouton "Retirer"</param>
+        /// <param name="e">Evenement Click</param>
         private void Retirer_Click(object sender, RoutedEventArgs e)
         {
             
@@ -333,6 +349,12 @@ namespace Projet_Startup_Cooking_BDD
 
             
         }
+
+        /// <summary>
+        /// Méthode reliée au bouton CdR permettant de devenir CdR si on ne l'est pas, ou accéder à la page CdR si on l'est. Inaccessible pour les utilisateurs restreints en clients
+        /// </summary>
+        /// <param name="sender">Bouton ""</param>
+        /// <param name="e">Evenement Click</param>
         private void CdR_Click(object sender, RoutedEventArgs e)
         {
             string query = $"select CdR from client where Identifiant = \"{this.id_client}\" ;";
@@ -350,12 +372,22 @@ namespace Projet_Startup_Cooking_BDD
             }
         }
 
+        /// <summary>
+        /// Méthode reliée au bouton "Déconnexion" permettant de se déconnecter et retourner au menu principal
+        /// </summary>
+        /// <param name="sender">Bouton "Déconnexion"</param>
+        /// <param name="e">Evenement Click</param>
         private void Deco_Click(object sender, RoutedEventArgs e)
         {
             Interface_Home interhome = new Interface_Home();
             this.NavigationService.Navigate(interhome);
         }
 
+        /// <summary>
+        /// Méthode reliée au bouton "Valider" permettant de valider la commande et passer au paiement. Le bouton est innaccessible quand le panier est vide
+        /// </summary>
+        /// <param name="sender">Bouton "Valider"</param>
+        /// <param name="e">Evenement Click</param>
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
             if (Panier.Items.Count > 0) //s'il y a des choses dans le panier
@@ -378,25 +410,49 @@ namespace Projet_Startup_Cooking_BDD
             }
             
         }
+
+        /// <summary>
+        /// Classe utilisée pour remplir la ListView des recettes disponibles
+        /// </summary>
         public class Recette_complete
         {
+            /// <summary>
+            /// Nom de la Recette
+            /// </summary>
             public string Nom_Recette { get; set; }
-
+            /// <summary>
+            /// Type de la Recette
+            /// </summary>
             public string Type { get; set; }
-
+            /// <summary>
+            /// Descriptif de la Recette
+            /// </summary>
             public string Descriptif { get; set; }
-
+            /// <summary>
+            /// Prix de la Recette
+            /// </summary>
             public string Prix { get; set; }
-
+            /// <summary>
+            /// Qt faisable de cette Recette
+            /// </summary>
             public int Qt_Faisable { get; set; }
         }
-
+        /// <summary>
+        /// Classe utilisée pour remplir la ListView des recettes dans le panier
+        /// </summary>
         public class Recette_Panier
         {
+            /// <summary>
+            /// Nom de la Recette
+            /// </summary>
             public string Nom_Recette { get; set; }
-
+            /// <summary>
+            /// Quantité de la Recette choisie
+            /// </summary>
             public string Quantite_Recette { get; set; }
-
+            /// <summary>
+            /// Prix de la Recette
+            /// </summary>
             public string Prix { get; set; }
         }
 
@@ -404,8 +460,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Textbox</param>
+        /// <param name="e">Evenement texte modifié</param>
         private void Caractere_interdit(object sender, TextChangedEventArgs e)
         {
             TextBox id_textbox = sender as TextBox;

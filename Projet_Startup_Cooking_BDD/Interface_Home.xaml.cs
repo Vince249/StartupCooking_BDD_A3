@@ -34,8 +34,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Se connecter" côté client qui vérifie si l'identifiant et le mdp rentrés par l'utilisateur correspondent à un couple identifiant/mdp dans la database 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Se connecter"</param>
+        /// <param name="e">Evenement Click</param>
         private void Button_Click_connect_client(object sender, RoutedEventArgs e)
         {
             // Récupération des input
@@ -69,8 +69,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Créer un compte" amenant sur la page correspondante
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Buoton "Créer un compte"</param>
+        /// <param name="e">Evenement Click</param>
         private void Button_Click_create_client(object sender, RoutedEventArgs e)
         {
             Creation_compte_client page_creation_client = new Creation_compte_client();
@@ -81,8 +81,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Se connecter" côté admin qui vérifie si l'identifiant et le mdp rentrés par l'utilisateur correspondent à un couple identifiant/mdp dans la database 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Se connecter"</param>
+        /// <param name="e">Evenement Click</param>
         private void Button_Click_connect_admin(object sender, RoutedEventArgs e)
         {
             // récupération des input
@@ -138,10 +138,10 @@ namespace Projet_Startup_Cooking_BDD
 
 
         /// <summary>
-        /// Méthode reliée au bouton "Reset BDD" nous permettant de réinitialiser notre database à partir de fichier txt
+        /// Méthode reliée au bouton "Reset BDD" nous permettant de réinitialiser notre database à partir de fichiers txt (équivalents à des scripts SQL ordinaires)
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Reset BDD"</param>
+        /// <param name="e">Evenement Click</param>
         private void Button_Click_Reset_BDD(object sender, RoutedEventArgs e)
         {
             Commandes_SQL.Execution_Script_TXT("Initialisation_DB.txt");
@@ -152,8 +152,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Mode démo" amenant sur la page correspondante
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Mode démo"</param>
+        /// <param name="e">Evenement Click</param>
         private void Button_Click_mode_demo(object sender, RoutedEventArgs e)
         {
             Page_Demo_1 page_demo = new Page_Demo_1();
@@ -164,8 +164,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Textbox</param>
+        /// <param name="e">Evenement texte modifié</param>
         private void Caractere_interdit(object sender, TextChangedEventArgs e)
         {
             TextBox id_textbox = sender as TextBox;

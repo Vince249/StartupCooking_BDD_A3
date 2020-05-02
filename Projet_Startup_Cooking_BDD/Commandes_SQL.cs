@@ -13,12 +13,14 @@ namespace Projet_Startup_Cooking_BDD
     /// </summary>
     public class Commandes_SQL
     {
-    
+
+
+
         /// <summary>
         /// Méthode permettant d'obtenir sous forme de liste de liste de string le résultat d'une query MySQL sur la database
         /// </summary>
         /// <param name="requete"> Query MySQL appliquée à la database </param>
-        /// <returns> Une List<List<string>> contenant les valeurs souhaitées</returns>
+        /// <returns> Une ListListstring contenant les valeurs souhaitées</returns>
         public static List<List<string>> Select_Requete(string requete)
         {
             string connectionString = "SERVER=localhost;PORT=3306;DATABASE=cooking;UID=root;PASSWORD=root;"; //connexion à la database

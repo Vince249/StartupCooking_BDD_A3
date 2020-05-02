@@ -20,6 +20,10 @@ namespace Projet_Startup_Cooking_BDD
     /// </summary>
     public partial class Page_Top : Page
     {
+        /// <summary>
+        /// Initialisaiton de la Page_Top, permettant l'affichage du CdR d'OR, de ses recettes les plus vendues, du CdR de la semaine actuelle 
+        /// ainsi que les 5 recettes les plus commandées de la semaine actuelle
+        /// </summary>
         public Page_Top()
         {
             InitializeComponent();
@@ -86,20 +90,49 @@ namespace Projet_Startup_Cooking_BDD
                 });
             }
         }
-
+        /// <summary>
+        /// Classe permettant le remplissage de la ListView des recettes du CdR d'Or
+        /// </summary>
         public class Recette_Or
         {
+            /// <summary>
+            /// Nom de la Recette
+            /// </summary>
             public string Nom { get; set; }
+            /// <summary>
+            /// Type de la Recette
+            /// </summary>
             public string Type { get; set; }
+            /// <summary>
+            /// Compteur de la Recette
+            /// </summary>
             public string Compteur { get; set; }
         }
 
+        /// <summary>
+        /// Classe permettant le remplissage de la ListView des recettes de la semaine
+        /// </summary>
         public class Recette_Semaine
         {
+            /// <summary>
+            /// Nom de la Recette
+            /// </summary>
             public string Nom { get; set; }
+            /// <summary>
+            /// Type de la Recette
+            /// </summary>
             public string Type { get; set; }
+            /// <summary>
+            /// Créateur de la Recette
+            /// </summary>
             public string Createur { get; set; }
+            /// <summary>
+            /// Volume acheté cette semaine
+            /// </summary>
             public string Volume_Achete_Semaine { get; set; }
+            /// <summary>
+            /// Compteur de la Recette
+            /// </summary>
             public string Compteur { get; set; }
         }
     }

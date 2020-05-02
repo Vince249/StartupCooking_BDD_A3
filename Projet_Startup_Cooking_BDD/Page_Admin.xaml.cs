@@ -48,8 +48,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Déconnexion" ramenant sur la page Interface_Home
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Déconnexion"</param>
+        /// <param name="e">Evenement Click</param>
         private void Deco_Click(object sender, RoutedEventArgs e)
         {
             Interface_Home interhome = new Interface_Home();
@@ -60,8 +60,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Tri par identifiant" permettant de trier les éléments de la listView contenant les recettes par rapport aux identifiants des CdR
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Tri par identifiant"</param>
+        /// <param name="e">Evenement Click</param>
         private void Trier_par_id_Click(object sender, RoutedEventArgs e)
         {
             // query permettant d'obtenir les éléments triés ordre alphabétique par rapport aux identifiants
@@ -80,8 +80,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Tri par recette" permettant de trier les éléments de la listView contenant les recettes par rapport au nom des recettes
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Tri par recette"</param>
+        /// <param name="e">Evenement Click</param>
         private void Trier_par_recette_Click(object sender, RoutedEventArgs e)
         {
             // query permettant d'obtenir les éléments triés ordre alphabétique par rapport aux identifiants
@@ -100,8 +100,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Supprimer recette" permettant de supprimer une recette, et tout ce qui est associé à celle-ci, de la database
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Supprimer recette"</param>
+        /// <param name="e">Evenement Click</param>
         private void Supprimer_recette_Click(object sender, RoutedEventArgs e)
         {
             // selection est un objet que l'on re-définit en tant classe Recette_id_CdR pour pouvoir accéder à ce qu'elle contient
@@ -176,8 +176,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Bannir le CdR" permettant d'effectuer l'action correspondante, elle va donc supprimer le client (CdR) ainsi que tout ce à quoi il est relié
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Bannir le CdR"</param>
+        /// <param name="e">Evenement Click</param>
         private void Ban_CdR_Click(object sender, RoutedEventArgs e)
         {
             // sécurité
@@ -259,8 +259,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         ///  Méthode reliée au bouton "Passer le CdR en client" permettant d'effectuer l'action correspondante, elle va donc rendre impossible pour ce client d'être CdR et va supprimer toutes ses recettes
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Passer le CdR en client"</param>
+        /// <param name="e">Evenement Click</param>
         private void CdR_To_Client_Click(object sender, RoutedEventArgs e)
         {
             // sécurité
@@ -343,8 +343,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         ///  Méthode reliée au bouton "TOP" permettant de naviguer par la page correspondante
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "TOP"</param>
+        /// <param name="e">Evenement Click</param>
         private void Top_Click(object sender, RoutedEventArgs e)
         {
             Page_Top pageTop = new Page_Top();
@@ -353,10 +353,10 @@ namespace Projet_Startup_Cooking_BDD
 
 
         /// <summary>
-        ///  Méthode reliée au bouton "Carnet de commandes des produits XML" permettant de générer un fichier XML contenant La liste des produits dont la quantité est inférieure à la quantité minimale classé par fournisseur puis par produit
+        ///  Méthode reliée au bouton "Carnet de commande des produits XML" permettant de générer un fichier XML contenant La liste des produits dont la quantité est inférieure à la quantité minimale classé par fournisseur puis par produit
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Carnet de commande des produits XML"</param>
+        /// <param name="e">Evenement Click</param>
         private void Carnet_commandes_produit_XML_Click(object sender, RoutedEventArgs e)
         {
             // mise a jour stock min et max produits pas utilisés depuis 30 jours
@@ -454,8 +454,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Créer nouveau produit" permettant de naviguer par la page correspondante
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Créer nouveau produit"</param>
+        /// <param name="e">Evenement Click</param>
         private void Creation_Produit_Click(object sender, RoutedEventArgs e)
         {
             Creation_Produit page_creation_produit = new Creation_Produit(this.id_admin);
@@ -466,8 +466,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode reliée au bouton "Création Fournisseur" permettant de naviguer par la page correspondante
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Bouton "Création Fournisseur"</param>
+        /// <param name="e">Evenement Click</param>
         private void Creation_fournisseur(object sender, RoutedEventArgs e)
         {
             Creation_Fournisseur page_fournisseur = new Creation_Fournisseur(this.id_admin);
@@ -480,8 +480,13 @@ namespace Projet_Startup_Cooking_BDD
         /// </summary>
         public class Recette_id_CdR
         {
+            /// <summary>
+            /// Nom de la Recette
+            /// </summary>
             public string Nom_Recette { get; set; }
-
+            /// <summary>
+            /// Identifiant du CdR
+            /// </summary>
             public string Identifiant_CdR { get; set; }
         }
 
@@ -491,12 +496,21 @@ namespace Projet_Startup_Cooking_BDD
         /// </summary>
         public class Fournisseur
         {
+            /// <summary>
+            /// Référence du Fournisseur
+            /// </summary>
             public string Ref_Fournisseur { get; set; }
-
+            /// <summary>
+            /// Nom du Fournisseur
+            /// </summary>
             public string Nom_Fournisseur { get; set; }
-
+            /// <summary>
+            /// Numéro de téléphone du Fournisseur
+            /// </summary>
             public string Numero_tel_Fournisseur { get; set; }
-
+            /// <summary>
+            /// Liste des produits à commander
+            /// </summary>
             public List<Produit> liste_produit_a_commander { get; set; }
         }
 
@@ -506,20 +520,37 @@ namespace Projet_Startup_Cooking_BDD
         /// </summary>
         public class Produit
         {
+            /// <summary>
+            /// Nomdu Produit
+            /// </summary>
             public string Nom_Produit { get; set; }
-
+            /// <summary>
+            /// Catégorie du Produit
+            /// </summary>
             public string Categorie { get; set; }
-
+            /// <summary>
+            /// Unité du Produit
+            /// </summary>
             public string Unite { get; set; }
-
+            /// <summary>
+            /// Stock actuel du Produit
+            /// </summary>
             public string Stock { get; set; }
-
+            /// <summary>
+            /// Stock minimal du Produit
+            /// </summary>
             public string Stock_min { get; set; }
-
+            /// <summary>
+            /// Stock max du Produit
+            /// </summary>
             public string Stock_max { get; set; }
-
+            /// <summary>
+            /// Référence du Fournisseur de ce Produit
+            /// </summary>
             public string Ref_Fournisseur { get; set; }
-
+            /// <summary>
+            /// Quantité à commander
+            /// </summary>
             public string Quantite_a_commander { get; set; } 
         }
 
@@ -527,8 +558,8 @@ namespace Projet_Startup_Cooking_BDD
         /// <summary>
         /// Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Textbox</param>
+        /// <param name="e">Evenement texte modifié</param>
         private void Caractere_interdit(object sender, TextChangedEventArgs e)
         {
             TextBox id_textbox = sender as TextBox;

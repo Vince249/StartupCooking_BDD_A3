@@ -20,6 +20,9 @@ namespace Projet_Startup_Cooking_BDD
     /// </summary>
     public partial class Page_Demo_2 : Page
     {
+        /// <summary>
+        /// Initialisation de la Page_Demo_2, affiche le nombre de CdR et une ListView contenant la liste pour chaque CdR de leur Identifant, Nom et le volume que représente les commandes de leurs recettes
+        /// </summary>
         public Page_Demo_2()
         {
             InitializeComponent();
@@ -39,14 +42,29 @@ namespace Projet_Startup_Cooking_BDD
             }   
             
         }
-
+        /// <summary>
+        /// Classe utilisée pour remplir la ListView avec Nom, Identifiant et volume de commande de ses recettes pour chaque CdR
+        /// </summary>
         public class Nom_QT
         {
+            /// <summary>
+            /// Nom du CdR
+            /// </summary>
             public string Nom { get; set; }
+            /// <summary>
+            /// Identifiant du CdR
+            /// </summary>
             public string Identifiant { get; set; }
+            /// <summary>
+            /// volume de commande de ses recettes
+            /// </summary>
             public string Qt { get; set; }
         }
-
+        /// <summary>
+        /// Méthode reliée au bouton "Suivant" permettant de passer à la page de démo suivante
+        /// </summary>
+        /// <param name="sender">Bouton "Suivant"</param>
+        /// <param name="e">Evenement Click</param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Page_Demo_3 page_demo_3 = new Page_Demo_3();

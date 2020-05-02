@@ -22,6 +22,17 @@ namespace Projet_Startup_Cooking_BDD
     {
         private string id_client;
         private List<List<string>> liste_panier;
+        /// <summary>
+        /// Initialisation de la page Validation_Paiement, affichage du montant total de la commande, du solde actuel, 
+        /// du solde restant après commande et du reste à payer après déduction du total au solde actuel. 
+        /// 
+        /// Affichage du montant qui sera remboursé post-paiement dans le cadre de la rémunération des CdR
+        /// Passer le bouton Valider en mode "Confirmer" si le solde actuel est suffisant, "Payer le reste par CB" dans le cas contraire
+        /// </summary>
+        /// <param name="total">Montant total de la commande</param>
+        /// <param name="solde">Solde actuel du client</param>
+        /// <param name="id_client">Identifiant du client afin de procéder au paiement</param>
+        /// <param name="liste_panier">Liste des objets dans le panier du client afin de décrémenter les quantités de produit</param>
         public Validation_Paiement(string total, string solde, string id_client, List<List<string>> liste_panier)
         {
             InitializeComponent();
@@ -73,12 +84,28 @@ namespace Projet_Startup_Cooking_BDD
 
         }
 
+        /// <summary>
+        /// Méthode reliée au bouton "Annuler", permet d'annuler la commande et de revenir à la page précédente
+        /// </summary>
+        /// <param name="sender">Bouton "Annuler"</param>
+        /// <param name="e">Evenement Click</param>
         private void Annuler_Click(object sender, RoutedEventArgs e)
         {
             Page_Client page_Client = new Page_Client(this.id_client);
             this.NavigationService.Navigate(page_Client);
         }
 
+        /// <summary>
+        /// Méthode reliée au bouton "Tricher (+50cooks)" permettant d'augmenter le solde du client de 50 cooks.
+        /// A l'heure actuelle si le solde d'un client n'est pas suffisant pour payer l'intégralité de la commande, le client est invité
+        /// à payer le reste par CB. Comme indiqué dans le CdC cette page (Page_Payer_CB ici) n'avait pas à être réellement designée.
+        /// Afin de permettre le test de nos fonctions, nous avons donc ajouté ce bouton permettant à un nouveau client de se donner de l'argent
+        /// et ainsi pour voir valider ses commandes.
+        /// Après avoir triché la valeur du bouton valider est ré-évaluée
+        /// Cette méthode serait évidemment retirée dans le cadre d'une réelle mise en ligne de l'application.
+        /// </summary>
+        /// <param name="sender">Bouton "Tricher"</param>
+        /// <param name="e">Evenement Click</param>
         private void Tricher_Click(object sender, RoutedEventArgs e)
         {
             string updatesolde = Convert.ToString(Convert.ToInt32(Solde.Content) + 50);
@@ -103,6 +130,22 @@ namespace Projet_Startup_Cooking_BDD
 
         }
 
+        /// <summary>
+        /// Méthode reliée au bouton "Valider" permettant de Valider le paiement.
+        /// Si le contenu du bouton est "Payer le reste par CB", aucune action n'est effectuée et le client est envoyé sur la page Page_Payer_CB
+        /// Si le contenu du bouton est "Confirmer", on effectue les actions suivantes :
+        /// - Décrémenter le nb de crédit du client
+        /// - Créer une instance de Commande
+        /// --> Pour chaque recette commandée
+        ///         * Rémunérer le/les CdR
+        ///         * Augmenter le compteur des recettes utilisées de la quantité prise
+        ///         * Augmenter le prix de vente
+        ///         * Augmenter la rémunération de la recette
+        ///         * Créer ses instances de Recette_Commande
+        ///         * Diminuer les produits
+        /// </summary>
+        /// <param name="sender">Bouton "Valider"</param>
+        /// <param name="e">Evenement Click</param>
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
             if(Valider.Content.ToString() == "Confirmer")

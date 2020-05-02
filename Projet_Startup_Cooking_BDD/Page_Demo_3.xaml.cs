@@ -20,6 +20,9 @@ namespace Projet_Startup_Cooking_BDD
     /// </summary>
     public partial class Page_Demo_3 : Page
     {
+        /// <summary>
+        /// Initialisation de la Page_Demo_3, affichage du nombre de recettes créées
+        /// </summary>
         public Page_Demo_3()
         {
             InitializeComponent();
@@ -27,7 +30,11 @@ namespace Projet_Startup_Cooking_BDD
             List<List<string>> Liste_Nb = Commandes_SQL.Select_Requete(query);
             Nb.Content = Liste_Nb[0][0];
         }
-
+        /// <summary>
+        /// Méthode reliée au bouton "Suivant" permettant de passer à la page de démo suivante
+        /// </summary>
+        /// <param name="sender">Bouton "Suivant"</param>
+        /// <param name="e">Evenement Click</param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Page_Demo_4 page_demo_4 = new Page_Demo_4();

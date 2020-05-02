@@ -1,0 +1,968 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Projet_Startup_Cooking_BDD</name>
+    </assembly>
+    <members>
+        <member name="T:Projet_Startup_Cooking_BDD.Creation_Fournisseur">
+            <summary>
+            Logique d'interaction pour Creation_Fournisseur.xaml
+            </summary>
+            <summary>
+            Creation_Fournisseur
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_Fournisseur.#ctor(System.String)">
+            <summary>
+            Initialisation de la page 
+            </summary>
+            <param name="id_admin"> identifiant de l'admin connecté </param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_Fournisseur.Creer_Fournisseur_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Créer le fournisseur" qui crée un nouveau fournisseur dans la database
+            </summary>
+            <param name="sender">bouton "Créer le fournisseur"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_Fournisseur.Creer_Reinitialiser(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+             Méthode reliée au bouton "Reinitialiser" servant à clear toutes les textbox
+            </summary>
+            <param name="sender">Bouton "Reinitialiser"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_Fournisseur.Caractere_interdit(System.Object,System.Windows.Controls.TextChangedEventArgs)">
+            <summary>
+            Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
+            </summary>
+            <param name="sender">TextBox</param>
+            <param name="e">Evenement texte modifié</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_Fournisseur.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Creation_Produit">
+            <summary>
+            Logique d'interaction pour Creation_Produit.xaml
+            </summary>
+            <summary>
+            Creation_Produit
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_Produit.#ctor(System.String)">
+            <summary>
+            Initialisation de la page 
+            </summary>
+            <param name="id_admin"> identifiant de l'admin connecté </param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_Produit.Creer_Produit_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Créer le produit" qui crée un nouveau produit dans la database
+            </summary>
+            <param name="sender">Bouton "Créer le produit"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_Produit.Creer_Reinitialiser(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Reinitialiser" servant à clear toutes les textbox
+            </summary>
+            <param name="sender">Bouton "Reinitialiser"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_Produit.Caractere_interdit(System.Object,System.Windows.Controls.TextChangedEventArgs)">
+            <summary>
+            Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
+            </summary>
+            <param name="sender">Textbox</param>
+            <param name="e">Evenement texte modifié</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_Produit.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_CdR">
+            <summary>
+            Logique d'interaction pour Page_CdR.xaml
+            </summary>
+            <summary>
+            Page_CdR
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_CdR.#ctor(System.String)">
+            <summary>
+            Initialisation de la page comprenant le message de bienvenue, le solde du CdR, la listView contenant les produits et la listView contenant les recettes du CdR
+            </summary>
+            <param name="id_client"> identifiant de l'utilisateur que l'on a conservé depuis la page Interface_Home </param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_CdR.Client_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Client" ramenant sur la page_Client
+            </summary>
+            <param name="sender">Bouton "Client"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_CdR.Deco_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Déconnexion" ramenant sur la page Interface_Home
+            </summary>
+            <param name="sender">Bouton "Déconnexion"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_CdR.Creer_Recette_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Créer la recette" permettant d'ajouter une nouvelle recette dans la database
+            </summary>
+            <param name="sender">Bouton "Créer la recette"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_CdR.Supprimer_Recette_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Supprimer recette" permettant de supprimer une recette, et tout ce qui est associé à celle-ci, de la database
+            </summary>
+            <param name="sender">Bouton "Supprimer recette"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_CdR.Ajout_Produit_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Ajouter le produit" permettant d'affecter une quantité (input) au produit selectionné dans la listView produit
+            </summary>
+            <param name="sender">Bouton "Ajouter le produit"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_CdR.Reset_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Reinitialiser" servant à clear toutes les textbox
+            </summary>
+            <param name="sender">Bouton "Reinitialiser"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_CdR.Produit">
+            <summary>
+            Classe utilisée pour remplir la listView produit ou récupérer les valeurs d'une selection dans cette même listViesw
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_CdR.Produit.Nom_Produit">
+            <summary>
+            Nom du Produit
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_CdR.Produit.Unite">
+            <summary>
+            Unité du Produit
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_CdR.Produit.Quantite">
+            <summary>
+            Quantité du Produit
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_CdR.Recette">
+            <summary>
+            Classe utilisée pour remplir la listView recette ou récupérer les valeurs d'une selection dans cette même listViesw
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_CdR.Recette.Nom_Recette">
+            <summary>
+            Nom de la Recette
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_CdR.Recette.Compteur">
+            <summary>
+            Compteur de la Recette
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_CdR.Caractere_interdit(System.Object,System.Windows.Controls.TextChangedEventArgs)">
+            <summary>
+            Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
+            </summary>
+            <param name="sender">Textbox</param>
+            <param name="e">Evenement texte modifié</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_CdR.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Demo_1">
+            <summary>
+            Logique d'interaction pour Page_Demo_1.xaml
+            </summary>
+            <summary>
+            Page_Demo_1
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Demo_1.#ctor">
+            <summary>
+            Initialisation de la Page_Demo_1, affiche le nombre de client
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Demo_1.Button_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Suivant" permettant de passer à la page de démo suivante
+            </summary>
+            <param name="sender">Bouton "Suivant"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Demo_1.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Demo_2">
+            <summary>
+            Logique d'interaction pour Page_Demo_2.xaml
+            </summary>
+            <summary>
+            Page_Demo_2
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Demo_2.#ctor">
+            <summary>
+            Initialisation de la Page_Demo_2, affiche le nombre de CdR et une ListView contenant la liste pour chaque CdR de leur Identifant, Nom et le volume que représente les commandes de leurs recettes
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Demo_2.Nom_QT">
+            <summary>
+            Classe utilisée pour remplir la ListView avec Nom, Identifiant et volume de commande de ses recettes pour chaque CdR
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Demo_2.Nom_QT.Nom">
+            <summary>
+            Nom du CdR
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Demo_2.Nom_QT.Identifiant">
+            <summary>
+            Identifiant du CdR
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Demo_2.Nom_QT.Qt">
+            <summary>
+            volume de commande de ses recettes
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Demo_2.Button_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Suivant" permettant de passer à la page de démo suivante
+            </summary>
+            <param name="sender">Bouton "Suivant"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Demo_2.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Demo_3">
+            <summary>
+            Logique d'interaction pour Page_Demo_3.xaml
+            </summary>
+            <summary>
+            Page_Demo_3
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Demo_3.#ctor">
+            <summary>
+            Initialisation de la Page_Demo_3, affichage du nombre de recettes créées
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Demo_3.Button_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Suivant" permettant de passer à la page de démo suivante
+            </summary>
+            <param name="sender">Bouton "Suivant"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Demo_3.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Demo_4">
+            <summary>
+            Logique d'interaction pour Page_Demo_4.xaml
+            </summary>
+            <summary>
+            Page_Demo_4
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Demo_4.#ctor">
+            <summary>
+            Initialisation de Page_Demo_4, affichage du Nom, Stock actuel et Stock minimum des produits dont le Stock actuel est inférieur à 2*Stock minimal dans une List View
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Demo_4.Button_Click_Recette(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Afficher infos recette" permettant (en cliquant sur un produit au préalable) d'afficher dans une autre ListView les informations relatives aux recettes utilisant ce produit
+            Notamment leur nom et la quantité de ce produit qu'elles utilisent
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Demo_4.Produit">
+            <summary>
+            Classe permettant de remplir la ListView des produits
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Demo_4.Produit.Nom">
+            <summary>
+            Nom du Produit
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Demo_4.Produit.Stock">
+            <summary>
+            Stock du Produit
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Demo_4.Produit.Stock_mini">
+            <summary>
+            Stock minimal du Produit
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Demo_4.Recette">
+            <summary>
+            Classe permettant de remplir la ListView des recettes
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Demo_4.Recette.Nom">
+            <summary>
+            Nom de la Recette
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Demo_4.Recette.Qt">
+            <summary>
+            Quantité de la Recette
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Demo_4.Button_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Quitter mode démo" permettant de revenir au menu principal
+            </summary>
+            <param name="sender">Bouton "Quitter mode démo"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Demo_4.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Payer_CB">
+            <summary>
+            Logique d'interaction pour Page_Payer_CB.xaml
+            </summary>
+            <summary>
+            Page_Payer_CB
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Payer_CB.#ctor">
+            <summary>
+            Initialisation de la Page_Payer_CB, vide car il n'était pas demandé de permettre aux clients de réellement donner leurs infos de CB
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Payer_CB.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Top">
+            <summary>
+            Logique d'interaction pour Page_Top.xaml
+            </summary>
+            <summary>
+            Page_Top
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Top.#ctor">
+            <summary>
+            Initialisaiton de la Page_Top, permettant l'affichage du CdR d'OR, de ses recettes les plus vendues, du CdR de la semaine actuelle 
+            ainsi que les 5 recettes les plus commandées de la semaine actuelle
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Top.Recette_Or">
+            <summary>
+            Classe permettant le remplissage de la ListView des recettes du CdR d'Or
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Top.Recette_Or.Nom">
+            <summary>
+            Nom de la Recette
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Top.Recette_Or.Type">
+            <summary>
+            Type de la Recette
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Top.Recette_Or.Compteur">
+            <summary>
+            Compteur de la Recette
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Top.Recette_Semaine">
+            <summary>
+            Classe permettant le remplissage de la ListView des recettes de la semaine
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Top.Recette_Semaine.Nom">
+            <summary>
+            Nom de la Recette
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Top.Recette_Semaine.Type">
+            <summary>
+            Type de la Recette
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Top.Recette_Semaine.Createur">
+            <summary>
+            Créateur de la Recette
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Top.Recette_Semaine.Volume_Achete_Semaine">
+            <summary>
+            Volume acheté cette semaine
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Top.Recette_Semaine.Compteur">
+            <summary>
+            Compteur de la Recette
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Top.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Validation_Paiement">
+            <summary>
+            Logique d'interaction pour Validation_Paiement.xaml
+            </summary>
+            <summary>
+            Validation_Paiement
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Validation_Paiement.#ctor(System.String,System.String,System.String,System.Collections.Generic.List{System.Collections.Generic.List{System.String}})">
+            <summary>
+            Initialisation de la page Validation_Paiement, affichage du montant total de la commande, du solde actuel, 
+            du solde restant après commande et du reste à payer après déduction du total au solde actuel. 
+            
+            Affichage du montant qui sera remboursé post-paiement dans le cadre de la rémunération des CdR
+            Passer le bouton Valider en mode "Confirmer" si le solde actuel est suffisant, "Payer le reste par CB" dans le cas contraire
+            </summary>
+            <param name="total">Montant total de la commande</param>
+            <param name="solde">Solde actuel du client</param>
+            <param name="id_client">Identifiant du client afin de procéder au paiement</param>
+            <param name="liste_panier">Liste des objets dans le panier du client afin de décrémenter les quantités de produit</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Validation_Paiement.Annuler_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Annuler", permet d'annuler la commande et de revenir à la page précédente
+            </summary>
+            <param name="sender">Bouton "Annuler"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Validation_Paiement.Tricher_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Tricher (+50cooks)" permettant d'augmenter le solde du client de 50 cooks.
+            A l'heure actuelle si le solde d'un client n'est pas suffisant pour payer l'intégralité de la commande, le client est invité
+            à payer le reste par CB. Comme indiqué dans le CdC cette page (Page_Payer_CB ici) n'avait pas à être réellement designée.
+            Afin de permettre le test de nos fonctions, nous avons donc ajouté ce bouton permettant à un nouveau client de se donner de l'argent
+            et ainsi pour voir valider ses commandes.
+            Après avoir triché la valeur du bouton valider est ré-évaluée
+            Cette méthode serait évidemment retirée dans le cadre d'une réelle mise en ligne de l'application.
+            </summary>
+            <param name="sender">Bouton "Tricher"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Validation_Paiement.Valider_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Valider" permettant de Valider le paiement.
+            Si le contenu du bouton est "Payer le reste par CB", aucune action n'est effectuée et le client est envoyé sur la page Page_Payer_CB
+            Si le contenu du bouton est "Confirmer", on effectue les actions suivantes :
+            - Décrémenter le nb de crédit du client
+            - Créer une instance de Commande
+            --> Pour chaque recette commandée
+                    * Rémunérer le/les CdR
+                    * Augmenter le compteur des recettes utilisées de la quantité prise
+                    * Augmenter le prix de vente
+                    * Augmenter la rémunération de la recette
+                    * Créer ses instances de Recette_Commande
+                    * Diminuer les produits
+            </summary>
+            <param name="sender">Bouton "Valider"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Validation_Paiement.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.App">
+            <summary>
+            Logique d'interaction pour App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Commandes_SQL">
+            <summary>
+            Fonctions nous permettant d'intéragir avec MySQL
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Commandes_SQL.Select_Requete(System.String)">
+            <summary>
+            Méthode permettant d'obtenir sous forme de liste de liste de string le résultat d'une query MySQL sur la database
+            </summary>
+            <param name="requete"> Query MySQL appliquée à la database </param>
+            <returns> Une ListListstring contenant les valeurs souhaitées</returns>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Commandes_SQL.Insert_Requete(System.String)">
+            <summary>
+            Méthode permettant d'exécuter n'importe quelle query MySQL sur la database, autres que les "select"
+            </summary>
+            <param name="requete"> Query MySQL appliquée à la database </param>
+            <returns> un message d'erreur si la query MySQL est incorrecte </returns>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Commandes_SQL.Execution_Script_TXT(System.String)">
+            <summary>
+            Méthode nous permettant d'exécuter un script MySQL (enregistré sous le format .txt)
+            </summary>
+            <param name="fichier"> nom + extension du fichier se situant dans Bin/Debug </param>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Creation_compte_client">
+            <summary>
+            Logique d'interaction pour Creation_compte_client.xaml
+            </summary>
+            <summary>
+            Creation_compte_client
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_compte_client.#ctor">
+            <summary>
+            Initialisation de la page 
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_compte_client.Button_Click_creer_compte_client(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Créer votre compte" qui crée un nouveau client dans la database
+            </summary>
+            <param name="sender">Bouton créer votre compte creer</param>
+            <param name="e">Evenment Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_compte_client.Caractere_interdit(System.Object,System.Windows.Controls.TextChangedEventArgs)">
+            <summary>
+            Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
+            </summary>
+            <param name="sender">Textbox</param>
+            <param name="e">Evenement texte modifié</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Creation_compte_client.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Interface_Home">
+            <summary>
+            Logique d'interaction pour Interface_Home.xaml
+            </summary>
+            <summary>
+            Interface_Home
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Interface_Home.#ctor">
+            <summary>
+            Initialisation de la page
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Interface_Home.Button_Click_connect_client(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Se connecter" côté client qui vérifie si l'identifiant et le mdp rentrés par l'utilisateur correspondent à un couple identifiant/mdp dans la database 
+            </summary>
+            <param name="sender">Bouton "Se connecter"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Interface_Home.Button_Click_create_client(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Créer un compte" amenant sur la page correspondante
+            </summary>
+            <param name="sender">Buoton "Créer un compte"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Interface_Home.Button_Click_connect_admin(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Se connecter" côté admin qui vérifie si l'identifiant et le mdp rentrés par l'utilisateur correspondent à un couple identifiant/mdp dans la database 
+            </summary>
+            <param name="sender">Bouton "Se connecter"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Interface_Home.Button_Click_Reset_BDD(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Reset BDD" nous permettant de réinitialiser notre database à partir de fichiers txt (équivalents à des scripts SQL ordinaires)
+            </summary>
+            <param name="sender">Bouton "Reset BDD"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Interface_Home.Button_Click_mode_demo(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Mode démo" amenant sur la page correspondante
+            </summary>
+            <param name="sender">Bouton "Mode démo"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Interface_Home.Caractere_interdit(System.Object,System.Windows.Controls.TextChangedEventArgs)">
+            <summary>
+            Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
+            </summary>
+            <param name="sender">Textbox</param>
+            <param name="e">Evenement texte modifié</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Interface_Home.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.MainWindow">
+            <summary>
+            Logique d'interaction pour MainWindow.xaml, NavigationWindow offre une interface pratique pour se déplacer de page en page
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.MainWindow.#ctor">
+            <summary>
+            Window de Navigation
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Admin">
+            <summary>
+            Logique d'interaction pour Page_Admin.xaml
+            </summary>
+            <summary>
+            Page_Admin
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Admin.#ctor(System.String)">
+            <summary>
+            Initialisation de la page comprenant le message de bienvenue et la listView contenant les recettes
+            </summary>
+            <param name="id_admin"> identifiant de l'utilisateur que l'on a conservé depuis la page Interface_Home </param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Admin.Deco_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Déconnexion" ramenant sur la page Interface_Home
+            </summary>
+            <param name="sender">Bouton "Déconnexion"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Admin.Trier_par_id_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Tri par identifiant" permettant de trier les éléments de la listView contenant les recettes par rapport aux identifiants des CdR
+            </summary>
+            <param name="sender">Bouton "Tri par identifiant"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Admin.Trier_par_recette_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Tri par recette" permettant de trier les éléments de la listView contenant les recettes par rapport au nom des recettes
+            </summary>
+            <param name="sender">Bouton "Tri par recette"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Admin.Supprimer_recette_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Supprimer recette" permettant de supprimer une recette, et tout ce qui est associé à celle-ci, de la database
+            </summary>
+            <param name="sender">Bouton "Supprimer recette"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Admin.Ban_CdR_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Bannir le CdR" permettant d'effectuer l'action correspondante, elle va donc supprimer le client (CdR) ainsi que tout ce à quoi il est relié
+            </summary>
+            <param name="sender">Bouton "Bannir le CdR"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Admin.CdR_To_Client_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+             Méthode reliée au bouton "Passer le CdR en client" permettant d'effectuer l'action correspondante, elle va donc rendre impossible pour ce client d'être CdR et va supprimer toutes ses recettes
+            </summary>
+            <param name="sender">Bouton "Passer le CdR en client"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Admin.Top_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+             Méthode reliée au bouton "TOP" permettant de naviguer par la page correspondante
+            </summary>
+            <param name="sender">Bouton "TOP"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Admin.Carnet_commandes_produit_XML_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+             Méthode reliée au bouton "Carnet de commande des produits XML" permettant de générer un fichier XML contenant La liste des produits dont la quantité est inférieure à la quantité minimale classé par fournisseur puis par produit
+            </summary>
+            <param name="sender">Bouton "Carnet de commande des produits XML"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Admin.Creation_Produit_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Créer nouveau produit" permettant de naviguer par la page correspondante
+            </summary>
+            <param name="sender">Bouton "Créer nouveau produit"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Admin.Creation_fournisseur(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Création Fournisseur" permettant de naviguer par la page correspondante
+            </summary>
+            <param name="sender">Bouton "Création Fournisseur"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Admin.Recette_id_CdR">
+            <summary>
+            Classe utilisée pour remplir la listView recette ou récupérer les valeurs d'une selection dans cette même listViesw
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Recette_id_CdR.Nom_Recette">
+            <summary>
+            Nom de la Recette
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Recette_id_CdR.Identifiant_CdR">
+            <summary>
+            Identifiant du CdR
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Admin.Fournisseur">
+            <summary>
+            Classe utilisée pour générer le fichier XML dans Carnet_commandes_produit_XML_Click
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Fournisseur.Ref_Fournisseur">
+            <summary>
+            Référence du Fournisseur
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Fournisseur.Nom_Fournisseur">
+            <summary>
+            Nom du Fournisseur
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Fournisseur.Numero_tel_Fournisseur">
+            <summary>
+            Numéro de téléphone du Fournisseur
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Fournisseur.liste_produit_a_commander">
+            <summary>
+            Liste des produits à commander
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Admin.Produit">
+            <summary>
+            Classe utilisée pour générer le fichier XML dans Carnet_commandes_produit_XML_Click (les instances de cette classe seront mises dans des listes pour ensuite fabriquer des instances de la classe fournisseur)
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Produit.Nom_Produit">
+            <summary>
+            Nomdu Produit
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Produit.Categorie">
+            <summary>
+            Catégorie du Produit
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Produit.Unite">
+            <summary>
+            Unité du Produit
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Produit.Stock">
+            <summary>
+            Stock actuel du Produit
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Produit.Stock_min">
+            <summary>
+            Stock minimal du Produit
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Produit.Stock_max">
+            <summary>
+            Stock max du Produit
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Produit.Ref_Fournisseur">
+            <summary>
+            Référence du Fournisseur de ce Produit
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Admin.Produit.Quantite_a_commander">
+            <summary>
+            Quantité à commander
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Admin.Caractere_interdit(System.Object,System.Windows.Controls.TextChangedEventArgs)">
+            <summary>
+            Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
+            </summary>
+            <param name="sender">Textbox</param>
+            <param name="e">Evenement texte modifié</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Admin.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Client">
+            <summary>
+            Logique d'interaction pour Page_Client.xaml
+            </summary>
+            <summary>
+            Page_Client
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Client.#ctor(System.String)">
+            <summary>
+            Initialisation de la page permettant l'écriture du welcome message, solde en cook, de la listview des recettes dispos ainsi que des différents bouton, textbox, ...
+            </summary>
+            <param name="id_client">Identifiant du client actuel</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Client.Ajouter_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Ajouter" permettant de passer le montant choisi de la recette sélectionnée dans le panier. La quantité faisable pour chaque recette se met à jour après l'ajout dans le panier
+            Le montant total de la commande se met à jour après chaque ajout
+            </summary>
+            <param name="sender">Bouton "Ajouter"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Client.Retirer_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Retirer" permettant de retirer une recette choisie du panier (on retire l'intégralité de la recette). La quantité faisable pour toutes les recettes se remet à jour après le retrait d'une recette du panier
+            Le montant total se met à jour après chaque retrait
+            </summary>
+            <param name="sender">Bouton "Retirer"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Client.CdR_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton CdR permettant de devenir CdR si on ne l'est pas, ou accéder à la page CdR si on l'est. Inaccessible pour les utilisateurs restreints en clients
+            </summary>
+            <param name="sender">Bouton ""</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Client.Deco_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Déconnexion" permettant de se déconnecter et retourner au menu principal
+            </summary>
+            <param name="sender">Bouton "Déconnexion"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Client.Valider_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Méthode reliée au bouton "Valider" permettant de valider la commande et passer au paiement. Le bouton est innaccessible quand le panier est vide
+            </summary>
+            <param name="sender">Bouton "Valider"</param>
+            <param name="e">Evenement Click</param>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Client.Recette_complete">
+            <summary>
+            Classe utilisée pour remplir la ListView des recettes disponibles
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Client.Recette_complete.Nom_Recette">
+            <summary>
+            Nom de la Recette
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Client.Recette_complete.Type">
+            <summary>
+            Type de la Recette
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Client.Recette_complete.Descriptif">
+            <summary>
+            Descriptif de la Recette
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Client.Recette_complete.Prix">
+            <summary>
+            Prix de la Recette
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Client.Recette_complete.Qt_Faisable">
+            <summary>
+            Qt faisable de cette Recette
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Page_Client.Recette_Panier">
+            <summary>
+            Classe utilisée pour remplir la ListView des recettes dans le panier
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Client.Recette_Panier.Nom_Recette">
+            <summary>
+            Nom de la Recette
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Client.Recette_Panier.Quantite_Recette">
+            <summary>
+            Quantité de la Recette choisie
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Page_Client.Recette_Panier.Prix">
+            <summary>
+            Prix de la Recette
+            </summary>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Client.Caractere_interdit(System.Object,System.Windows.Controls.TextChangedEventArgs)">
+            <summary>
+            Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
+            </summary>
+            <param name="sender">Textbox</param>
+            <param name="e">Evenement texte modifié</param>
+        </member>
+        <member name="M:Projet_Startup_Cooking_BDD.Page_Client.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Projet_Startup_Cooking_BDD.Properties.Resources">
+            <summary>
+              Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Properties.Resources.ResourceManager">
+            <summary>
+              Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
+            </summary>
+        </member>
+        <member name="P:Projet_Startup_Cooking_BDD.Properties.Resources.Culture">
+            <summary>
+              Remplace la propriété CurrentUICulture du thread actuel pour toutes
+              les recherches de ressources à l'aide de cette classe de ressource fortement typée.
+            </summary>
+        </member>
+    </members>
+</doc>

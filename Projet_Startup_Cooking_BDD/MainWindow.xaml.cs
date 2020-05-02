@@ -16,10 +16,13 @@ using System.Windows.Shapes;
 namespace Projet_Startup_Cooking_BDD
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour MainWindow.xaml, NavigationWindow offre une interface pratique pour se déplacer de page en page
     /// </summary>
     public partial class MainWindow : NavigationWindow
     {
+        /// <summary>
+        /// Window de Navigation
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
