@@ -1,0 +1,67 @@
+use cooking;
+INSERT INTO cooking.client VALUES ("remiid","remimdp","Remi GUILLON","0000000000",1000,1);
+INSERT INTO cooking.client VALUES ("vincentid","vincentmdp","Vincent POUPET","0000000000",1000,1);
+INSERT INTO cooking.client VALUES ("johnny","leave","Brig","0000000000",0,0);
+INSERT INTO cooking.client VALUES ("steve","big","Pete","0000000000",0,2);
+
+
+INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("2020/04/22",50,"remiid");
+INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("2020/04/28",25,"vincentid");
+INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("2020/04/28",24,"johnny");
+INSERT INTO cooking.commande (Date,prix,Identifiant) VALUES ("2020/04/30",12,"steve");
+
+
+INSERT INTO cooking.recette VALUES ("Crepe","dessert","Crepe au sucre et Nutella",10,2,1,"remiid");
+INSERT INTO cooking.recette VALUES ("Gratin de courgettes","legume","Self explanatory",12,2,3,"vincentid");
+INSERT INTO cooking.recette VALUES ("Falafel","exotique","Falafel libanaises express",15,2,1,"vincentid");
+INSERT INTO cooking.recette VALUES ("Poulet au curry","exotique","Poulet au curry de Kampot",25,2,2,"remiid");
+
+INSERT INTO cooking.fournisseur VALUES ("#1234","Exotic Corp","8888888");
+INSERT INTO cooking.fournisseur VALUES ("#5678","Classicos","999999");
+INSERT INTO cooking.fournisseur VALUES ("#999","Leguman","0111010");
+
+INSERT INTO cooking.produit VALUES ("pois-chiche","feculent","g",10000,8000,16000,"#5678");
+INSERT INTO cooking.produit VALUES ("oeuf","produit animal","unitee",100,120,240,"#5678");
+INSERT INTO cooking.produit VALUES ("oignon","legume","g",80,60,120,"#999");
+INSERT INTO cooking.produit VALUES ("ail","legume","gousse",80,60,120,"#999");
+INSERT INTO cooking.produit VALUES ("cumin","condiment","g",70,60,120,"#1234");
+INSERT INTO cooking.produit VALUES ("farine de ble","farine","g",9000,6000,12000,"#5678");
+INSERT INTO cooking.produit VALUES ("lait","produit animal","mL",17000,12000,24000,"#5678");
+INSERT INTO cooking.produit VALUES ("beurre","produit animal","g",1500,1000,2000,"#5678");
+INSERT INTO cooking.produit VALUES ("courgette","legume","unitee",50,60,120,"#999");
+INSERT INTO cooking.produit VALUES ("gruyere","produit animal","g",2900,2000,4000,"#5678");
+INSERT INTO cooking.produit VALUES ("creme fraiche","produit animal","mL",9000,8000,16000,"#5678");
+INSERT INTO cooking.produit VALUES ("poulet","viande","g",17000,10000,20000,"#5678");
+INSERT INTO cooking.produit VALUES ("curry","condiment","g",900,1000,2000,"#1234");
+INSERT INTO cooking.produit VALUES ("riz","feculent","g",18000,10000,20000,"#1234");
+
+
+INSERT INTO cooking.composition_commande VALUES ("Poulet au curry",1,2);
+INSERT INTO cooking.composition_commande VALUES ("Falafel",2,1);
+INSERT INTO cooking.composition_commande VALUES ("Crepe",2,1);
+INSERT INTO cooking.composition_commande VALUES ("Gratin de courgettes",3,2);
+INSERT INTO cooking.composition_commande VALUES ("Gratin de courgettes",4,1);
+
+
+INSERT INTO cooking.composition_recette VALUES ("Falafel","pois-chiche",400);
+INSERT INTO cooking.composition_recette VALUES ("Falafel","oeuf",1);
+INSERT INTO cooking.composition_recette VALUES ("Falafel","oignon",1);
+INSERT INTO cooking.composition_recette VALUES ("Falafel","ail",2);
+INSERT INTO cooking.composition_recette VALUES ("Falafel","cumin",3);
+
+INSERT INTO cooking.composition_recette VALUES ("Crepe","farine de ble",300);
+INSERT INTO cooking.composition_recette VALUES ("Crepe","oeuf",3);
+INSERT INTO cooking.composition_recette VALUES ("Crepe","lait",600);
+INSERT INTO cooking.composition_recette VALUES ("Crepe","beurre",50);
+
+INSERT INTO cooking.composition_recette VALUES ("Gratin de courgettes","courgette",3);
+INSERT INTO cooking.composition_recette VALUES ("Gratin de courgettes","oignon",2);
+INSERT INTO cooking.composition_recette VALUES ("Gratin de courgettes","ail",1);
+INSERT INTO cooking.composition_recette VALUES ("Gratin de courgettes","gruyere",100);
+INSERT INTO cooking.composition_recette VALUES ("Gratin de courgettes","oeuf",2);
+INSERT INTO cooking.composition_recette VALUES ("Gratin de courgettes","creme fraiche",200);
+
+INSERT INTO cooking.composition_recette VALUES ("Poulet au curry","creme fraiche",200);
+INSERT INTO cooking.composition_recette VALUES ("Poulet au curry","poulet",500);
+INSERT INTO cooking.composition_recette VALUES ("Poulet au curry","curry",50);
+INSERT INTO cooking.composition_recette VALUES ("Poulet au curry","riz",500);

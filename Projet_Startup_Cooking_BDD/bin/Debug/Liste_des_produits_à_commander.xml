@@ -1,2 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfFournisseur xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfFournisseur xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Fournisseur>
+    <Ref_Fournisseur>#1234</Ref_Fournisseur>
+    <Nom_Fournisseur>Exotic Corp</Nom_Fournisseur>
+    <Numero_tel_Fournisseur>8888888</Numero_tel_Fournisseur>
+    <liste_produit_a_commander>
+      <Produit>
+        <Nom_Produit>curry</Nom_Produit>
+        <Categorie>condiment</Categorie>
+        <Unite>g</Unite>
+        <Stock>900</Stock>
+        <Stock_min>1000</Stock_min>
+        <Stock_max>2000</Stock_max>
+        <Ref_Fournisseur>#1234</Ref_Fournisseur>
+        <Quantite_a_commander>1100</Quantite_a_commander>
+      </Produit>
+    </liste_produit_a_commander>
+  </Fournisseur>
+  <Fournisseur>
+    <Ref_Fournisseur>#5678</Ref_Fournisseur>
+    <Nom_Fournisseur>Classicos</Nom_Fournisseur>
+    <Numero_tel_Fournisseur>999999</Numero_tel_Fournisseur>
+    <liste_produit_a_commander>
+      <Produit>
+        <Nom_Produit>oeuf</Nom_Produit>
+        <Categorie>produit animal</Categorie>
+        <Unite>unitee</Unite>
+        <Stock>100</Stock>
+        <Stock_min>120</Stock_min>
+        <Stock_max>240</Stock_max>
+        <Ref_Fournisseur>#5678</Ref_Fournisseur>
+        <Quantite_a_commander>140</Quantite_a_commander>
+      </Produit>
+    </liste_produit_a_commander>
+  </Fournisseur>
+  <Fournisseur>
+    <Ref_Fournisseur>#999</Ref_Fournisseur>
+    <Nom_Fournisseur>Leguman</Nom_Fournisseur>
+    <Numero_tel_Fournisseur>0111010</Numero_tel_Fournisseur>
+    <liste_produit_a_commander>
+      <Produit>
+        <Nom_Produit>courgette</Nom_Produit>
+        <Categorie>legume</Categorie>
+        <Unite>unitee</Unite>
+        <Stock>50</Stock>
+        <Stock_min>60</Stock_min>
+        <Stock_max>120</Stock_max>
+        <Ref_Fournisseur>#999</Ref_Fournisseur>
+        <Quantite_a_commander>70</Quantite_a_commander>
+      </Produit>
+    </liste_produit_a_commander>
+  </Fournisseur>
+</ArrayOfFournisseur>

@@ -372,7 +372,7 @@ namespace Projet_Startup_Cooking_BDD
                            $"where Nom_Produit not in " +
                            $"(select distinct(Nom_Produit) " +
                            $"from (cooking.commande natural join cooking.composition_commande) natural join cooking.composition_recette " +
-                           $"where Date between \"{auj}\" AND \"{datelimite}\");";
+                           $"where Date between \"{datelimite}\" AND \"{auj}\");";
             List<List<string>> Liste_Produit_a_modifier = Commandes_SQL.Select_Requete(query);
 
             // pour chaque produit on fait la mise à jour des quantité
