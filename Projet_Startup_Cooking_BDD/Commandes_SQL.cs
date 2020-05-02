@@ -8,18 +8,20 @@ using MySql.Data.MySqlClient;
 
 namespace Projet_Startup_Cooking_BDD
 {
+    /// <summary>
+    /// Fonctions nous permettant d'intéragir avec MySQL
+    /// </summary>
     public class Commandes_SQL
     {
     
         /// <summary>
-        /// Méthode permettant d'obtenir sous forme de liste de liste de string le résultat d'une query sql sur la database
+        /// Méthode permettant d'obtenir sous forme de liste de liste de string le résultat d'une query MySQL sur la database
         /// </summary>
-        /// <param name="requete"> Query SQL appliquée à la db </param>
-        /// <returns> Une List<List<string>> contenant les réponses  </returns>
+        /// <param name="requete"> Query MySQL appliquée à la database </param>
+        /// <returns> Une List<List<string>> contenant les valeurs souhaitées</returns>
         public static List<List<string>> Select_Requete(string requete)
         {
-            // Bien vérifier, via Workbench par exemple, que ces paramètres de connexion sont valides !!!
-            string connectionString = "SERVER=localhost;PORT=3306;DATABASE=cooking;UID=root;PASSWORD=root;";
+            string connectionString = "SERVER=localhost;PORT=3306;DATABASE=cooking;UID=root;PASSWORD=root;"; //connexion à la database
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();
 
@@ -29,12 +31,14 @@ namespace Projet_Startup_Cooking_BDD
             MySqlDataReader reader;
             reader = command.ExecuteReader();
             string resReq = "";
-            while (reader.Read())                           // parcours ligne par ligne
+            while (reader.Read()) // parcours ligne par ligne
             {
                 string currentRowAsString = "";
-                for (int i = 0; i < reader.FieldCount; i++)    // parcours cellule par cellule
+                for (int i = 0; i < reader.FieldCount; i++) // parcours cellule par cellule
                 {
-                    string valueAsString = reader.GetValue(i).ToString();  // recuperation de la valeur de chaque cellule sous forme d'une string (voir cependant les differentes methodes disponibles !!)
+                    // on va récupérer chaque valeur contenue les celulles sous forme de string
+                    // on va séparer les éléments d'un row par une virgule ',' et chaque row par un point-virgule ';'
+                    string valueAsString = reader.GetValue(i).ToString();
                     if (i == reader.FieldCount - 1)
                     {
                         currentRowAsString += valueAsString;
@@ -45,10 +49,12 @@ namespace Projet_Startup_Cooking_BDD
                     }
 
                 }
-                resReq += currentRowAsString + ";";   // affichage de la ligne (sous forme d'une "grosse" string) sur la sortie standard
+                resReq += currentRowAsString + ";"; 
             }
 
             connection.Close();
+
+            // on crée une liste de liste de string que l'on va remplir avec resReq puis on va la return
             List<List<string>> reponse = new List<List<string>>();
             string[] temp = resReq.Split(';');
             for (int i = 0; i < temp.Length - 1; i++) // lenght -1 parce que dernier élément vide
@@ -60,6 +66,11 @@ namespace Projet_Startup_Cooking_BDD
         }
 
 
+        /// <summary>
+        /// Méthode permettant d'exécuter n'importe quelle query MySQL sur la database, autres que les "select"
+        /// </summary>
+        /// <param name="requete"> Query MySQL appliquée à la database </param>
+        /// <returns> un message d'erreur si la query MySQL est incorrecte </returns>
         public static string Insert_Requete(string requete)
         {
             string connectionString = "SERVER=localhost;PORT=3306;DATABASE=cooking;UID=root;PASSWORD=root;";
@@ -84,12 +95,12 @@ namespace Projet_Startup_Cooking_BDD
 
 
         /// <summary>
-        /// Fonction permettant d'exécuter un script SQL (enregistré sous le format .txt)
+        /// Méthode nous permettant d'exécuter un script MySQL (enregistré sous le format .txt)
         /// </summary>
-        /// <param name="fichier"> Chemin du fichier </param>
+        /// <param name="fichier"> nom + extension du fichier se situant dans Bin/Debug </param>
         public static void Execution_Script_TXT(string fichier)
         {
-            //! Récupération des commandes qui sont dans le fichier .txt
+            // Récupération des commandes qui sont dans le fichier .txt -> on les place toutes dans un seul string
             string line;
             string commandes_in_file = "";
             System.IO.StreamReader file = new System.IO.StreamReader(fichier);
@@ -99,7 +110,7 @@ namespace Projet_Startup_Cooking_BDD
             }
             file.Close();
 
-            //! Exécution des commandes sur MySQL
+            // exécution des commandes sur MySQL
             string connectionString = "SERVER=localhost;PORT=3306;DATABASE=cooking;UID=root;PASSWORD=root;";
             MySqlConnection connection = new MySqlConnection(connectionString);
             connection.Open();

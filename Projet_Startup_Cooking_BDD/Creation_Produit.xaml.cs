@@ -21,14 +21,26 @@ namespace Projet_Startup_Cooking_BDD
     public partial class Creation_Produit : Page
     {
         private string id_admin;
+
+        /// <summary>
+        /// Initialisation de la page 
+        /// </summary>
+        /// <param name="id_admin"> identifiant de l'admin connecté </param>
         public Creation_Produit( string id_admin)
         {
             InitializeComponent();
             this.id_admin = id_admin;
         }
 
+
+        /// <summary>
+        /// Méthode reliée au bouton "Créer le produit" qui crée un nouveau produit dans la database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Creer_Produit_Click(object sender, RoutedEventArgs e)
         {
+            // récupération des input
             string nom_produit = textbox_nom.Text;
             string categorie = textbox_categorie.Text;
             string unite = textbox_unite.Text;
@@ -36,7 +48,8 @@ namespace Projet_Startup_Cooking_BDD
             string stock = textbox_stock.Text;
             string stock_min = textbox_stock_min.Text;
             string stock_max = textbox_stock_max.Text;
-            
+
+            // sécurité pour les input
             if (nom_produit == "" || nom_produit.Length > 50)
             {
                 Erreur_message.Content = "Nom invalide (1-50 caractères)";
@@ -69,7 +82,7 @@ namespace Projet_Startup_Cooking_BDD
             {
                 Erreur_message.Content = "";
 
-                //on vérifie si le fournisseur du produit qu'on veut créer existe dans notre BDD
+                //on vérifie si le fournisseur du produit qu'on veut créer existe dans notre database car Ref_Fournisseur = Foreign key de l'entité produit
                 string query = "select Ref_Fournisseur from cooking.fournisseur;";
                 List<List<string>> liste_Ref_fournisseur = Commandes_SQL.Select_Requete(query);
 
@@ -85,15 +98,17 @@ namespace Projet_Startup_Cooking_BDD
                 }
                 else
                 {
+                    // création du fournisseur dans la database à partir des input
                     query = $"insert into cooking.produit values (\"{nom_produit}\",\"{categorie}\",\"{unite}\",{stock},{stock_min},{stock_max},\"{ref_fournisseur}\")";
                     string ex = Commandes_SQL.Insert_Requete(query);
 
-                    if (ex == $"Duplicate entry '{nom_produit}' for key 'produit.PRIMARY'")
+                    if (ex == $"Duplicate entry '{nom_produit}' for key 'produit.PRIMARY'") // si le nom_produit (clé primaire) existe déjà dans la database.produit
                     {
                         Erreur_message.Content = "Nom déjà utilisé";
                     }
                     else
                     {
+                        // on navigue vers la page Admin
                         Page_Admin page_admin = new Page_Admin(this.id_admin);
                         this.NavigationService.Navigate(page_admin);
                     }
@@ -101,22 +116,34 @@ namespace Projet_Startup_Cooking_BDD
             }
         }
 
+
+        /// <summary>
+        /// Méthode reliée au bouton "Reinitialiser" servant à clear toutes les textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Creer_Reinitialiser(object sender, RoutedEventArgs e)
         {
+            // on navigue vers une nouvelle page Création_Produit pour réinitialiser les input
             Creation_Produit page_creation_produit = new Creation_Produit(this.id_admin);
             this.NavigationService.Navigate(page_creation_produit);
         }
 
 
+        /// <summary>
+        /// Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Caractere_interdit(object sender, TextChangedEventArgs e)
         {
             TextBox id_textbox = sender as TextBox;
-            // \s - Stands for white space. The rest is for alphabets and numbers
             if (id_textbox.Text.Contains('"') || id_textbox.Text.Contains('é') || id_textbox.Text.Contains('è')
                 || id_textbox.Text.Contains('î') || id_textbox.Text.Contains('ê') || id_textbox.Text.Contains('ô')
                 || id_textbox.Text.Contains('ï') || id_textbox.Text.Contains('ë') || id_textbox.Text.Contains('ç')
                 || id_textbox.Text.Contains('à') || id_textbox.Text.Contains('ù'))
             {
+                // on efface le dernier caractère s'il est interdit, ne laissant ainsi pas l'opportunité à l'utilisateur de l'écrire
                 string a = id_textbox.Text.Remove(id_textbox.Text.Length - 1);
                 id_textbox.Text = a;
                 Erreur_message.Content = "Accents/Guillemets interdits";

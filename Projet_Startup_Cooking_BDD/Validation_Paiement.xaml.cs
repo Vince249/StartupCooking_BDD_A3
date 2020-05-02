@@ -187,13 +187,6 @@ namespace Projet_Startup_Cooking_BDD
                     }
                 }
 
-
-
-
-
-
-
-
                 Page_Client page_Client = new Page_Client(this.id_client);
                 this.NavigationService.Navigate(page_Client);
             }

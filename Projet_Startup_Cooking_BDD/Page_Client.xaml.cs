@@ -401,16 +401,20 @@ namespace Projet_Startup_Cooking_BDD
         }
 
 
-
+        /// <summary>
+        /// Méthode permettant d'interdire certains caractères pour les input (caratères provoquant des erreurs sur MySQL)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Caractere_interdit(object sender, TextChangedEventArgs e)
         {
             TextBox id_textbox = sender as TextBox;
-            // \s - Stands for white space. The rest is for alphabets and numbers
             if (id_textbox.Text.Contains('"') || id_textbox.Text.Contains('é') || id_textbox.Text.Contains('è')
                 || id_textbox.Text.Contains('î') || id_textbox.Text.Contains('ê') || id_textbox.Text.Contains('ô')
                 || id_textbox.Text.Contains('ï') || id_textbox.Text.Contains('ë') || id_textbox.Text.Contains('ç')
                 || id_textbox.Text.Contains('à') || id_textbox.Text.Contains('ù'))
             {
+                // on efface le dernier caractère s'il est interdit, ne laissant ainsi pas l'opportunité à l'utilisateur de l'écrire
                 string a = id_textbox.Text.Remove(id_textbox.Text.Length - 1);
                 id_textbox.Text = a;
                 erreur.Content = "Accents/Guillemets interdits";
