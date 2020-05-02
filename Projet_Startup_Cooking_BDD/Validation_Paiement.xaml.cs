@@ -99,8 +99,8 @@ namespace Projet_Startup_Cooking_BDD
         /// Méthode reliée au bouton "Tricher (+50cooks)" permettant d'augmenter le solde du client de 50 cooks.
         /// A l'heure actuelle si le solde d'un client n'est pas suffisant pour payer l'intégralité de la commande, le client est invité
         /// à payer le reste par CB. Comme indiqué dans le CdC cette page (Page_Payer_CB ici) n'avait pas à être réellement designée.
-        /// Afin de permettre le test de nos fonctions, nous avons donc ajouté ce bouton permettant à un nouveau client de se donner de l'argent
-        /// et ainsi pour voir valider ses commandes.
+        /// Afin de permettre le test de nos fonctions, nous avons donc ajouté ce bouton permettant à un nouveau client de se donner des crédits cooks
+        /// et ainsi pouvoir valider ses commandes.
         /// Après avoir triché la valeur du bouton valider est ré-évaluée
         /// Cette méthode serait évidemment retirée dans le cadre d'une réelle mise en ligne de l'application.
         /// </summary>
