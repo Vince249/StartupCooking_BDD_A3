@@ -4,6 +4,11 @@
         <name>Unit_Test</name>
     </assembly>
     <members>
+        <member name="T:Unit_Test.UnitTest1">
+            <summary>
+            Tests Unitaires, ils portent sur nos fonctions en lien avec SQL
+            </summary>
+        </member>
         <member name="M:Unit_Test.UnitTest1.Test_Select_Requete">
             <summary>
             On utilise la table cooking.fournisseur car à moins de supprimer manuellement depuis MySQL, 

@@ -6,6 +6,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Unit_Test
 {
+    /// <summary>
+    /// Tests Unitaires, ils portent sur nos fonctions en lien avec SQL
+    /// </summary>
     [TestClass]
     public class UnitTest1
     {
