@@ -113,21 +113,7 @@ namespace Projet_Startup_Cooking_BDD
             file.Close();
 
             // exécution des commandes sur MySQL
-            string connectionString = "SERVER=localhost;PORT=3306;DATABASE=cooking;UID=root;PASSWORD=root;";
-            MySqlConnection connection = new MySqlConnection(connectionString);
-            connection.Open();
-
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = commandes_in_file;
-
-            MySqlDataReader reader;
-            try
-            {
-                reader = command.ExecuteReader();
-            }
-            catch (Exception)
-            {
-            }
+            string ex = Insert_Requete(commandes_in_file);
         }
     }
 }

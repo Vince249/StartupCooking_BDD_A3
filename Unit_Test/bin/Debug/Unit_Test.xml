@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Unit_Test</name>
+    </assembly>
+    <members>
+        <member name="M:Unit_Test.UnitTest1.Test_Select_Requete">
+            <summary>
+            On utilise la table cooking.fournisseur car à moins de supprimer manuellement depuis MySQL, 
+            on ne peut pas supprimer un fournisseur depuis l'application
+            Nous savons donc que le fournisseur ayant la référence "#999" à le nom "Leguman" (on l'ajoute via Dummy_Data lorsque l'on initialise la database)
+            </summary>
+        </member>
+        <member name="M:Unit_Test.UnitTest1.Test_Insert_Requete">
+            <summary>
+            Nous allons compter le nombre de client avant insertion d'un nouveau puis,
+            après nous allons re-compter le nombre de client après insertion de ce dernier.
+            Si nombre de client avant insertion du nouveau client + 1 = nombre de client après insertion du nouveau client
+            Alors la fonction Insert_Requete fonctionne
+            Après avoir testé cela, nous allons supprimer le client de la database
+            Remarque : la primary key de cooking.client étant l'identifiant, nous en avons choisi un qui a une faible chance d'être un doublon
+            </summary>
+        </member>
+        <member name="M:Unit_Test.UnitTest1.Execution_Script_TXT">
+            <summary>
+            Nous allons effectuer le même processus que pour le test de "Insert_Requete" mais ici la query pour insérer le nouveau client
+            se trouvera dans un fichier .txt que nous allons créer
+            Après avoir testé cela, nous allons supprimer le client de la database ainsi que le fichier que nous avons créé
+            </summary>
+        </member>
+    </members>
+</doc>
