@@ -236,10 +236,15 @@ namespace Projet_Startup_Cooking_BDD
                         string query_final = query1 + query2  + query4;
                         ex = Commandes_SQL.Insert_Requete(query_final);
                     }
-
+                    // on supprime les références aux commandes du client banni
+                    query = $"delete from cooking.composition_commande where Ref_Commande in (select ref_commande from cooking.commande where Identifiant = \"{id_CdR_Box.Text}\");";
+                    string ex2 = Commandes_SQL.Insert_Requete(query);
+                    // on supprime le client banni de la table commande
+                    query = $"delete from cooking.commande where Identifiant = \"{id_CdR_Box.Text}\";";
+                    ex2 = Commandes_SQL.Insert_Requete(query);
                     // on supprime le client (CdR) de la database
                     query = $"delete from cooking.client where Identifiant = \"{id_CdR_Box.Text}\";";
-                    string ex2 = Commandes_SQL.Insert_Requete(query);
+                    ex2 = Commandes_SQL.Insert_Requete(query);
 
                     // on actualise la listView contenant les recettes (les recettes du CdR que l'on vient de supprimer n'existent plus)
                     Recettes_id_ListView.Items.Clear();

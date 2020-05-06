@@ -34,22 +34,32 @@ namespace Projet_Startup_Cooking_BDD
             //On peut directement chercher dans Composition_Commande vu qu'on va prendre toutes les commandes
             string query = "SELECT Identifiant, sum(compteur) as SUMQT FROM cooking.recette group by Identifiant order by SUMQT desc limit 1;"; //query pour le CdR d'Or
             List<List<string>> Liste_Nom_CdR_Qte_vendue = Commandes_SQL.Select_Requete(query);
-            CdR_Or.Content = Liste_Nom_CdR_Qte_vendue[0][0];
-
-            //On cherche ensuite ses recettes les plus vendues
-
-            query = $"SELECT Nom_Recette, Type, Compteur FROM cooking.recette where Identifiant = \"{Liste_Nom_CdR_Qte_vendue[0][0]}\" order by Compteur desc limit 5;";
-            List<List<string>> Liste_Recette_Infos = Commandes_SQL.Select_Requete(query);
-
-            //On ajoute ensuite les informations de chaque recette à la ListView dédiée
-
-            for (int i = 0; i < Liste_Recette_Infos.Count; i++)
+            if(Liste_Nom_CdR_Qte_vendue.Count != 0)
             {
-                string Nom = Liste_Recette_Infos[i][0];
-                string Type = Liste_Recette_Infos[i][1];
-                string Qte = Liste_Recette_Infos[i][2];
-                Liste_Recette_Or.Items.Add(new Recette_Or { Nom = Nom, Type = Type, Compteur = Qte });
+                CdR_Or.Content = Liste_Nom_CdR_Qte_vendue[0][0];
+
+                //On cherche ensuite ses recettes les plus vendues
+
+                query = $"SELECT Nom_Recette, Type, Compteur FROM cooking.recette where Identifiant = \"{Liste_Nom_CdR_Qte_vendue[0][0]}\" order by Compteur desc limit 5;";
+                List<List<string>> Liste_Recette_Infos = Commandes_SQL.Select_Requete(query);
+
+                //On ajoute ensuite les informations de chaque recette à la ListView dédiée
+
+                for (int i = 0; i < Liste_Recette_Infos.Count; i++)
+                {
+                    string Nom = Liste_Recette_Infos[i][0];
+                    string Type = Liste_Recette_Infos[i][1];
+                    string Qte = Liste_Recette_Infos[i][2];
+                    Liste_Recette_Or.Items.Add(new Recette_Or { Nom = Nom, Type = Type, Compteur = Qte });
+                }
             }
+            else
+            {
+                CdR_Or.Content = "Pas de CdR d'Or";
+            }
+            
+
+            
 
             //CdR Semaine
             int jour = (int)DateTime.Today.DayOfWeek; //jour de la semaine
@@ -66,7 +76,14 @@ namespace Projet_Startup_Cooking_BDD
                 $"order by sum(Quantite_Recette) desc " +
                 $"limit 1;";
             List<List<string>> Liste_CdR_Semaine = Commandes_SQL.Select_Requete(query);
-            CdR_Semaine.Content = Liste_CdR_Semaine[0][0];
+            if(Liste_CdR_Semaine.Count != 0)
+            {
+                CdR_Semaine.Content = Liste_CdR_Semaine[0][0];
+            }
+            else
+            {
+                CdR_Semaine.Content = "Pas de CdR Semaine";
+            }
 
             //Top commande Semaine
             query = $"select recette.Nom_Recette, Type, recette.Identifiant, sum(Quantite_Recette), Compteur " +
